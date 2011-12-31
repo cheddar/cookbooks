@@ -6,19 +6,9 @@ end]
 
 case node[:fqdn]
 
-when "host.example.com"
-
-  # for virtual servers use dest with nodes hash
-  shorewall_rule "nginx@my" do
-    dest "$FW:#{nodes['my.example.com']}"
-    destport "http,https"
-  end
-
-when "lb.example.com"
-
-  # for bare metal dest can be ommited
-  shorewall_rule "nginx" do
-    destport "http,https"
+when "dev.zentoo.org"
+  shorewall_rule "zentoo" do
+    destport "http,https,rsync,3000"
   end
 
 end
