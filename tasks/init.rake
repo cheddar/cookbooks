@@ -23,6 +23,7 @@ task :init do
 
   unless File.exist?(CLIENT_KEY_FILE)
     File.open(CLIENT_KEY_FILE, "w") do |f|
+      # TODO: does not work during bootstrap when ssh is not yet possible
       Net::SSH.start(chef_server_url, node_name) do |ssh|
         cmd = "sudo knife client create #{node_name} -a -n -u root -k /root/.chef/client.pem | tail -n+2"
         f.write(ssh.exec!(cmd))
