@@ -14,3 +14,14 @@ run_list(%w(
   recipe[nagios::client]
   recipe[munin::node]
 ))
+
+default_attributes({
+  "portage" => {
+    "BINHOST" => "http://chef.zenops.net/${ARCH}/",
+  },
+
+  "contacts" => {
+    "hostmaster" => "unhollow@gmail.com",
+    "cron" => "unhollow@gmail.com"
+  },
+})
