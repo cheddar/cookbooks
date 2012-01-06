@@ -4,6 +4,7 @@ package "app-portage/gentoolkit-dev"
 # zentoo repository
 git "/var/cache/portage/zentoo" do
   repository "https://github.com/zentoo/zentoo"
+  enable_submodules true
   action :sync
 end
 
