@@ -37,45 +37,9 @@ default_unless[:sysctl][:kernel][:shmmni] = 4096
 # skip hardware cookbooks
 default[:skip][:hardware] = false
 
-<<<<<<< HEAD
-# base packages
-node[:packages] = %w(
-  app-admin/lib_users
-  app-admin/pwgen
-  app-admin/pydf
-  app-admin/sysstat
-  app-arch/atool
-  app-arch/xz-utils
-  app-misc/colordiff
-  app-misc/mc
-  app-shells/bash-completion
-  dev-util/strace
-  mail-client/mailx
-  net-analyzer/bwm-ng
-  net-analyzer/iptraf-ng
-  net-analyzer/mtr
-  net-analyzer/netcat
-  net-analyzer/tcpdump
-  net-analyzer/traceroute
-  net-dns/bind-tools
-  net-misc/keychain
-  net-misc/telnet-bsd
-  net-misc/whois
-  sys-apps/ethtool
-  sys-apps/hdparm
-  sys-apps/iproute2
-  sys-apps/less
-  sys-apps/pciutils
-  sys-fs/ncdu
-  sys-process/htop
-  sys-process/iotop
-  sys-process/lsof
-)
-=======
 # provide sane default values in case ohai didn't find them
 default_unless[:virtualization] = {}
 default_unless[:cpu][:total] = 1
->>>>>>> upstream
 
 # support non-root runs
 if Process.euid == 0
