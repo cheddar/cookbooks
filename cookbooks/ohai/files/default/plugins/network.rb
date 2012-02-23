@@ -1,4 +1,5 @@
 require 'resolv'
+require 'ipaddr'
 require 'open-uri'
 
 provides "network"
@@ -14,11 +15,11 @@ default_addresses = network[:interfaces][network[:default_interface]][:addresses
 
 Resolv::DNS.open(:nameserver => ['8.8.8.8', '8.8.4.4']) do |dns|
   dns.getaddresses(fqdn).each do |r|
-    next unless default_addresses.include?(r)
+    next unless default_addresses.include?(r.to_s.downcase)
     if r.is_a?(Resolv::IPv4)
       ipaddress r.to_s
     elsif r.is_a?(Resolv::IPv6)
-      ip6address r.to_s
+      ip6address IPAddr.new(r.to_s).to_string
     end
   end
 end
