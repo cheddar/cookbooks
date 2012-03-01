@@ -123,30 +123,6 @@ end
   end
 end
 
-# documentation
-package "dev-python/sphinx"
-
-remote_directory "/var/www/documentation" do
-  source "documentation/html"
-  files_backup 0
-  files_owner "root"
-  files_group "root"
-  files_mode "0644"
-  owner "root"
-  group "root"
-  mode "0755"
-end
-
-query = Proc.new do |u|
-  u[:tags] and
-  u[:tags].include?("hostmaster")
-end
-
-htpasswd_from_databag "/var/www/documentation/.htpasswd" do
-  query query
-  owner "nginx"
-end
-
 # nginx SSL proxy
 ssl_ca "/etc/ssl/nginx/#{node[:fqdn]}-ca" do
   notifies :reload, "service[nginx]"
@@ -212,30 +188,32 @@ end
 end
 
 # nagios service checks
-nrpe_command "check_chef_solr" do
-  command "/usr/lib/nagios/plugins/check_pidfile /var/run/chef/solr.pid"
-end
+if tagged?("nagios-client")
+  nrpe_command "check_chef_solr" do
+    command "/usr/lib/nagios/plugins/check_pidfile /var/run/chef/solr.pid"
+  end
 
-nrpe_command "check_chef_expander" do
-  command "/usr/lib/nagios/plugins/check_pidfile /var/run/chef/expander.pid"
-end
+  nrpe_command "check_chef_expander" do
+    command "/usr/lib/nagios/plugins/check_pidfile /var/run/chef/expander.pid"
+  end
 
-nagios_service "CHEF-SERVER" do
-  check_command "check_http!-S -s 'This is the Chef API Server.'"
-  servicegroups "chef"
-end
+  nagios_service "CHEF-SERVER" do
+    check_command "check_http!-S -s 'This is the Chef API Server.'"
+    servicegroups "chef"
+  end
 
-nagios_service "CHEF-SERVER-SSL" do
-  check_command "check_http!-S -C 21"
-  servicegroups "chef"
-end
+  nagios_service "CHEF-SERVER-SSL" do
+    check_command "check_http!-S -C 21"
+    servicegroups "chef"
+  end
 
-nagios_service "CHEF-SOLR" do
-  check_command "check_nrpe!check_chef_solr"
-  servicegroups "chef"
-end
+  nagios_service "CHEF-SOLR" do
+    check_command "check_nrpe!check_chef_solr"
+    servicegroups "chef"
+  end
 
-nagios_service "CHEF-EXPANDER" do
-  check_command "check_nrpe!check_chef_expander"
-  servicegroups "chef"
+  nagios_service "CHEF-EXPANDER" do
+    check_command "check_nrpe!check_chef_expander"
+    servicegroups "chef"
+  end
 end

@@ -1,11 +1,13 @@
-cwd = File.expand_path(File.join(File.dirname(__FILE__), "../../"))
+cwd = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 
 cookbook_path [
   "#{cwd}/cookbooks",
   "#{cwd}/site-cookbooks",
 ]
 
-chef_root = File.expand_path("~/.chef")
+role_path "#{cwd}/roles"
+
+chef_root = "/var/lib/chef"
 
 sandbox_path "#{chef_root}/sandboxes"
 file_cache_path "#{chef_root}/cache/files"
