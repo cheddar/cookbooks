@@ -13,6 +13,11 @@ end]
 case node[:fqdn]
 
 when "dev.zentoo.org"
+  shorewall_rule "chef.zenops.net" do
+    dest "$FW:#{nodes['chef.zenops.net']}"
+    destport "http,https"
+  end
+
   shorewall_rule "dev.zentoo.org" do
     dest "$FW:#{nodes['dev.zentoo.org']}"
     destport "http,https,rsync,3000,8081"
@@ -21,6 +26,12 @@ when "dev.zentoo.org"
   shorewall6_rule "dev.zentoo.org" do
     dest "$FW:#{nodes6['dev.zentoo.org']}"
     destport "http,https,rsync,3000,8081"
+  end
+
+when "bocaloves.me"
+  shorewall_rule "bocaloves.me" do
+    dest "$FW:#{nodes['bocaloves.me']}"
+    destport "ftp,http,https"
   end
 
 end
