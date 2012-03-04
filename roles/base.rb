@@ -8,10 +8,6 @@ run_list(%w(
 ))
 
 default_attributes({
-  "portage" => {
-    "BINHOST" => "http://chef.zenops.net/${ARCH}/",
-  },
-
   "contacts" => {
     "hostmaster" => "unhollow@gmail.com",
     "cron" => "unhollow@gmail.com"
