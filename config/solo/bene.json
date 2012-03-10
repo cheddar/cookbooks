@@ -1,0 +1,14 @@
+{
+	"current_email": "bb@xnull.de",
+	"current_name": "Benedikt Böhm",
+
+	"git": {
+		"github": {
+			"user": "hollow"
+		}
+	},
+
+	"run_list": [
+		"recipe[base]"
+	]
+}
