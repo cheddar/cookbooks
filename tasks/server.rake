@@ -36,13 +36,19 @@ namespace :server do
     scfg = File.join(TOPDIR, "config", "solo.rb")
     sjson = File.join(TOPDIR, "config", "solo", "server.json")
 
+    sh("chef-solo -c #{scfg} -j #{sjson} -N #{fqdn} || :")
+
+    # now this one is really ugly. no idea why the init script is so damn
+    # broken that it is always stuck in starting state on the first run ...
+    sh("kill $(</var/run/chef/expander.pid)")
+    sh("/etc/init.d/chef-expander restart")
     sh("chef-solo -c #{scfg} -j #{sjson} -N #{fqdn}")
 
     # run chef-client to register a client key
     sh("chef-client")
 
     # setup a client key for root
-    sh("knife client create root -a -n -u chef-webui -k /etc/chef/webui.pem | tail -n+2 > /root/.chef/client.pem")
+    sh("env EDITOR=vim knife client create root -a -n -u chef-webui -k /etc/chef/webui.pem | tail -n+2 > /root/.chef/client.pem")
 
     # create new node
     nf = File.join(NODES_DIR, "#{fqdn}.rb")

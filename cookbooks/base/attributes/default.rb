@@ -21,7 +21,7 @@ default[:locales] = [
 
 # nameservers and search domain
 default[:resolv][:search] = [node[:domain]]
-default[:resolv][:nameservers] = %w(8.8.8.8 8.8.4.4)
+default[:resolv][:nameservers] = %w(4.2.2.6 4.2.2.5)
 default[:resolv][:hosts] = []
 default[:resolv][:aliases] = []
 
@@ -70,7 +70,6 @@ when "gentoo"
     app-misc/mc
     app-shells/bash-completion
     app-text/dos2unix
-    dev-libs/libyaml
     dev-util/strace
     mail-client/mailx
     net-analyzer/bwm-ng
@@ -118,12 +117,10 @@ when "mac_os_x"
     gnu-sed
     gnu-tar
     keychain
-    libyaml
     midnight-commander
     ncdu
     netcat
     nmap
-    proctools
     pwgen
     ssh-copy-id
     wget
