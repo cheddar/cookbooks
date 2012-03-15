@@ -15,6 +15,11 @@ end]
 case node[:fqdn]
 
 when "dev.zentoo.org"
+  shorewall_rule "test.chariteam.de" do
+    dest "$FW:#{nodes['test.chariteam.de']}"
+    destport "ftp,http,https"
+  end
+
   shorewall_rule "chef.zenops.net" do
     dest "$FW:#{nodes['chef.zenops.net']}"
     destport "http,https"
