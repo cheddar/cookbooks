@@ -56,19 +56,14 @@ when "zeus.xnull.de"
     destport "ftp,http,imaps,smtp"
   end
 
-  shorewall_rule "nagios" do
-    dest "$FW:#{nodes["nagios.xnull.de"]}"
-    destport "http,https"
-  end
+  #shorewall_rule "nagios" do
+  #  dest "$FW:#{nodes["nagios.xnull.de"]}"
+  #  destport "http,https"
+  #end
 
   shorewall_rule "my" do
     dest "$FW:#{nodes["my.xnull.de"]}"
     destport "git,http,https"
-  end
-
-  shorewall_rule "chef" do
-    dest "$FW:#{nodes["chef.xnull.de"]}"
-    destport "http,https"
   end
 
   # these nodes are not deployed or managed
