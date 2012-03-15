@@ -30,6 +30,53 @@ when "dev.zentoo.org"
     destport "http,https,rsync,3000,8081"
   end
 
+when "zeus.xnull.de"
+  shorewall_rule "kanbanero" do
+    dest "$FW:#{nodes["kanbanero.com"]}"
+    destport "http,https"
+  end
+
+  shorewall_rule "keks" do
+    dest "$FW:188.40.132.124"
+    destport "http,https"
+  end
+
+  shorewall_rule "kali" do
+    dest "$FW:188.40.132.125"
+    destport "ftp,smtp,http,https,pop3,pop3s,imap,imaps"
+  end
+
+  shorewall_rule "helios" do
+    dest "$FW:188.40.228.147"
+    destport "ftp,http,imaps,smtp"
+  end
+
+  shorewall_rule "nagios" do
+    dest "$FW:#{nodes["nagios.xnull.de"]}"
+    destport "http,https"
+  end
+
+  shorewall_rule "my" do
+    dest "$FW:#{nodes["my.xnull.de"]}"
+    destport "git,http,https"
+  end
+
+  shorewall_rule "chef" do
+    dest "$FW:#{nodes["chef.xnull.de"]}"
+    destport "http,https"
+  end
+
+  # these nodes are not deployed or managed
+  shorewall_rule "noth" do
+    dest "$FW:188.40.228.146"
+    proto "-"
+  end
+
+  shorewall_rule "nemesis" do
+    dest "$FW:188.40.228.151"
+    proto "-"
+  end
+
 when "bocaloves.me"
   shorewall_rule "bocaloves.me" do
     dest "$FW:#{nodes['bocaloves.me']}"
