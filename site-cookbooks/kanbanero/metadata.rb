@@ -1,0 +1,5 @@
+depends "capistrano"
+depends "monit"
+depends "mysql"
+depends "nagios"
+depends "nginx"
