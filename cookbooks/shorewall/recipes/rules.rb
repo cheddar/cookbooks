@@ -41,19 +41,9 @@ when "zeus.xnull.de"
     destport "http,https"
   end
 
-  shorewall_rule "keks" do
-    dest "$FW:188.40.132.124"
-    destport "http,https"
-  end
-
   shorewall_rule "kali" do
-    dest "$FW:188.40.132.125"
+    dest "$FW:#{nodes['kali.xnull.de']}"
     destport "ftp,smtp,http,https,pop3,pop3s,imap,imaps"
-  end
-
-  shorewall_rule "helios" do
-    dest "$FW:188.40.228.147"
-    destport "ftp,http,imaps,smtp"
   end
 
   #shorewall_rule "nagios" do
@@ -67,6 +57,16 @@ when "zeus.xnull.de"
   end
 
   # these nodes are not deployed or managed
+  shorewall_rule "keks" do
+    dest "$FW:188.40.132.124"
+    destport "http,https"
+  end
+
+  shorewall_rule "helios" do
+    dest "$FW:188.40.228.147"
+    destport "ftp,http,imaps,smtp"
+  end
+
   shorewall_rule "noth" do
     dest "$FW:188.40.228.146"
     proto "-"
