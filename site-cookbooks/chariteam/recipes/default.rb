@@ -1,5 +1,6 @@
 include_recipe "nginx::php"
 
-nginx_server "chariteam" do
-  template "nginx.conf"
-end
+# XXX: temporarily disabled until config stabilizes on the server
+#nginx_server "chariteam" do
+#  template "nginx.conf"
+#end
