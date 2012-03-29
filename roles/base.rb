@@ -8,8 +8,12 @@ run_list(%w(
 ))
 
 default_attributes({
-  "contacts" => {
-    "hostmaster" => "unhollow@gmail.com",
-    "cron" => "unhollow@gmail.com"
+  :contacts => {
+    :hostmaster => "unhollow@gmail.com",
+    :cron => "unhollow@gmail.com"
+  },
+
+  :postfix => {
+    :relayhost => "mx.zenops.net",
   },
 })

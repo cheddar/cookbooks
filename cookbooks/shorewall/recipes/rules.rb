@@ -37,7 +37,7 @@ when "dev.zentoo.org"
 
   shorewall_rule "nagios" do
     dest "$FW:#{nodes["nagios.zenops.net"]}"
-    destport "http,https"
+    destport "http,https,8000"
   end
 
 when "zeus.xnull.de"
