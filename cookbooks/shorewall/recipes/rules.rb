@@ -35,6 +35,11 @@ when "dev.zentoo.org"
     destport "http,https,rsync,3000,8081"
   end
 
+  shorewall_rule "nagios" do
+    dest "$FW:#{nodes["nagios.zenops.net"]}"
+    destport "http,https"
+  end
+
 when "zeus.xnull.de"
   shorewall_rule "kanbanero" do
     dest "$FW:#{nodes["kanbanero.com"]}"
@@ -45,11 +50,6 @@ when "zeus.xnull.de"
     dest "$FW:#{nodes['kali.xnull.de']}"
     destport "ftp,smtp,http,https,pop3,pop3s,imap,imaps"
   end
-
-  #shorewall_rule "nagios" do
-  #  dest "$FW:#{nodes["nagios.xnull.de"]}"
-  #  destport "http,https"
-  #end
 
   shorewall_rule "my" do
     dest "$FW:#{nodes["my.xnull.de"]}"
