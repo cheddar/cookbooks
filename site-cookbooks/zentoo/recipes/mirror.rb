@@ -24,7 +24,7 @@ rsync_module "zentoo-portage" do
   path "/var/cache/portage/zentoo"
   uid "nobody"
   gid "nobody"
-  exclude "/.git* /eix.*"
+  exclude "/.git* /eix.* /scripts"
 end
 
 # distfiles

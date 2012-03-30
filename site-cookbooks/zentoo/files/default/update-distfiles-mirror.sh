@@ -27,7 +27,7 @@ exec 2> >(logger -i -p "${LOG_FACILITY}.error" -t "${PROGRAM}")
 	git pull -q origin master
 
 	for i in $(find . -name '*.ebuild'); do
-		ebuild $i fetch
+		ebuild $i fetch > /dev/null
 	done
 
 	popd > /dev/null
