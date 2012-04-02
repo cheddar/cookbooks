@@ -40,6 +40,23 @@ when "dev.zentoo.org"
     destport "http,https,8000"
   end
 
+  node.run_state[:nodes].each do |n|
+    shorewall_rule "syslog@#{n[:fqdn]}" do
+      source "$FW:#{n[:primary_ipaddress]}"
+      dest "$FW:#{nodes["nagios.zenops.net"]}"
+      destport "514"
+    end
+  end
+
+  node.run_state[:nodes].each do |n|
+    next unless node[:tags].include?("splunk-forwarder")
+    shorewall_rule "splunk-forwarder@#{n[:fqdn]}" do
+      source "$FW:#{n[:primary_ipaddress]}"
+      dest "$FW:#{nodes["nagios.zenops.net"]}"
+      destport "9997"
+    end
+  end
+
 when "zeus.xnull.de"
   shorewall_rule "kanbanero" do
     dest "$FW:#{nodes["kanbanero.com"]}"
