@@ -1,4 +1,4 @@
-comment "Lars"
+comment "Lars Keller"
 
 nodes({
   "test.chariteam.de" => {

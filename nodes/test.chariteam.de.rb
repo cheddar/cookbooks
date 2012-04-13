@@ -9,4 +9,5 @@ run_list(%w(
   recipe[mysql::server]
   recipe[pure-ftpd]
   recipe[chariteam]
+  recipe[xvfb]
 ))
