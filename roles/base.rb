@@ -5,7 +5,6 @@ run_list(%w(
   recipe[duply]
   recipe[postfix::satelite]
   recipe[chef::client]
-  recipe[splunk::forwarder]
 ))
 
 default_attributes({
