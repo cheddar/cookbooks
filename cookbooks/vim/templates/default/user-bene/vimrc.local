@@ -1,0 +1,13 @@
+" Set GUI window size
+if has("gui_running")
+	set lines=50
+	set columns=150
+endif
+
+" map Ctrl-S to save (in ex and insert mode)
+imap <C-s> <esc>:w<cr>a
+map <C-s> :w<cr>
+
+" map Ctrl-N to write+next
+imap <C-n> <esc>:w<cr>:n
+map <C-n> :w<cr>:n
