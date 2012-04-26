@@ -1,0 +1,12 @@
+# git aliases
+alias gl="git lg"
+alias ga="git add -A"
+alias gb="git blame"
+alias gp="git pull"
+alias gpr="git pull --rebase"
+alias gcm="git checkout master"
+alias grh="git reset --hard"
+alias grH="git reset HEAD"
+
+# host shortcuts
+alias Z="ssh dev.zentoo.org"

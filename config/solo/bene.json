@@ -1,14 +1,26 @@
 {
-	"current_email": "bb@xnull.de",
-	"current_name": "Benedikt Böhm",
+  "current_email": "bb@xnull.de",
+  "current_name": "Benedikt Böhm",
 
-	"git": {
-		"github": {
-			"user": "hollow"
-		}
-	},
+  "git": {
+    "github": {
+      "user": "hollow"
+    }
+  },
 
-	"run_list": [
-		"recipe[base]"
-	]
+  "vim": {
+    "plugins": {
+      "fugitive": "https://github.com/tpope/vim-fugitive",
+      "ctrlp": "https://github.com/kien/ctrlp.vim",
+      "vim-rails": "https://github.com/tpope/vim-rails.git",
+      "closetag": "https://github.com/vim-scripts/closetag.vim",
+      "nerdcommenter": "https://github.com/scrooloose/nerdcommenter",
+      "surround": "https://github.com/tpope/vim-surround.git",
+      "lusty": "https://github.com/sjbach/lusty"
+    }
+  },
+
+  "run_list": [
+    "recipe[base]"
+  ]
 }
