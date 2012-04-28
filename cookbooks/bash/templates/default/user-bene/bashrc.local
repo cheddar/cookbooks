@@ -1,12 +1,19 @@
 # git aliases
-alias gl="git lg"
 alias ga="git add -A"
 alias gb="git blame"
+alias gcm="git checkout master"
+alias gdm="git diff master"
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gl="git lg"
 alias gp="git pull"
 alias gpr="git pull --rebase"
-alias gcm="git checkout master"
-alias grh="git reset --hard"
-alias grH="git reset HEAD"
+alias grh="git reset HEAD"
+
+# rails shortcuts
+alias brs="bundle exec rails server"
+alias con="bundle exec rails console"
 
 # host shortcuts
 alias Z="ssh dev.zentoo.org"
+alias X="ssh box.home.xnull.de"

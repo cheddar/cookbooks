@@ -14,15 +14,16 @@ set wildmode=list:longest
 " ctrlp
 let g:ctrlp_max_height = 30
 
-" map Ctrl-S to save (in ex and insert mode)
-imap <C-s> <esc>:w<cr>a
-map <C-s> :w<cr>
-
 " map Ctrl-N to write+next
 imap <C-n> <esc>:w<cr>:n<cr>
 map <C-n> :w<cr>:n<cr>
 
-" map Ctrl-B to LustyJuggler
+<% if node.platform?("mac_os_x") %>
+" use system clipboard
+set clipboard=unnamed
+<% end %>
+
+" remap LustyJuggler
 map <leader><Space> <leader>lj
 
 " window movement
@@ -48,17 +49,3 @@ map <leader>rl :Rlayout<cr>
 map <leader>rm :Rmodel<cr>
 map <leader>rs :Rstylesheet<cr>
 map <leader>rv :Rview<cr>
-
-" this needs to be repeated here because of fugitive status
-set laststatus=2
-set statusline=
-set statusline+=%2*%-3.3n%0*\                " buffer number
-set statusline+=%f\                          " file name
-set statusline+=%h%1*%m%r%w%0*               " flags
-set statusline+=\[%{strlen(&ft)?&ft:'none'}, " filetype
-set statusline+=%{&encoding},                " encoding
-set statusline+=%{&fileformat}]              " file format
-set statusline+=%{fugitive#statusline()}     " git branch
-set statusline+=%=                           " right align
-set statusline+=%2*0x%-8B\                   " current char
-set statusline+=%-14.(%l,%c%V%)\ %<%P      " offset
