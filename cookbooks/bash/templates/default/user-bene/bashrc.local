@@ -43,6 +43,21 @@ svr () { sudo /etc/init.d/$1 restart; }
 # gentoo development
 export ECHANGELOG_USER="Benedikt Böhm <hollow@gentoo.org>"
 
+eportdir() {
+	if [[ -n "${PORTDIR_CACHE}" ]]; then
+		echo "${PORTDIR_CACHE}"
+	elif [[ -d ${HOME}/work/gentoo/cvs ]]; then
+		PORTDIR_CACHE="${HOME}/projects/gentoo/cvs"
+		eportdir
+	elif [[ -d /usr/portage ]]; then
+		PORTDIR_CACHE="/usr/portage"
+		eportdir
+	else
+		PORTDIR_CACHE="$(portageq portdir)"
+		eportdir
+	fi
+}
+
 repm() {
 	repoman manifest
 }
@@ -96,4 +111,12 @@ putmirror() {
 putdist() {
 	putdgo $1 /home/hollow/public_html/distfiles/
 	putdgo $1 /space/distfiles-local/
+}
+
+# zentoo development
+geix() {
+	pushd ~/projects/zentoo >/dev/null
+	./scripts/sync-gentoo-cache
+	eix --cache-file ./eix.cache.gentoo "$@"
+	popd >/dev/null
 }
