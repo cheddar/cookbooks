@@ -4,7 +4,6 @@
 
   "portage": {
     "CFLAGS": "-march=athlon64 -O2 -pipe",
-    "USE": "bash-completion bzip2 caps -cups fontconfig gs idn jpeg pcre png svg tiff truetype urandom vhosts vim-syntax"
   },
 
   "run_list": [

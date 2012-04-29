@@ -1,0 +1,55 @@
+{
+  "current_email": "bb@xnull.de",
+  "current_name": "Benedikt Böhm",
+
+  "portage": {
+    "profile": "/usr/portage/profiles/default/linux/amd64/10.0/desktop",
+    "CFLAGS": "-march=native -mtune=native -O2 -pipe",
+    "ACCEPT_KEYWORDS": "~amd64",
+    "MAKEOPTS": "-j3",
+    "OPTS": "--jobs=2 --load-average=6",
+    "USE": [
+      "-bluetooth -cups -gtk -qt4 -projectm -samba",
+      "avahi fontconfig gs",
+      "bluray vaapi vdpau xvmc",
+      "aio cpudetection ssse3",
+      "aacplus ass css ffmpeg theora",
+      "lirc lirc_devices_commandir",
+      "-input_devices_keyboard",
+      "-input_devices_mouse",
+      "-video_cards_dummy",
+      "-video_cards_fbdev",
+      "-video_cards_glint",
+      "-video_cards_intel",
+      "-video_cards_mach64",
+      "-video_cards_mga",
+      "-video_cards_neomagic",
+      "-video_cards_nouveau",
+      "-video_cards_nv",
+      "-video_cards_r128",
+      "-video_cards_radeon",
+      "-video_cards_savage",
+      "-video_cards_sis",
+      "-video_cards_tdfx",
+      "-video_cards_trident",
+      "-video_cards_v4l",
+      "-video_cards_vesa",
+      "-video_cards_via",
+      "-video_cards_vmware",
+      "-video_cards_voodoo",
+      "video_cards_nvidia"
+    ]
+  },
+
+  "baselayout": {
+    "groups": {
+      "audio": { "members": "bene" },
+      "cdrom": { "members": "bene" },
+      "video": { "members": "bene" }
+    }
+  },
+
+  "run_list": [
+    "recipe[base]"
+  ]
+}
