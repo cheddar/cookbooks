@@ -3,7 +3,7 @@
   "current_name": "Benedikt Böhm",
 
   "portage": {
-    "CFLAGS": "-march=athlon64 -O2 -pipe",
+    "CFLAGS": "-march=athlon64 -O2 -pipe"
   },
 
   "run_list": [
