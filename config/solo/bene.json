@@ -10,13 +10,25 @@
 
   "vim": {
     "plugins": {
-      "fugitive": "https://github.com/tpope/vim-fugitive",
-      "ctrlp": "https://github.com/kien/ctrlp.vim",
-      "vim-rails": "https://github.com/tpope/vim-rails.git",
       "closetag": "https://github.com/vim-scripts/closetag.vim",
+      "ctrlp": "https://github.com/kien/ctrlp.vim",
+      "fugitive": "https://github.com/tpope/vim-fugitive",
+      "lusty": "https://github.com/sjbach/lusty",
+      "mw-utils": "https://github.com/MarcWeber/vim-addon-mw-utils",
       "nerdcommenter": "https://github.com/scrooloose/nerdcommenter",
-      "surround": "https://github.com/tpope/vim-surround.git",
-      "lusty": "https://github.com/sjbach/lusty"
+      "nerdtree": "https://github.com/scrooloose/nerdtree",
+      "snipmate": "https://github.com/garbas/vim-snipmate",
+      "snippets": "https://github.com/honza/snipmate-snippets",
+      "tlib": "https://github.com/tomtom/tlib_vim.git",
+      "vim-rails": "https://github.com/tpope/vim-rails.git"
+    }
+  },
+
+  "lftp": {
+    "bookmarks": {
+      "box": "sftp://bene@box.home.xnull.de/home/bene",
+      "cafe": "sftp://bene@cafe.noova.de/home/dump",
+      "chaos": "sftp://bene@chaos.home.xnull.de/home/bene"
     }
   },
 

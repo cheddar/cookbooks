@@ -1,3 +1,12 @@
+# load virtualenv wrapper
+if [[ -r /usr/bin/virtualenvwrapper.sh ]]; then
+	export VIRTUALENV_USE_DISTRIBUTE=1
+	export VIRTUAL_ENV_DISABLE_PROMPT=1
+	export PIP_VIRTUALENV_BASE=$WORKON_HOME
+	export PIP_RESPECT_VIRTUALENV=true
+	source /usr/bin/virtualenvwrapper.sh
+fi
+
 # git aliases
 alias ga="git add -A"
 alias gb="git blame"
@@ -17,3 +26,74 @@ alias con="bundle exec rails console"
 # host shortcuts
 alias Z="ssh dev.zentoo.org"
 alias X="ssh box.home.xnull.de"
+
+wake() {
+	case "$1" in
+	chaos)
+		wakeonlan 00:1b:21:5f:5f:45
+		;;
+	esac
+}
+
+# init script helpers
+sva () { sudo /etc/init.d/$1 start; }
+svo () { sudo /etc/init.d/$1 stop; }
+svr () { sudo /etc/init.d/$1 restart; }
+
+# gentoo development
+export ECHANGELOG_USER="Benedikt Böhm <hollow@gentoo.org>"
+
+repm() {
+	repoman manifest
+}
+
+reps() {
+	repm
+		repoman scan
+}
+
+repf() {
+	repm
+		repoman full
+}
+
+emerge() {
+	if [[ ${_DISTNAME} == "gentoo" ]]; then
+		sudo $(which emerge) "$@"
+	else
+		$(which emerge) "$@"
+	fi
+}
+
+eci() {
+	local answer msg
+
+	repoman manifest || return 1
+	cvs diff | colordiff | less -R
+	repoman full
+
+	echo -n 'continue? (y/N) '
+	read -e answer
+	[[ "${answer}" != "y" && "${answer}" != "Y" ]] && return 1
+
+	while [[ "${msg}" == "" ]]; do
+		echo -n 'enter commit message> '
+		read -e msg
+	done
+
+	echangelog "${msg}" || return 1
+	repoman commit -m "${msg}" || return 1
+}
+
+putdgo() {
+	scp $1 hollow@dev.gentoo.org:$2
+}
+
+putmirror() {
+	putdgo $1 /space/distfiles-local/
+}
+
+putdist() {
+	putdgo $1 /home/hollow/public_html/distfiles/
+	putdgo $1 /space/distfiles-local/
+}

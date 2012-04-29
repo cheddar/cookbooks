@@ -9,19 +9,29 @@ endif
 
 " use the wildmenu
 set wildmenu
-set wildmode=list:longest
-
-" ctrlp
-let g:ctrlp_max_height = 30
-
-" map Ctrl-N to write+next
-imap <C-n> <esc>:w<cr>:n<cr>
-map <C-n> :w<cr>:n<cr>
+set wildmode=full
 
 <% if node.platform?("mac_os_x") %>
 " use system clipboard
 set clipboard=unnamed
 <% end %>
+
+" ctrlp
+let g:ctrlp_max_height = 30
+
+" nerdtree
+autocmd VimEnter * if !argc() | NERDTree | endif
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd VimEnter,BufEnter * let b:git_root_dir=system("git rev-parse --show-toplevel 2>/dev/null")
+map <F12> :exec "NERDTreeToggle ".b:git_root_dir<cr>
+imap <F12> <esc>:exec "NERDTreeToggle ".b:git_root_dir<cr>
+
+" fugitive
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" map Ctrl-N to write+next
+imap <C-n> <esc>:w<cr>:n<cr>
+map <C-n> :w<cr>:n<cr>
 
 " remap LustyJuggler
 map <leader><Space> <leader>lj
@@ -49,3 +59,22 @@ map <leader>rl :Rlayout<cr>
 map <leader>rm :Rmodel<cr>
 map <leader>rs :Rstylesheet<cr>
 map <leader>rv :Rview<cr>
+
+" use sudo for writing
+cmap w!! w !sudo tee % >/dev/null
+
+" completion
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+highlight Pmenu ctermbg=238 gui=bold
+
+" ruby completion
+autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+
+" all remaining filetypes use syntaxcomplete
+autocmd Filetype *
+	\ if &omnifunc == "" |
+	\   setlocal omnifunc=syntaxcomplete#Complete |
+	\ endif
