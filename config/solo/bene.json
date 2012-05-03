@@ -11,12 +11,14 @@
   "vim": {
     "plugins": {
       "closetag": "https://github.com/vim-scripts/closetag.vim",
+      "conque": "https://github.com/rosenfeld/conque-term.git",
       "ctrlp": "https://github.com/kien/ctrlp.vim",
       "fugitive": "https://github.com/tpope/vim-fugitive",
       "lusty": "https://github.com/sjbach/lusty",
       "mw-utils": "https://github.com/MarcWeber/vim-addon-mw-utils",
       "nerdcommenter": "https://github.com/scrooloose/nerdcommenter",
       "nerdtree": "https://github.com/scrooloose/nerdtree",
+      "ruby-conque": "https://github.com/skwp/vim-ruby-conque.git",
       "snipmate": "https://github.com/garbas/vim-snipmate",
       "snippets": "https://github.com/honza/snipmate-snippets",
       "tlib": "https://github.com/tomtom/tlib_vim.git",

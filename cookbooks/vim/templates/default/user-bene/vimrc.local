@@ -29,6 +29,9 @@ imap <F12> <esc>:exec "NERDTreeToggle ".b:git_root_dir<cr>
 " fugitive
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
+" spawn bash in buffer
+map <leader>b :ConqueTermSplit bash<cr>
+
 " map Ctrl-N to write+next
 imap <C-n> <esc>:w<cr>:n<cr>
 map <C-n> :w<cr>:n<cr>
@@ -46,7 +49,10 @@ map <S-Right> <C-W><Right>
 map <silent> <leader>n :silent :nohlsearch<cr>
 
 " cleanup whitespace terror
-map <leader>ws :%s/ \+$//g<cr>
+map <silent> <leader>ws :%s/ \+$//g<cr>
+
+" sort helper
+vmap <silent> <leader>s :sort<cr>
 
 " git shortcuts
 map <leader>gb :Gblame<cr>
@@ -54,11 +60,12 @@ map <leader>gb :Gblame<cr>
 " rails shortcuts
 map <leader>rc :Rcontroller<cr>
 map <leader>rh :Rhelper<cr>
-map <leader>rj :Rjavascript<cr>
-map <leader>rl :Rlayout<cr>
 map <leader>rm :Rmodel<cr>
-map <leader>rs :Rstylesheet<cr>
 map <leader>rv :Rview<cr>
+
+" ruby shortcuts
+nmap <silent> <leader>rf :call RunRspecCurrentFileConque()<CR>
+nmap <silent> <leader>rl :call RunRspecCurrentLineConque()<CR>
 
 " use sudo for writing
 cmap w!! w !sudo tee % >/dev/null
