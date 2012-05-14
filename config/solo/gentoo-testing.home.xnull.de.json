@@ -6,7 +6,8 @@
     "CFLAGS": "-march=athlon64 -O2 -pipe",
     "ACCEPT_KEYWORDS": "~amd64",
     "MAKEOPTS": "-j3",
-    "OPTS": "--jobs=2 --load-average=6"
+    "OPTS": "--jobs=2 --load-average=6",
+    "FEATURES": "test"
   },
 
   "resolv": {
