@@ -40,13 +40,13 @@ namespace :server do
     # broken that it is always stuck in starting state on the first run ...
     sh("kill $(</var/run/chef/expander.pid)")
     sh("/etc/init.d/chef-expander restart")
-    sh("chef-solo -c #{scfg} -j #{sjson} -N #{fqdn}")
+    sh("false; while [[ $? -ne 0 ]]; do chef-solo -c #{scfg} -j #{sjson} -N #{fqdn}; done")
 
     # run chef-client to register a client key
     sh("chef-client")
 
     # setup a client key for root
-    sh("env EDITOR=vim knife client create root -a -n -u chef-webui -k /etc/chef/webui.pem | tail -n+2 > /root/.chef/client.pem")
+    sh("env EDITOR=vim knife client create root -a -d -u chef-webui -k /etc/chef/webui.pem | tail -n+2 > /root/.chef/client.pem")
 
     # create new node
     nf = File.join(NODES_DIR, "#{fqdn}.rb")
@@ -69,7 +69,11 @@ namespace :server do
     end
 
     # deploy initial repository
-    Rake::Task['load:all'].invoke
+    begin
+      Rake::Task['load:all'].invoke
+    rescue
+      Rake::Task['load:all'].invoke
+    end
 
     # run final chef-client
     3.times do
