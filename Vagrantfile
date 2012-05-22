@@ -7,16 +7,15 @@
 
 Vagrant::Config.run do |config|
 
-  config.vm.box_url = "http://zentoo.org/downloads/amd64/zentoo-host-amd64-current.box"
-
   config.vm.define :chef_server do |server|
-    server.vm.box = "zentoo-host"
+    server.vm.box = "chef-server"
+    server.vm.box_url = "http://www.zentoo.org/downloads/amd64/chef-server-current.box"
     server.vm.network :hostonly, "10.42.9.2", :netmask => "255.255.255.0"
     server.vm.provision :shell, :path => "scripts/vagrant/bootstrap-server.sh"
   end
 
   # Boot with a GUI so you can see the screen. (Default is headless)
-  config.vm.boot_mode = :gui
+  # config.vm.boot_mode = :gui
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
