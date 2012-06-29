@@ -24,8 +24,10 @@ alias brs="bundle exec rails server"
 alias con="bundle exec rails console"
 
 # host shortcuts
+alias I="ssh chef.itratos.net"
+alias M="ssh bene.madvertise.me"
+alias S="ssh chef.subma.net"
 alias Z="ssh dev.zentoo.org"
-alias X="ssh box.home.xnull.de"
 
 wake() {
 	case "$1" in
