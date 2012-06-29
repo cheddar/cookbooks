@@ -16,28 +16,15 @@ set wildmode=full
 set clipboard=unnamed
 <% end %>
 
+" fancy powerline icons
+let g:Powerline_symbols = 'fancy'
+
 " ctrlp
 let g:ctrlp_max_height = 30
-
-" nerdtree
-autocmd VimEnter * if !argc() | NERDTree | endif
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-autocmd VimEnter,BufEnter * let b:git_root_dir=system("git rev-parse --show-toplevel 2>/dev/null")
-map <F12> :exec "NERDTreeToggle ".b:git_root_dir<cr>
-imap <F12> <esc>:exec "NERDTreeToggle ".b:git_root_dir<cr>
-
-" fugitive
-autocmd BufReadPost fugitive://* set bufhidden=delete
-
-" spawn bash in buffer
-map <leader>b :ConqueTermSplit bash<cr>
 
 " map Ctrl-N to write+next
 imap <C-n> <esc>:w<cr>:n<cr>
 map <C-n> :w<cr>:n<cr>
-
-" remap LustyJuggler
-map <leader><Space> <leader>lj
 
 " window movement
 map <S-Down> <C-W><Down>
@@ -70,6 +57,14 @@ nmap <silent> <leader>rl :call RunRspecCurrentLineConque()<CR>
 " use sudo for writing
 cmap w!! w !sudo tee % >/dev/null
 
+" Bubble single lines
+nmap <C-Up> ddkP
+nmap <C-Down> ddp
+
+" Bubble multiple lines
+vmap <C-Up> xkP`[V`]
+vmap <C-Down> xp`[V`]
+
 " completion
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 highlight Pmenu ctermbg=238 gui=bold
@@ -85,3 +80,55 @@ autocmd Filetype *
 	\ if &omnifunc == "" |
 	\   setlocal omnifunc=syntaxcomplete#Complete |
 	\ endif
+
+" shortcut for file rename
+function! RenameFile()
+	let old_name = expand('%')
+	let new_name = input('New file name: ', expand('%'), 'file')
+	if new_name != '' && new_name != old_name
+		exec ':saveas ' . new_name
+		exec ':silent !rm ' . old_name
+		redraw!
+	endif
+endfunction
+map <leader>n :call RenameFile()<cr>
+
+" remember the git root of the current project
+autocmd VimEnter,BufEnter * let b:git_root_dir=system("git rev-parse --show-toplevel 2>/dev/null")
+
+" nerdtree
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+map <F12> :exec "NERDTreeToggle ".b:git_root_dir<cr>
+imap <F12> <esc>:exec "NERDTreeToggle ".b:git_root_dir<cr>
+
+" fugitive
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" git-grep goodies
+if !exists('g:git_grep_command')
+  let g:git_grep_command = 'git grep -n '
+endif
+
+function! s:GitGrep(terms)
+  let expr = g:git_grep_command.'"'.a:terms.'"'
+
+  execute ":silent! lcd " . b:git_root_dir
+  cgetexpr system(expr)
+  execute ":silent! lcd " . expand("%:p:h")
+
+  cwin
+  echo 'Number of matches: ' . len(getqflist())
+endfunction
+
+function! s:GitGrepWord()
+  call s:GitGrep(expand("<cword>"))
+endfunction
+
+command! -nargs=0 GitGrepWord :call s:GitGrepWord()
+command! -nargs=+ GitGrep     :call s:GitGrep(<q-args>)
+
+nnoremap <silent> <leader>gw :GitGrepWord<CR>
+
+" SelectBuf
+let g:selBufAlwaysHideBufNums = 1
+nmap <silent> <cr> :SelectBuf<cr>

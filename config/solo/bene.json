@@ -10,19 +10,20 @@
 
   "vim": {
     "plugins": {
+      "SelectBuf": "https://github.com/vim-scripts/SelectBuf.git",
       "closetag": "https://github.com/vim-scripts/closetag.vim",
-      "conque": "https://github.com/rosenfeld/conque-term.git",
+      "conque": "https://github.com/skwp/vim-conque",
       "ctrlp": "https://github.com/kien/ctrlp.vim",
       "fugitive": "https://github.com/tpope/vim-fugitive",
-      "lusty": "https://github.com/sjbach/lusty",
+      "genutils": "https://github.com/vim-scripts/genutils.git",
       "mw-utils": "https://github.com/MarcWeber/vim-addon-mw-utils",
       "nerdcommenter": "https://github.com/scrooloose/nerdcommenter",
       "nerdtree": "https://github.com/scrooloose/nerdtree",
-      "ruby-conque": "https://github.com/skwp/vim-ruby-conque.git",
+      "rails": "https://github.com/tpope/vim-rails.git",
+      "ruby-conque": "https://github.com/skwp/vim-ruby-conque",
       "snipmate": "https://github.com/garbas/vim-snipmate",
       "snippets": "https://github.com/honza/snipmate-snippets",
-      "tlib": "https://github.com/tomtom/tlib_vim.git",
-      "vim-rails": "https://github.com/tpope/vim-rails.git"
+      "tlib": "https://github.com/tomtom/tlib_vim.git"
     }
   },
 
