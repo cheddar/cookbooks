@@ -16,6 +16,10 @@ nginx_unicorn "kanbanero" do
   port node[:kanbanero][:port]
 end
 
+ssl_certificate "/etc/ssl/nginx/www.kanbanero.com" do
+  cn "www.kanbanero.com"
+end
+
 nginx_server "kanbanero" do
   template "nginx.conf"
 end
