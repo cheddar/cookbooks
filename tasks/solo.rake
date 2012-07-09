@@ -2,6 +2,7 @@ require "highline/import"
 
 def run_solo
   scfg = File.join(TOPDIR, "config", "solo.rb")
+  puts ">>> Starting Chef Bootstrap ..."
   sh("chef-solo -c #{scfg} -j #{ENV['SOLO_CONFIG']}")
 end
 
@@ -49,11 +50,14 @@ EOF
   task :mac_os_x => :create_solo_config do
     raise "running as root is not supported on mac os" if ENV['SOLO_USER'] == "root"
 
-    unless File.directory?("/usr/local")
-      sh("sudo mkdir -p /usr/local")
-      sh("sudo chmod g+rwx /usr/local")
-      sh("sudo chgrp admin /usr/local")
-    end
+    puts ">>> Bootstrapping Homebrew"
+    sh("sudo rm -rf /usr/local/.git")
+    sh("sudo git clone --bare https://github.com/zenops/homebrew /usr/local/.git")
+    sh("sudo env GIT_DIR=/usr/local/.git GIT_WORK_TREE=/usr/local git reset --hard master")
+    sh("sudo chown -R #{ENV['SOLO_USER']} /usr/local")
+    sh("sudo chown root /usr/local")
+    sh("sudo chgrp -R admin /usr/local")
+    sh("sudo chmod g+rwx /usr/local")
 
     run_solo
 

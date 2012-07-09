@@ -1,14 +1,24 @@
 #!/bin/bash
 
-# install a sane GCC first
-if [[ ! -e /usr/bin/gcc-4.2 ]]; then
-	curl -L https://github.com/downloads/kennethreitz/osx-gcc-installer/GCC-10.7-v2.pkg > GCC-10.7-v2.pkg
-	sudo installer -pkg GCC-10.7-v2.pkg -target /
-	rm -f GCC-10.7-v2.pkg
-fi
+# select the correct xcode version
+echo ">>> Setting XCode to /Applications/Xcode.app"
+sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer || exit 1
 
-# needed by ruby. does not compile with llvm-gcc
-export CC=/usr/bin/gcc-4.2
+# updates
+echo ">>> Installing Mac OS X software updates"
+sudo softwareupdate -ia || exit 1
 
-# now do the normal bootstrap
-exec $(dirname $0)/bootstrap
+# bootstrap rvm/bundler
+$(dirname $0)/bootstrap || exit 1
+source ~/.rvm/scripts/rvm && source .rvmrc
+
+# run rake solo
+rake solo || exit 1
+
+# install iTerm colors and fonts
+curl -s -L https://gist.github.com/raw/1595572/417a3fa36e35ca91d6d23ac961071094c26e5fad/Menlo-Powerline.otf > '/Applications/iTerm.app/Menlo-Powerline.otf'
+open '/Applications/iTerm.app/Menlo-Powerline.otf'
+
+# open iTerm
+curl -s -L https://raw.github.com/altercation/solarized/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors > '/Applications/iTerm.app/Solarized Dark.itermcolors'
+open '/Applications/iTerm.app/Solarized Dark.itermcolors'
