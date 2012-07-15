@@ -10,11 +10,9 @@ endif
 " use the wildmenu
 set wildmenu
 set wildmode=full
-
-<% if node.platform?("mac_os_x") %>
-" use system clipboard
-set clipboard=unnamed
-<% end %>
+"
+" reload files changed outside of vim
+set autoread
 
 " fancy powerline icons
 let g:Powerline_symbols = 'fancy'
@@ -25,6 +23,10 @@ let g:ctrlp_max_height = 30
 " map Ctrl-N to write+next
 imap <C-n> <esc>:w<cr>:n<cr>
 map <C-n> :w<cr>:n<cr>
+
+" map Ctrl-S to save+exit
+imap <C-s> <esc>:x<cr>
+map <C-s> :x<cr>
 
 " window movement
 map <S-Down> <C-W><Down>
@@ -77,9 +79,9 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
 " all remaining filetypes use syntaxcomplete
 autocmd Filetype *
-	\ if &omnifunc == "" |
-	\   setlocal omnifunc=syntaxcomplete#Complete |
-	\ endif
+			\ if &omnifunc == "" |
+			\   setlocal omnifunc=syntaxcomplete#Complete |
+			\ endif
 
 " shortcut for file rename
 function! RenameFile()
@@ -101,27 +103,27 @@ autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 map <F12> :exec "NERDTreeToggle ".b:git_root_dir<cr>
 imap <F12> <esc>:exec "NERDTreeToggle ".b:git_root_dir<cr>
 
-" fugitive
+" delete fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " git-grep goodies
 if !exists('g:git_grep_command')
-  let g:git_grep_command = 'git grep -n '
+	let g:git_grep_command = 'git grep -n '
 endif
 
 function! s:GitGrep(terms)
-  let expr = g:git_grep_command.'"'.a:terms.'"'
+	let expr = g:git_grep_command.'"'.a:terms.'"'
 
-  execute ":silent! lcd " . b:git_root_dir
-  cgetexpr system(expr)
-  execute ":silent! lcd " . expand("%:p:h")
+	execute ":silent! lcd " . b:git_root_dir
+	cgetexpr system(expr)
+	execute ":silent! lcd " . expand("%:p:h")
 
-  cwin
-  echo 'Number of matches: ' . len(getqflist())
+	cwin
+	echo 'Number of matches: ' . len(getqflist())
 endfunction
 
 function! s:GitGrepWord()
-  call s:GitGrep(expand("<cword>"))
+	call s:GitGrep(expand("<cword>"))
 endfunction
 
 command! -nargs=0 GitGrepWord :call s:GitGrepWord()
@@ -132,3 +134,6 @@ nnoremap <silent> <leader>gw :GitGrepWord<CR>
 " SelectBuf
 let g:selBufAlwaysHideBufNums = 1
 nmap <silent> <cr> :SelectBuf<cr>
+
+" gundo
+nnoremap <F5> :GundoToggle<cr>

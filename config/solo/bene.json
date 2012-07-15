@@ -16,6 +16,7 @@
       "ctrlp": "https://github.com/kien/ctrlp.vim",
       "fugitive": "https://github.com/tpope/vim-fugitive",
       "genutils": "https://github.com/vim-scripts/genutils.git",
+      "gundo": "https://github.com/sjl/gundo.vim/",
       "mw-utils": "https://github.com/MarcWeber/vim-addon-mw-utils",
       "nerdcommenter": "https://github.com/scrooloose/nerdcommenter",
       "nerdtree": "https://github.com/scrooloose/nerdtree",
@@ -29,13 +30,19 @@
 
   "lftp": {
     "bookmarks": {
-      "box": "sftp://bene@box.home.xnull.de/home/bene",
       "cafe": "sftp://bene@cafe.noova.de/home/dump",
-      "chaos": "sftp://bene@chaos.home.xnull.de/home/bene"
+      "chaos": "sftp://bene@chaos.home.xnull.de/home/bene",
+      "zentoo": "sftp://bene@dev.zentoo.org/home/bene"
     }
   },
 
   "run_list": [
-    "recipe[base]"
+    "recipe[base]",
+    "recipe[1password]",
+    "recipe[adium]",
+    "recipe[chrome]",
+    "recipe[istatmenus]",
+    "recipe[skype]",
+    "recipe[spotify]"
   ]
 }
