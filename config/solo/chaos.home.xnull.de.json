@@ -6,12 +6,12 @@
     "profile": "/usr/portage/profiles/default/linux/amd64/10.0/desktop",
     "CFLAGS": "-march=native -mtune=native -O2 -pipe",
     "ACCEPT_KEYWORDS": "~amd64",
-    "MAKEOPTS": "-j3",
-    "OPTS": "--jobs=2 --load-average=6",
+    "MAKEOPTS": "-j4",
+    "OPTS": "--jobs=4 --load-average=12",
     "USE": [
       "-bluetooth -cups -gtk -qt4 -projectm -samba",
       "avahi fontconfig gs",
-      "bluray vaapi vdpau xvmc",
+      "bluray vaapi xvmc",
       "aio cpudetection ssse3",
       "aacplus ass css ffmpeg theora",
       "lirc lirc_devices_commandir",
@@ -20,7 +20,7 @@
       "-video_cards_dummy",
       "-video_cards_fbdev",
       "-video_cards_glint",
-      "-video_cards_intel",
+      "video_cards_intel",
       "-video_cards_mach64",
       "-video_cards_mga",
       "-video_cards_neomagic",
@@ -37,7 +37,7 @@
       "-video_cards_via",
       "-video_cards_vmware",
       "-video_cards_voodoo",
-      "video_cards_nvidia"
+      "-video_cards_nvidia"
     ]
   },
 
