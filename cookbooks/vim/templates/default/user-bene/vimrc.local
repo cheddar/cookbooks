@@ -1,3 +1,7 @@
+"-----------------------------------------------------------------------
+" global settings
+"-----------------------------------------------------------------------
+
 " personal leader key
 let mapleader = ","
 
@@ -14,62 +18,36 @@ set wildmode=full
 " reload files changed outside of vim
 set autoread
 
-" fancy powerline icons
-let g:Powerline_symbols = 'fancy'
+" easy pasting
+set pastetoggle=<F4>
+
+"-----------------------------------------------------------------------
+" plugin settings
+"-----------------------------------------------------------------------
+
+" conque
+let g:ConqueTerm_FastMode = 0
+let g:ConqueTerm_Color = 2
+let g:ConqueTerm_ReadUnfocused = 1
+let g:ConqueTerm_InsertOnEnter = 1
+let g:ConqueTerm_CWInsert = 1
 
 " ctrlp
 let g:ctrlp_max_height = 30
 
-" map Ctrl-N to write+next
-imap <C-n> <esc>:w<cr>:n<cr>
-map <C-n> :w<cr>:n<cr>
+" powerline
+let g:Powerline_symbols = 'fancy'
 
-" map Ctrl-S to save+exit
-imap <C-s> <esc>:x<cr>
-map <C-s> :x<cr>
+" selectbuf
+let g:selBufAlwaysHideBufNums = 1
 
-" window movement
-map <S-Down> <C-W><Down>
-map <S-Up> <C-W><Up>
-map <S-Left> <C-W><Left>
-map <S-Right> <C-W><Right>
-
-" disable search hilight
-map <silent> <leader>n :silent :nohlsearch<cr>
-
-" cleanup whitespace terror
-map <silent> <leader>ws :%s/ \+$//g<cr>
-
-" sort helper
-vmap <silent> <leader>s :sort<cr>
-
-" git shortcuts
-map <leader>gb :Gblame<cr>
-
-" rails shortcuts
-map <leader>rc :Rcontroller<cr>
-map <leader>rh :Rhelper<cr>
-map <leader>rm :Rmodel<cr>
-map <leader>rv :Rview<cr>
-
-" ruby shortcuts
-nmap <silent> <leader>rf :call RunRspecCurrentFileConque()<CR>
-nmap <silent> <leader>rl :call RunRspecCurrentLineConque()<CR>
-
-" use sudo for writing
-cmap w!! w !sudo tee % >/dev/null
-
-" Bubble single lines
-nmap <C-Up> ddkP
-nmap <C-Down> ddp
-
-" Bubble multiple lines
-vmap <C-Up> xkP`[V`]
-vmap <C-Down> xp`[V`]
-
-" completion
+" supertab
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 highlight Pmenu ctermbg=238 gui=bold
+
+"-----------------------------------------------------------------------
+" auto commands
+"-----------------------------------------------------------------------
 
 " ruby completion
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
@@ -83,6 +61,19 @@ autocmd Filetype *
 			\   setlocal omnifunc=syntaxcomplete#Complete |
 			\ endif
 
+" remember the git root of the current project
+autocmd VimEnter,BufEnter * let b:git_root_dir=system("git rev-parse --show-toplevel 2>/dev/null")
+
+" close nerdcommenter if its the last window
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" delete fugitive buffers
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+"-----------------------------------------------------------------------
+" custom functions
+"-----------------------------------------------------------------------
+
 " shortcut for file rename
 function! RenameFile()
 	let old_name = expand('%')
@@ -93,20 +84,8 @@ function! RenameFile()
 		redraw!
 	endif
 endfunction
-map <leader>n :call RenameFile()<cr>
 
-" remember the git root of the current project
-autocmd VimEnter,BufEnter * let b:git_root_dir=system("git rev-parse --show-toplevel 2>/dev/null")
-
-" nerdtree
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-map <F12> :exec "NERDTreeToggle ".b:git_root_dir<cr>
-imap <F12> <esc>:exec "NERDTreeToggle ".b:git_root_dir<cr>
-
-" delete fugitive buffers
-autocmd BufReadPost fugitive://* set bufhidden=delete
-
-" git-grep goodies
+" git-grep function
 if !exists('g:git_grep_command')
 	let g:git_grep_command = 'git grep -n '
 endif
@@ -129,11 +108,69 @@ endfunction
 command! -nargs=0 GitGrepWord :call s:GitGrepWord()
 command! -nargs=+ GitGrep     :call s:GitGrep(<q-args>)
 
-nnoremap <silent> <leader>gw :GitGrepWord<CR>
+"-----------------------------------------------------------------------
+" key mappings
+"-----------------------------------------------------------------------
 
-" SelectBuf
-let g:selBufAlwaysHideBufNums = 1
-nmap <silent> <cr> :SelectBuf<cr>
+" function keys
+nnoremap <silent> <F1> :help<cr>
+nnoremap <silent> <F2> :call RenameFile()<cr>
+" nnoremap <F3> :SelectBuf<cr>
+nnoremap <silent> <F4> :set invpaste<cr>
+nnoremap <silent> <F5> :GundoToggle<cr>
+" nnoremap <F8> toggle terminal input mode
+" vnoremap <F9> send a visually selected range of text to an existing terminal buffer
+" nnoremap <F10> send the entire contents of the file to an existing terminal buffer
+" nnoremap <F11> execute the current file in a new terminal buffer
+nnoremap <silent> <F12> :ConqueTermSplit bash<cr>
 
-" gundo
-nnoremap <F5> :GundoToggle<cr>
+" map Ctrl-N to write+next
+imap <C-n> <esc>:w<cr>:n<cr>
+map <C-n> :w<cr>:n<cr>
+
+" window movement
+map <S-Down> <C-W><Down>
+map <S-Up> <C-W><Up>
+map <S-Left> <C-W><Left>
+map <S-Right> <C-W><Right>
+
+" Bubble single lines
+nmap <C-Up> ddkP
+nmap <C-Down> ddp
+
+" Bubble multiple lines
+vmap <C-Up> xkP`[V`]
+vmap <C-Down> xp`[V`]
+
+" use sudo for writing
+cmap w!! w !sudo tee % >/dev/null
+
+" git grep for word under the cursor
+nmap <silent> <leader>gw :GitGrepWord<CR>
+
+" disable search hilight
+nmap <silent> <leader>n :silent :nohlsearch<cr>
+
+" cleanup whitespace terror
+nmap <silent> <leader>ws :%s/ \+$//g<cr>
+vmap <silent> <leader>ws :s/ \+$//g<cr>
+
+" sort helper
+vmap <silent> <leader>s :sort<cr>
+vmap <silent> <leader>su :sort u<cr>
+
+" git shortcuts
+map <leader>gb :Gblame<cr>
+
+" rails shortcuts
+map <leader>rc :Rcontroller<cr>
+map <leader>rh :Rhelper<cr>
+map <leader>rm :Rmodel<cr>
+map <leader>rv :Rview<cr>
+
+" convert ruby 1.8 hash syntax to ruby 1.9 version
+map <silent> <leader>rbh :%s/:\(\w\+\) => /\1: /g<cr>
+
+" run current spec in conque
+nmap <silent> <leader>rsf :call RunRspecCurrentFileConque()<CR>
+nmap <silent> <leader>rsl :call RunRspecCurrentLineConque()<CR>
