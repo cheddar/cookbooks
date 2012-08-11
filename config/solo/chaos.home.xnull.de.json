@@ -12,7 +12,7 @@
       "-bluetooth -cups -gtk -qt4 -projectm -samba",
       "avahi fontconfig gs systemd xorg",
       "aio cpudetection ssse3",
-      "aacplus ass blueray css ffmpeg theora xvmc",
+      "aacplus ass bluray css ffmpeg theora xvmc",
       "lirc lirc_devices_commandir",
       "-input_devices_keyboard",
       "-input_devices_mouse",
