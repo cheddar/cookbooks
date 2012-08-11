@@ -10,10 +10,9 @@
     "OPTS": "--jobs=4 --load-average=12",
     "USE": [
       "-bluetooth -cups -gtk -qt4 -projectm -samba",
-      "avahi fontconfig gs",
-      "bluray vaapi xvmc",
+      "avahi fontconfig gs systemd xorg",
       "aio cpudetection ssse3",
-      "aacplus ass css ffmpeg theora",
+      "aacplus ass blueray css ffmpeg theora xvmc",
       "lirc lirc_devices_commandir",
       "-input_devices_keyboard",
       "-input_devices_mouse",
