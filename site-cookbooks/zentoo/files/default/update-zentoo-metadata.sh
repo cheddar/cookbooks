@@ -13,7 +13,8 @@ exec 2> >(logger -i -p "${LOG_FACILITY}.error" -t "${PROGRAM}")
 	export PORTDIR="/var/cache/portage/zentoo"
 
 	pushd ${PORTDIR} > /dev/null
-	git pull -q origin master
+	git fetch -q origin
+	git reset --hard origin/master
 	./scripts/sync-local-cache > /dev/null
 	popd > /dev/null
 
