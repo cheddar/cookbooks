@@ -96,6 +96,10 @@ file "/var/log/nginx/error_log" do
   action :delete
 end
 
+splunk_input "monitor:///var/log/nginx/access_log" do
+  index "access"
+end
+
 cookbook_file "/etc/logrotate.d/nginx" do
   source "logrotate.conf"
   owner "root"
