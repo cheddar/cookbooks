@@ -11,11 +11,6 @@ monit_instance "kanbanero" do
   manage false
 end
 
-nginx_unicorn "kanbanero" do
-  homedir node[:kanbanero][:homedir]
-  port node[:kanbanero][:port]
-end
-
 ssl_certificate "/etc/ssl/nginx/www.kanbanero.com" do
   cn "www.kanbanero.com"
 end
@@ -24,11 +19,11 @@ nginx_server "kanbanero" do
   template "nginx.conf"
 end
 
-nrpe_command "check_kanbanero_unicorn" do
-  command "/usr/lib/nagios/plugins/check_pidfile /var/app/kanbanero/shared/pids/unicorn.pid"
+nrpe_command "check_kanbanero_thin" do
+  command "/usr/lib/nagios/plugins/check_pidfile /var/app/kanbanero/shared/pids/thin.pid"
 end
 
-nagios_service "KANBAN-UNICORN" do
-  check_command "check_nrpe!check_kanbanero_unicorn"
+nagios_service "KANBAN-THIN" do
+  check_command "check_nrpe!check_kanbanero_thin"
   servicegroups "kanbanero"
 end
