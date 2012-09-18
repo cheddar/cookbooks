@@ -1,5 +1,7 @@
 set[:primary_ipaddress] = "176.9.96.166"
 
+set[:contacts][:hostmaster] = "hostmaster@chariteam.de"
+
 set[:denyhosts][:whitelist] = [
   '160.45.202.20',
 ]
