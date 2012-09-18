@@ -28,7 +28,7 @@ define :mongodb_instance, :nfiles => "1024" do
 
   # data for solr searches
   tag("mongodb")
-  node[:mongodb][:instances][params[:name]] = params
+  node[:mongodb][:instances][name] = params
 
   directory dbpath do
     owner "mongodb"
@@ -79,6 +79,14 @@ define :mongodb_instance, :nfiles => "1024" do
     action [:enable, :start]
   end
 
+  if tagged?("ganymed-client")
+    ganymed_collector svcname do
+      source "mongodb.rb"
+      variables :name => name,
+                :port => port
+    end
+  end
+
   if tagged?("nagios-client")
     nrpe_command "check_mongodb_#{name}" do
       command "/usr/lib/nagios/plugins/check_pidfile /var/run/mongodb/#{name}.pid mongod"
@@ -121,25 +129,6 @@ define :mongodb_instance, :nfiles => "1024" do
     unless params[:opts].any? { |o| o.match(/--replSet/) }
       node.default[:nagios][:services]["#{nagname}-REPL-STATE"][:enabled] = false
       node.default[:nagios][:services]["#{nagname}-REPL-LAG"][:enabled] = false
-    end
-  end
-
-  if tagged?("munin-node")
-    %w(
-      btree
-      conn
-      lock
-      mem
-      ops
-    ).each do |p|
-      munin_plugin "mongo_#{name}_#{p}" do
-        plugin "mongo_#{p}"
-        source "mongo_#{p}"
-        config [
-          "env.name #{name}",
-          "env.port #{port.to_i + 1000}",
-        ]
-      end
     end
   end
 end

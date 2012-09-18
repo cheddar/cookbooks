@@ -57,16 +57,6 @@ if platform?("mac_os_x")
     mode "0600"
     backup 0
   end
-
-  execute "mysql-link-plist" do
-    command "ln -nfs $(brew --prefix mysql)/homebrew.mxcl.mysql.plist #{node[:homedir]}/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
-    action :nothing
-  end
-
-  service "mysql" do
-    service_name "homebrew.mxcl.mysql"
-    action :start
-  end
 end
 
 if platform?("gentoo") and root?
@@ -217,44 +207,4 @@ if tagged?("nagios-client")
 
   nagios_service_escalation "MYSQL-SLAVEIO"
   nagios_service_escalation "MYSQL-SLAVESQL"
-end
-
-# munin plugins
-if tagged?("munin-node")
-  mysql_munin_password = get_password("mysql/munin")
-
-  mysql_user "munin" do
-    force_password true
-    password mysql_munin_password
-  end
-
-  mysql_grant "munin-global" do
-    user "munin"
-    privileges ["SUPER", "PROCESS", "REPLICATION CLIENT"]
-    database "*"
-  end
-
-  mysql_grant "munin-mysql" do
-    user "munin"
-    privileges ["SELECT"]
-    database "mysql"
-  end
-
-  # remove old plugins
-  %w(bytes queries slave_status slowqueries threads).each do |p|
-    munin_plugin "mysql_#{p}" do
-      action :delete
-    end
-  end
-
-  # use advanced mysql graphs
-  package "net-analyzer/munin-mysql"
-
-  munin_plugin "mysql" do
-    config [
-      "env.mysqlconnection DBI:mysql:mysql",
-      "env.mysqluser munin",
-      "env.mysqlpassword #{mysql_munin_password}",
-    ]
-  end
 end

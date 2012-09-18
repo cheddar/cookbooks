@@ -92,11 +92,6 @@ nginx_module "log" do
   template "log.conf"
 end
 
-# we use syslog, no need to keep old error logs
-file "/var/log/nginx/error_log" do
-  action :delete
-end
-
 file "/etc/syslog-ng/conf.d/90-nginx.conf" do
   action :delete
 end
@@ -138,10 +133,8 @@ if tagged?("nagios-client")
   end
 end
 
-if tagged?("munin-node")
-  %w(memory request status).each do |p|
-    munin_plugin "nginx_#{p}" do
-      source "nginx_#{p}"
-    end
+if tagged?("ganymed-client")
+  ganymed_collector "nginx" do
+    source "nginx.rb"
   end
 end
