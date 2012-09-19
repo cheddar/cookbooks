@@ -80,17 +80,17 @@ when "dev.zentoo.org"
 
 when "zeus.xnull.de"
   shorewall_rule "kanbanero" do
-    dest "$FW:#{nodes["kanbanero.com"]}"
+    dest "$FW:188.40.132.123"
     destport "http,https"
   end
 
   shorewall_rule "kali" do
-    dest "$FW:#{nodes['kali.xnull.de']}"
+    dest "$FW:188.40.132.125"
     destport "ftp,smtp,http,https,pop3,pop3s,imap,imaps"
   end
 
   shorewall_rule "my" do
-    dest "$FW:#{nodes["my.xnull.de"]}"
+    dest "$FW:188.40.228.153"
     destport "git,http,https"
   end
 
@@ -117,7 +117,6 @@ when "zeus.xnull.de"
 
 when "bocaloves.me"
   shorewall_rule "bocaloves.me" do
-    dest "$FW:#{nodes['bocaloves.me']}"
     destport "ftp,http,https"
   end
 
