@@ -5,6 +5,15 @@ nodes({
   "kanbanero.com" => {
     :tags => %w(hostmaster),
   },
+  "iberico.kanbanero.net" => {
+    :tags => %w(hostmaster),
+  },
+  "app1.kanbanero.net" => {
+    :tags => %w(hostmaster),
+  },
+  "staging.kanbanero.net" => {
+    :tags => %w(hostmaster),
+  },
 })
 
 authorized_keys [
