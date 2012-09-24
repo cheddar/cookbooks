@@ -5,14 +5,12 @@ action :create do
   uid = new_resource.uid
   groups = new_resource.groups
   homedir = if new_resource.homedir == nil
-              "/var/app/#{user}"
+              node[user][:homedir] rescue "/var/app/#{user}"
             else
               new_resource.homedir
             end
 
-  akf = new_resource.authorized_keys_for
-  akf = [akf] unless akf.is_a?(Array)
-
+  akf = [new_resource.authorized_keys_for, node[user][:deployers]].flatten.uniq
   authorized_keys = authorized_keys_for(akf)
 
   group user do
@@ -80,10 +78,14 @@ EOS
   end
 
   if new_resource.rvm
-    version = new_resource.rvm
+    paths = [
+      "#{homedir}/.rvm/rubies",
+      "#{homedir}/.rvm/gems",
+      "#{homedir}/shared/bundle",
+    ]
 
-    rvm_instance user do
-      version version
+    portage_preserve_libs user do
+      paths paths
     end
   end
 
