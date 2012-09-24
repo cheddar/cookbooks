@@ -1,6 +1,8 @@
 include_recipe "kanbanero::user"
 include_recipe "mysql"
 
+package "dev-libs/libxslt"
+
 monit_instance "kanbanero" do
   manage false
 end
