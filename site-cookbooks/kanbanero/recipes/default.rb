@@ -7,6 +7,13 @@ monit_instance "kanbanero" do
   manage false
 end
 
+cookbook_file "/var/app/kanbanero/shared/config/database.login.yml" do
+  source "database.login.yml"
+  owner "app"
+  group "app"
+  mode "0640"
+end
+
 nginx_server "kanbanero" do
   template "nginx.conf"
 end
