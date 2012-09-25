@@ -1,4 +1,4 @@
 login: &login
   <<: *defaults
-  username: root
+  username: kanbanero
   password: "D}U4m[>EsxPYVrsR2Z"

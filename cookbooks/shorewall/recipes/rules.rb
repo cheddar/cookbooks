@@ -78,6 +78,17 @@ when "dev.zentoo.org"
     end
   end
 
+when "iberico.kanbanero.net"
+  shorewall_rule "app1" do
+    dest "$FW:#{nodes['app1.kanbanero.net']}"
+    destport "http,https"
+  end
+
+  shorewall_rule "staging" do
+    dest "$FW:#{nodes['staging.kanbanero.net']}"
+    destport "http,https"
+  end
+
 when "zeus.xnull.de"
   shorewall_rule "kanbanero" do
     dest "$FW:188.40.132.123"
