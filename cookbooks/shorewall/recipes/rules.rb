@@ -131,4 +131,10 @@ when "bocaloves.me"
     destport "ftp,http,https"
   end
 
+when "chariteam.de"
+  shorewall_rule "chariteam.de" do
+    destport "ftp,http,https"
+  end
+
+
 end
