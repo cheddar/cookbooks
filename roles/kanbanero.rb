@@ -7,15 +7,12 @@ run_list(%w(
 override_attributes({
   :backup => {
     :encryption_password => "V9RaKs1DaeoX1PJY0aAqWaj8wgDQM8",
-    :target_base_url => "ssh://backup:6hktyzGQOyTBGNzegT90Y8TUAavC55@backup.madvertise.net/backup",
+    :target_base_url => "ftp://u54761:E6zVrffyU1Jc3vgf@u54761.your-backup.de/",
   },
 
   :mysql => {
     :backup => {
-      :mode => "stream",
-      :stream => {
-        :host => "dbbackup@backup.madvertise.net",
-      },
+      :mode => "copy",
     }
   }
 })
