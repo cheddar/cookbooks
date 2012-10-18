@@ -6,9 +6,9 @@ V	130308110721Z		05	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations
 V	130314170743Z		06	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=my.xnull.de
 V	130315094639Z		07	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=b.xnull-ns.de
 V	130315100237Z		08	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=a.xnull-ns.de
-V	130315104536Z		09	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=kanbanero.com
+R	130315104536Z	121018221329Z	09	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=kanbanero.com
 V	130315122439Z		0A	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=zeus.xnull.de
-V	130315143245Z		0B	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=test.chariteam.de
+R	130315143245Z	121018221315Z	0B	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=test.chariteam.de
 V	130327115746Z		0C	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=kali.xnull.de
 V	130329090405Z		0D	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=nagios.zenops.net
 V	130429130010Z		0E	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=box.home.xnull.de

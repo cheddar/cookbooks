@@ -8,7 +8,7 @@ V	130315094639Z		07	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations
 V	130315100237Z		08	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=a.xnull-ns.de
 V	130315104536Z		09	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=kanbanero.com
 V	130315122439Z		0A	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=zeus.xnull.de
-V	130315143245Z		0B	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=test.chariteam.de
+R	130315143245Z	121018221315Z	0B	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=test.chariteam.de
 V	130327115746Z		0C	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=kali.xnull.de
 V	130329090405Z		0D	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=nagios.zenops.net
 V	130429130010Z		0E	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=box.home.xnull.de
@@ -21,3 +21,4 @@ V	130718121537Z		14	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations
 V	130922125205Z		15	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=iberico.kanbanero.net
 V	130922130309Z		16	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=app1.kanbanero.net
 V	130922131138Z		17	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=staging.kanbanero.net
+V	131002091842Z		18	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=chariteam.de
