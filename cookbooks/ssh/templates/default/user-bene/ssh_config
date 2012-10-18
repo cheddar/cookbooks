@@ -23,7 +23,7 @@ Host *.madvertise.net *.madvertise.me madvertise.me
 	User bene
 
 # ds
-Host *.subma.net www.dmf-ms.de
+Host *.subma.net www.dmf-ms.de *.digitaleseiten.de
 	User boehm
 
 # newthinking
