@@ -2,7 +2,7 @@ comment "Robin Spaetling"
 email "robin@chariteam.de"
 
 nodes({
-  "test.chariteam.de" => {
+  "chariteam.de" => {
     :tags => %w(hostmaster),
   },
 })

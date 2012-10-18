@@ -2,7 +2,7 @@ comment "Jana Rekittke"
 email "jana@rekittke.name"
 
 nodes({
-  "test.chariteam.de" => {
+  "chariteam.de" => {
     :tags => %w(hostmaster),
   },
 })

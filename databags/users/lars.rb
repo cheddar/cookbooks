@@ -1,7 +1,7 @@
 comment "Lars Keller"
 
 nodes({
-  "test.chariteam.de" => {
+  "chariteam.de" => {
     :tags => %w(hostmaster),
   },
 })
