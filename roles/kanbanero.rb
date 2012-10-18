@@ -5,6 +5,11 @@ run_list(%w(
 ))
 
 override_attributes({
+  :contacts => {
+    :hostmaster => "hostmaster@kanbanero.com",
+    :cron => "hostmaster@kanbanero.com"
+  },
+
   :backup => {
     :encryption_password => "V9RaKs1DaeoX1PJY0aAqWaj8wgDQM8",
     :target_base_url => "ftp://u54761:E6zVrffyU1Jc3vgf@u54761.your-backup.de/",
