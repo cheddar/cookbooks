@@ -1,24 +1,36 @@
 require 'json'
 
-def get_mon_nodes(extra_search=nil)
+def get_ceph_nodes(type)
   nodes = []
 
-  if node[:tags].include?('ceph-mon')
+  if node[:tags].include?("ceph-#{type}")
     nodes << node
   end
 
   nodes += node.run_state[:nodes].select do |n|
-    n[:tags].include?("ceph-mon") and
-      n[:ceph][:fsid] == node[:ceph][:fsid]
+    begin
+      n[:tags].include?("ceph-#{type}") and
+      n[:ceph][:config][:fsid] == node[:ceph][:config][:fsid]
+    rescue
+      false
+    end
   end
 
-  nodes
+  nodes.uniq { |n| n[:fqdn] }
+end
+
+def get_mon_nodes
+  get_ceph_nodes('mon')
 end
 
 def get_mon_addresses()
   get_mon_nodes.map do |node|
     "#{node[:ipaddress]}:6789"
   end.uniq
+end
+
+def get_mds_nodes
+  get_ceph_nodes('mds')
 end
 
 QUORUM_STATES = ['leader', 'peon']
