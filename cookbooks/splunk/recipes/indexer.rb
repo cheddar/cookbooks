@@ -28,6 +28,7 @@ end
   indexes
   props
   tags
+  times
   transforms
 ).each do |c|
   template "/opt/splunk/etc/system/local/#{c}.conf" do
@@ -52,6 +53,7 @@ end
 ## splunk apps
 include_recipe "splunk::syslog"
 include_recipe "splunk::nagios"
+include_recipe "splunk::ganymed"
 
 ## nginx ssl proxy
 include_recipe "nginx"
