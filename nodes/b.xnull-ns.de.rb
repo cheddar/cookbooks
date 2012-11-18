@@ -1,4 +1,4 @@
-set[:primary_ipaddress] = "79.140.39.11"
+set[:primary_ipaddress] = "80.244.253.229"
 
 run_list(%w(
   role[base]
