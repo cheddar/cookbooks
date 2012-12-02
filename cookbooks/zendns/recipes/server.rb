@@ -14,20 +14,23 @@ template "/etc/powerdns/pdns.conf" do
 end
 
 package "dev-libs/mongo"
+package "dev-ruby/madvertise-logging"
+package "dev-ruby/mongo"
 
-cookbook_file "/usr/src/zendnspipe.c" do
-  source "zendnspipe.c"
+cookbook_file "/usr/libexec/zendnspipe" do
+  source "zendnspipe.rb"
   owner "root"
   group "root"
-  mode "0644"
-end
-
-execute "compile-zendnspipe" do
-  command "gcc -std=c99 -lmongoc -o /usr/libexec/zendnspipe /usr/src/zendnspipe.c"
-  not_if { FileUtils.uptodate?("/usr/libexec/zendnspipe", ["/usr/src/zendnspipe.c"]) }
+  mode "0755"
   notifies :restart, "service[pdns]"
 end
 
 service "pdns" do
   action [:enable, :start]
+end
+
+if tagged?('ganymed-client')
+  ganymed_collector 'zendns' do
+    source 'zendns.rb'
+  end
 end
