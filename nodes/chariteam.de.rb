@@ -4,6 +4,8 @@ set[:denyhosts][:whitelist] = [
   '160.45.202.20',
 ]
 
+set[:php][:use_flags] = %w(xmlreader xmlwriter)
+
 run_list(%w(
   role[chariteam]
   recipe[mysql::server]
