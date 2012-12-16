@@ -10,6 +10,7 @@ define :account,
        :home_owner => nil,
        :home_group => nil,
        :authorized_keys => [],
+       :key_source => nil,
        :action => :create do
   include_recipe "account"
 
@@ -18,6 +19,8 @@ define :account,
 
   home_owner = params[:home_owner]
   home_group = params[:home_group]
+
+  key_source = params[:key_source]
 
   group params[:gid] do
     append true
@@ -66,6 +69,22 @@ define :account,
     owner home_owner
     group home_group
     mode "0700"
+  end
+
+  if key_source
+    cookbook_file "#{home}/.ssh/id_rsa" do
+      source key_source
+      owner home_owner
+      group home_group
+      mode "0600"
+    end
+
+    cookbook_file "#{home}/.ssh/id_rsa.pub" do
+      source "#{key_source}.pub"
+      owner home_owner
+      group home_group
+      mode "0644"
+    end
   end
 
   # don't create an authorized keys file if authorized_keys is nil.
