@@ -8,6 +8,13 @@ git "/var/cache/portage/zentoo" do
   action :sync
 end
 
+git "/var/cache/portage/zentoo-next" do
+  repository "https://github.com/zentoo/zentoo"
+  revision "next"
+  enable_submodules true
+  action :sync
+end
+
 cookbook_file "/usr/local/sbin/update-zentoo-metadata" do
   source "update-zentoo-metadata.sh"
   owner "root"
@@ -22,6 +29,13 @@ end
 
 rsync_module "zentoo-portage" do
   path "/var/cache/portage/zentoo"
+  uid "nobody"
+  gid "nobody"
+  exclude "/.git* /eix.* /scripts"
+end
+
+rsync_module "zentoo-portage-next" do
+  path "/var/cache/portage/zentoo-next"
   uid "nobody"
   gid "nobody"
   exclude "/.git* /eix.* /scripts"
