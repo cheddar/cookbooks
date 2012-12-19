@@ -6,6 +6,7 @@ set[:portage][:USE] = [
   "-ruby_targets_ruby18",
   "-php_targets_php5-3",
   "php_targets_php5-4",
+  "vhosts",
 ]
 
 run_list(%w(
