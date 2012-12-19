@@ -19,4 +19,7 @@ default_attributes({
     :relayhost => "mx.zenops.net",
   },
 
+  :portage => {
+    :SYNC => "rsync://rsync.zentoo.org/zentoo-portage-next",
+  },
 })
