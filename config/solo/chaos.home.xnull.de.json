@@ -1,4 +1,6 @@
 {
+  "primary_ipaddress": "10.35.0.2",
+
   "current_email": "bb@xnull.de",
   "current_name": "Benedikt Böhm",
 
@@ -52,7 +54,7 @@
     "hosts": [
       "10.35.0.1 fritz.box",
       "10.35.0.2 chaos.home.xnull.de chaos",
-      "10.35.0.3 kronos.home.xnull.de kronos",
+      "10.35.0.3 kronos.home.xnull.de kronos"
     ]
   },
 
