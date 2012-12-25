@@ -29,17 +29,21 @@ remote_tmux() {
 	ssh -t $1 /bin/bash -li -c 'T'
 }
 
-alias C="remote_tmux chaos.home.xnull.de"
-alias M="remote_tmux bene.madvertise.me"
-alias Z="remote_tmux dev.zentoo.org"
-
 wake() {
 	case "$1" in
 	chaos)
-		wakeonlan 00:1b:21:5f:5f:45
+		wakeonlan 8C:89:A5:C1:66:27
 		;;
 	esac
 }
+
+function C() {
+	wake chaos
+	remote_tmux home.xnull.de
+}
+
+alias M="remote_tmux bene.madvertise.me"
+alias Z="remote_tmux dev.zentoo.org"
 
 # init script helpers
 sva () { sudo /etc/init.d/$1 start; }
