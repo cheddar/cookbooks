@@ -15,6 +15,10 @@ end]
 case node[:fqdn]
 
 when "dev.zentoo.org"
+  shorewall_interface "nodes" do
+    interface "vboxnet0 0.0.0.0 optional"
+  end
+
   shorewall_rule "chef.zenops.net" do
     dest "$FW:#{nodes['chef.zenops.net']}"
     destport "http,https"
@@ -73,42 +77,21 @@ when "dev.zentoo.org"
     end
   end
 
-when "iberico.kanbanero.net"
-  shorewall_rule "app1" do
-    dest "$FW:#{nodes['app1.kanbanero.net']}"
-    destport "http,https"
-  end
-
-  shorewall_rule "staging" do
-    dest "$FW:#{nodes['staging.kanbanero.net']}"
-    destport "http,https"
-  end
-
 when "zeus.xnull.de"
-  shorewall_rule "kanbanero" do
-    dest "$FW:188.40.132.123"
-    destport "http,https"
+  shorewall_rule "helios" do
+    dest "$FW:#{nodes['linux-vserver.org']}"
+    destport "ftp,http,imaps,smtp"
   end
 
   shorewall_rule "kali" do
-    dest "$FW:188.40.132.125"
+    dest "$FW:#{nodes['kali.xnull.de']}"
     destport "ftp,smtp,http,https,pop3,pop3s,imap,imaps"
-  end
-
-  shorewall_rule "my" do
-    dest "$FW:188.40.228.153"
-    destport "git,http,https"
   end
 
   # these nodes are not deployed or managed
   shorewall_rule "keks" do
     dest "$FW:188.40.132.124"
     destport "http,https"
-  end
-
-  shorewall_rule "helios" do
-    dest "$FW:188.40.228.147"
-    destport "ftp,http,imaps,smtp"
   end
 
   shorewall_rule "noth" do
@@ -131,5 +114,15 @@ when "chariteam.de"
     destport "ftp,http,https"
   end
 
+when "iberico.kanbanero.net"
+  shorewall_rule "app1" do
+    dest "$FW:#{nodes['app1.kanbanero.net']}"
+    destport "http,https"
+  end
+
+  shorewall_rule "staging" do
+    dest "$FW:#{nodes['staging.kanbanero.net']}"
+    destport "http,https"
+  end
 
 end
