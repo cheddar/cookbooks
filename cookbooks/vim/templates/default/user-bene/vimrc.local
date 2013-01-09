@@ -52,12 +52,18 @@ let g:syntastic_auto_jump=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': ['c', 'cpp'] }
 
 " taglist
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Close_On_Select = 1
 let Tlist_Highlight_Tag_On_BufEnter = 0
 let Tlist_Sort_Type = "name"
+
+" vimux
+let g:VimuxHeight = "33"
 
 "-----------------------------------------------------------------------
 " auto commands
@@ -111,7 +117,7 @@ if !exists('g:git_grep_command')
 endif
 
 function! s:GitGrep(terms)
-	let expr = g:git_grep_command.'"'.a:terms.'"'
+	let expr = g:git_grep_command."'".a:terms."'"
 
 	execute ":silent! lcd " . b:git_root_dir
 	cgetexpr system(expr)
@@ -125,8 +131,13 @@ function! s:GitGrepWord()
 	call s:GitGrep(expand("<cword>"))
 endfunction
 
+function! s:GitGrepWordBoundaries()
+	call s:GitGrep("\\b".expand("<cword>")."\\b")
+endfunction
+
+command! -nargs=0 GitGrepWordBoundaries :call s:GitGrepWordBoundaries()
 command! -nargs=0 GitGrepWord :call s:GitGrepWord()
-command! -nargs=+ GitGrep     :call s:GitGrep(<q-args>)
+command! -nargs=+ GitGrep :call s:GitGrep(<q-args>)
 
 "-----------------------------------------------------------------------
 " key mappings
@@ -145,15 +156,22 @@ nnoremap <silent> <F6> :TlistToggle<cr>
 " nnoremap <F11> execute the current file in a new terminal buffer
 nnoremap <silent> <F12> :GundoToggle<cr>
 
-" map Ctrl-N to write+next
-imap <C-n> <esc>:w<cr>:n<cr>
-map <C-n> :w<cr>:n<cr>
-
 " window movement
 map <S-Down> <C-W><Down>
 map <S-Up> <C-W><Up>
 map <S-Left> <C-W><Left>
 map <S-Right> <C-W><Right>
+
+" map Ctrl-N to write+next
+imap <C-n> <esc>:w<cr>:n<cr>
+map <C-n> :w<cr>:n<cr>
+
+" jump to next merge conflict
+imap <C-c> <esc>/^<<<<<cr>
+map <C-c> /^<<<<<cr>
+
+" (visual) paste without losing the register
+xnoremap P Pgvy
 
 " Bubble single lines
 nmap <C-Up> ddkP
@@ -163,15 +181,9 @@ nmap <C-Down> ddp
 vmap <C-Up> xkP`[V`]
 vmap <C-Down> xp`[V`]
 
-" tag search
-nnoremap <silent><Leader><C-]> <C-w><C-]>
-nnoremap <silent><C-]> g<C-]>
-
-" use sudo for writing
-cmap w!! w !sudo tee % >/dev/null
-
 " git grep for word under the cursor
-nmap <silent> <leader>gw :GitGrepWord<CR>
+nmap <silent> <leader>gw :GitGrepWordBoundaries<CR>
+nmap <silent> <leader>gW :GitGrepWord<CR>
 
 " disable search hilight
 nmap <silent> <leader>n :silent :nohlsearch<cr>
@@ -184,7 +196,10 @@ vmap <silent> <leader>so :sort<cr>
 vmap <silent> <leader>su :sort u<cr>
 
 " git shortcuts
-map <leader>gb :Gblame<cr>
+map <leader>gb :silent :Gblame<cr>
+
+""" shortcuts below here haven't been used in quite a while, maybe i should
+""" remove them ...
 
 " rails shortcuts
 map <leader>rc :Rcontroller<cr>
@@ -192,12 +207,23 @@ map <leader>rh :Rhelper<cr>
 map <leader>rm :Rmodel<cr>
 map <leader>rv :Rview<cr>
 
-" convert ruby 1.8 hash syntax to ruby 1.9 version
-map <silent> <leader>rbh :%s/:\(\w\+\) => /\1: /g<cr>
-
 " add ruby debugger
-nnoremap <silent><leader>rad Orequire 'debugger'; debugger<esc>
+nnoremap <silent> <leader>rad Orequire 'debugger'; debugger<esc>
 
-" run current spec in conque
-nmap <silent> <leader>rsf :call RunRspecCurrentFileConque()<CR>
-nmap <silent> <leader>rsl :call RunRspecCurrentLineConque()<CR>
+" vimux
+map <leader>vp :silent :VimuxPromptCommand<cr>
+map <leader>vi :silent :VimuxInspectRunner<cr>
+map <leader>vq :silent :VimuxCloseRunner<cr>
+map <leader>vx :silent :VimuxClosePanes<cr>
+map <leader>vs :silent :VimuxInterruptRunner<cr>
+
+" run tests
+map <silent> <leader>t :silent :w<cr>:call VimuxRunCommand("PS1='${RESET}'; clear; rspec --drb " . expand("%:p"))<cr>
+map <silent> <leader>T :silent :w<cr>:call VimuxRunCommand("PS1='${RESET}'; clear; rspec --drb " . expand("%:p") . ":" . line("."))<cr>
+
+" tag search
+nnoremap <silent><Leader><C-]> <C-w><C-]>
+nnoremap <silent><C-]> g<C-]>
+
+" use sudo for writing
+cmap w!! w !sudo tee % >/dev/null
