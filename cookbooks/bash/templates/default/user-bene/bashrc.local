@@ -19,6 +19,7 @@ alias gl="git lg"
 alias gp="git pull"
 alias gpr="git pull --rebase"
 alias grh="git reset HEAD"
+alias s="git status"
 
 # rails shortcuts
 alias brs="bundle exec rails server"
