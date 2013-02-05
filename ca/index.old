@@ -1,10 +1,10 @@
 R	121230211638Z	121202064931Z	01	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=chef.zenops.net
 R	121230223843Z	121202064931Z	02	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=dev.zentoo.org
 R	121231111419Z	120329085152Z	03	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=ns.zen-dns.de
-V	130301202659Z		04	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=bocaloves.me
+R	130301202659Z	130204161923Z	04	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=bocaloves.me
 V	130308110721Z		05	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=www.bocaloves.me
 R	130314170743Z	121228082145Z	06	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=my.xnull.de
-V	130315094639Z		07	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=b.xnull-ns.de
+R	130315094639Z	121228082211Z	07	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=b.xnull-ns.de
 R	130315100237Z	121228082201Z	08	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=a.xnull-ns.de
 R	130315104536Z	121018221329Z	09	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=kanbanero.com
 V	130315122439Z		0A	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=zeus.xnull.de
