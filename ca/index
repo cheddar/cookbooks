@@ -2,7 +2,7 @@ R	121230211638Z	121202064931Z	01	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/
 R	121230223843Z	121202064931Z	02	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=dev.zentoo.org
 R	121231111419Z	120329085152Z	03	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=ns.zen-dns.de
 R	130301202659Z	130204161923Z	04	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=bocaloves.me
-V	130308110721Z		05	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=www.bocaloves.me
+R	130308110721Z	130210162457Z	05	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=www.bocaloves.me
 R	130314170743Z	121228082145Z	06	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=my.xnull.de
 R	130315094639Z	121228082211Z	07	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=b.xnull-ns.de
 R	130315100237Z	121228082201Z	08	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=a.xnull-ns.de
@@ -26,3 +26,4 @@ V	131202064931Z		19	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations
 V	131202064931Z		1A	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=dev.zentoo.org
 V	131216222624Z		1B	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=linux-vserver.org
 V	140204161923Z		1C	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=bocaloves.me
+V	140210162457Z		1D	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=www.bocaloves.me
