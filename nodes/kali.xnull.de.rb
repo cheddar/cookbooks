@@ -1,3 +1,5 @@
+chef_environment "production"
+
 set[:primary_ipaddress] = "188.40.132.125"
 
 set[:nepal][:debug] = true

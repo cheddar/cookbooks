@@ -1,3 +1,5 @@
+chef_environment "production"
+
 set[:primary_ipaddress] = "176.9.28.173"
 set[:primary_ip6address] = "2a01:4f8:150:30a3::1"
 

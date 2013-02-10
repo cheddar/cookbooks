@@ -1,3 +1,5 @@
+chef_environment "production"
+
 set[:primary_ipaddress] = "176.9.69.244"
 
 set[:mysql][:server][:long_query_time] = "0.1"

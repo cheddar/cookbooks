@@ -1,3 +1,5 @@
+chef_environment "production"
+
 set[:primary_ipaddress] = "176.9.107.72"
 
 set[:denyhosts][:whitelist] = [
