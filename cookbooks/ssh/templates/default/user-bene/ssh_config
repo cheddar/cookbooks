@@ -17,27 +17,3 @@ Host *.gentoo-ev.org
 
 Host linux-vserver.org
 	User hollow
-
-# madvertise
-Host *.madvertise.net *.madvertise.me madvertise.me
-	User bene
-
-# ds
-Host *.subma.net www.dmf-ms.de *.digitaleseiten.de
-	User boehm
-
-# newthinking
-Host *.newthinking.net
-	User bbo
-
-# itratos
-Host *.itratos.net
-	User bene
-
-# zenops
-Host *.zenops.net
-	User bene
-
-# private
-Host *.xnull.de
-	User bene
