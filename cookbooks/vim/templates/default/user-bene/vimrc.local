@@ -146,6 +146,16 @@ command! -nargs=+ GitGrep :call s:GitGrep(<q-args>)
 " key mappings
 "-----------------------------------------------------------------------
 
+" disable arrow keys
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+
 " function keys
 nnoremap <silent> <F1> :help<cr>
 nnoremap <silent> <F2> :call RenameFile()<cr>
@@ -176,8 +186,7 @@ imap <C-n> <esc>:w<cr>:n<cr>
 map <C-n> :w<cr>:n<cr>
 
 " jump to next merge conflict
-imap <C-c> <esc>/^<<<<<cr>
-map <C-c> /^<<<<<cr>
+map <leader>fc /^<<<<<cr>
 
 " (visual) paste without losing the register
 xnoremap P Pgvy
