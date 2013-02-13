@@ -11,7 +11,8 @@ fi
 alias ga="git add -A"
 alias gb="git blame"
 alias gcm="git checkout master"
-alias gcl="git checkout live"
+alias gcn="git checkout next"
+alias gcu="git checkout upstream"
 alias gdm="git diff master"
 alias gd="git diff"
 alias gdc="git diff --cached"
@@ -57,7 +58,10 @@ export ECHANGELOG_USER="Benedikt Böhm <hollow@gentoo.org>"
 eportdir() {
 	if [[ -n "${PORTDIR_CACHE}" ]]; then
 		echo "${PORTDIR_CACHE}"
-	elif [[ -d ${HOME}/work/gentoo/cvs ]]; then
+	elif [[ -d ${HOME}/projects/gentoo/cvs ]]; then
+		PORTDIR_CACHE="${HOME}/projects/gentoo/cvs"
+		eportdir
+	elif [[ -d ${HOME}/projects/zentoo/zentoo ]]; then
 		PORTDIR_CACHE="${HOME}/projects/gentoo/cvs"
 		eportdir
 	elif [[ -d /usr/portage ]]; then
