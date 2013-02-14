@@ -146,16 +146,6 @@ command! -nargs=+ GitGrep :call s:GitGrep(<q-args>)
 " key mappings
 "-----------------------------------------------------------------------
 
-" disable arrow keys
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
-
 " function keys
 nnoremap <silent> <F1> :help<cr>
 nnoremap <silent> <F2> :call RenameFile()<cr>
