@@ -11,7 +11,7 @@ package "sys-cluster/hadoop"
   directory dir do
     owner "hadoop"
     group "hadoop"
-    mode "0755"
+    mode "0775"
   end
 end
 
@@ -40,6 +40,7 @@ end.first
 %w(
   core-site.xml
   hadoop-env.sh
+  hadoop-metrics2.properties
   hdfs-site.xml
   log4j.properties
   mapred-site.xml
