@@ -67,21 +67,6 @@ rsync_module "zentoo-distfiles" do
   gid "nobody"
 end
 
-# metro
-git "/usr/local/metro" do
-  repository "https://github.com/zentoo/metro"
-  action :sync
-end
-
-directory "/var/cache/metro/zentoo" do
-  owner "root"
-  group "root"
-  mode "0755"
-  recursive true
-end
-
-# TODO: cronjob for automagic stage building
-
 rsync_module "zentoo" do
   path "/var/cache/metro/zentoo"
   uid "nobody"
