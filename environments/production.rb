@@ -1,3 +1,4 @@
+description "The production environment"
 
 cookbook "R",                 "= 1.0.0"
 cookbook "account",           "= 1.0.2"
@@ -63,3 +64,7 @@ cookbook "vserver",           "= 0.1.0"
 cookbook "xinetd",            "= 1.0.0"
 cookbook "zendns",            "= 0.1.0"
 cookbook "zookeeper",         "= 0.1.0"
+cookbook "boca",              "= 0.1.0"
+cookbook "chariteam",         "= 0.1.0"
+cookbook "kanbanero",         "= 0.1.0"
+cookbook "zentoo",            "= 0.1.0"
