@@ -8,7 +8,7 @@ set[:metro][:aws_access_key_id] = "AKIAJGUN7XK4VYGLLFPA"
 set[:metro][:aws_secret_access_key] = "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"
 
 run_list(%w(
-  role[host]
+  role[base]
   recipe[metro]
   recipe[zentoo::mirror]
   recipe[java]
