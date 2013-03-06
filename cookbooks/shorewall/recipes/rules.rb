@@ -121,6 +121,12 @@ when "chariteam.de"
   end
 
 when "iberico.kanbanero.net"
+  # LXC
+  shorewall_lxc_bridge "lxc" do
+    interface "lxc0"
+    bridged "eth0"
+  end
+
   shorewall_rule "app1" do
     dest "$FW:#{nodes['app1.kanbanero.net']}"
     destport "http,https"
