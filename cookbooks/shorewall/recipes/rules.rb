@@ -16,14 +16,14 @@ case node[:fqdn]
 
 when "dev.zentoo.org"
   # LXC
-  shorewall_lxc_bridge "lxc" do
-    interface "lxc0"
-    bridged "eth0"
-  end
-
-  #shorewall_interface "nodes" do
-  #  interface "vboxnet0 0.0.0.0 optional"
+  #shorewall_lxc_bridge "lxc" do
+  #  interface "lxc0"
+  #  bridged "eth0"
   #end
+
+  shorewall_interface "nodes" do
+    interface "vboxnet0 0.0.0.0 optional"
+  end
 
   shorewall_rule "chef.zenops.net" do
     dest "$FW:#{nodes['chef.zenops.net']}"
