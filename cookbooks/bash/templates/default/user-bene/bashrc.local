@@ -28,7 +28,7 @@ alias con="bundle exec rails console"
 
 # host shortcuts
 remote_tmux() {
-	ssh -t $1 tmux attach -t default
+	ssh -t $1 /bin/bash -li -c 'T'
 }
 
 wake() {
