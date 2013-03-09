@@ -1,32 +1,11 @@
-R	121230211638Z	121202064931Z	01	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=chef.zenops.net
-R	121230223843Z	121202064931Z	02	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=dev.zentoo.org
-R	121231111419Z	120329085152Z	03	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=ns.zen-dns.de
-R	130301202659Z	130204161923Z	04	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=bocaloves.me
-R	130308110721Z	130210162457Z	05	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=www.bocaloves.me
-R	130314170743Z	121228082145Z	06	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=my.xnull.de
-R	130315094639Z	121228082211Z	07	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=b.xnull-ns.de
-R	130315100237Z	121228082201Z	08	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=a.xnull-ns.de
-R	130315104536Z	121018221329Z	09	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=kanbanero.com
-R	130315122439Z	130214093005Z	0A	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=zeus.xnull.de
-R	130315143245Z	121018221315Z	0B	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=test.chariteam.de
-R	130327115746Z	130306083552Z	0C	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=kali.xnull.de
-R	130329090405Z	130306083556Z	0D	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=nagios.zenops.net
-V	130429130010Z		0E	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=box.home.xnull.de
-V	130429151338Z		0F	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=chaos.home.xnull.de
-V	130512211730Z		10	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=gentoo-stable.home.xnull.de
-V	130513153452Z		11	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=gentoo-testing.home.xnull.de
-V	130524104827Z		12	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=boca-app.com
-V	130704191601Z		13	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=www.kanbanero.com
-V	130718121537Z		14	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=*.boca-app.com
-V	130922125205Z		15	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=iberico.kanbanero.net
-V	130922130309Z		16	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=app1.kanbanero.net
-V	130922131138Z		17	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=staging.kanbanero.net
-V	131002091842Z		18	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=chariteam.de
-V	131202064931Z		19	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=chef.zenops.net
-V	131202064931Z		1A	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=dev.zentoo.org
-V	131216222624Z		1B	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=linux-vserver.org
-V	140204161923Z		1C	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=bocaloves.me
-V	140210162457Z		1D	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=www.bocaloves.me
-V	140214093006Z		1E	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=zeus.xnull.de
-V	140305103405Z		1F	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=web1.schilder-versand.com
-V	140306083552Z		20	unknown	/C=DE/ST=Berlin/L=Berlin/O=Example Com/OU=Operations/CN=kali.xnull.de
+V	140309095347Z		01	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=app1.kanbanero.net
+V	140309095348Z		02	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=bocaloves.me
+V	140309095349Z		03	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=chariteam.de
+V	140309095350Z		04	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=chef.zenops.net
+V	140309095352Z		05	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=dev.zentoo.org
+V	140309095353Z		06	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=iberico.kanbanero.net
+V	140309095354Z		07	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=kali.xnull.de
+V	140309095356Z		08	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=linux-vserver.org
+V	140309095357Z		09	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=nagios.zenops.net
+V	140309095358Z		0A	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=staging.kanbanero.net
+V	140309095359Z		0B	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=web1.schilder-versand.com

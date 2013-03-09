@@ -1,7 +1,7 @@
 # Configure the Rakefile's tasks.
 
 # The company name - used for SSL certificates, and in srvious other places
-COMPANY_NAME = "Example Com"
+COMPANY_NAME = "ZenOps"
 
 # The Country Name to use for SSL Certificates
 SSL_COUNTRY_NAME = "DE"
@@ -16,7 +16,7 @@ SSL_LOCALITY_NAME = "Berlin"
 SSL_ORGANIZATIONAL_UNIT_NAME = "Operations"
 
 # The SSL contact email address
-SSL_EMAIL_ADDRESS = "hostmaster@example.com"
+SSL_EMAIL_ADDRESS = "hostmaster@zenops.de"
 
 # The upstream branch to track
 UPSTREAM_BRANCH="zenops/next"
