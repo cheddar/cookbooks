@@ -1,0 +1,4 @@
+login: &login
+  <<: *defaults
+  username: kanbanero
+  password: "D}U4m[>EsxPYVrsR2Z"
