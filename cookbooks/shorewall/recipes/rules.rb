@@ -120,6 +120,11 @@ when "chariteam.de"
     destport "ftp,http,https"
   end
 
+when "app1.admineo.de"
+  shorewall_rule "admineo" do
+    destport "http,https"
+  end
+
 when "iberico.kanbanero.net"
   # LXC
   shorewall_lxc_bridge "lxc" do
