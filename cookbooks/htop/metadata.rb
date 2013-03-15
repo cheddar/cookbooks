@@ -1,13 +1,12 @@
 # encoding: utf-8
 
-description "ZooKeeper enables highly reliable distributed coordination"
+description "HTop"
 
 maintainer "Benedikt Böhm"
 maintainer_email "benedikt.boehm@madvertise.com"
 license "Apache v2.0"
 
-version "0.2.0"
+version "0.1.0"
 
 supports "gentoo"
-
-depends "java"
+supports "mac_os_x"
