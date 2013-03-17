@@ -16,4 +16,5 @@ run_list(%w(
   recipe[java]
   recipe[mysql::server]
   recipe[mongodb::server]
+  recipe[postgresql::server]
 ))
