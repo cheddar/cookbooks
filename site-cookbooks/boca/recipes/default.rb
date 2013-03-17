@@ -14,6 +14,7 @@ end
   admin
   admintest
   db
+  images
   web
   webtest
 ).each do |vhost|
