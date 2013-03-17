@@ -7,9 +7,13 @@ if [[ -r /usr/bin/virtualenvwrapper.sh ]]; then
 	source /usr/bin/virtualenvwrapper.sh
 fi
 
+# blacklist for bash completion
+FIGNORE=".o:~:CVS:.svn:.git:metadata.json"
+
 # git aliases
 alias ga="git add -A"
 alias gb="git blame"
+alias gcl="git checkout live"
 alias gcm="git checkout master"
 alias gcn="git checkout next"
 alias gcu="git checkout upstream"
