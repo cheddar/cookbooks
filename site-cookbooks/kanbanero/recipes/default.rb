@@ -4,8 +4,11 @@ include_recipe "mysql"
 package "dev-libs/libxslt"
 package "net-libs/nodejs"
 
+systemd_user_session "kanbanero"
+
 monit_instance "kanbanero" do
   manage false
+  action :delete if systemd_running?
 end
 
 cookbook_file "/var/app/kanbanero/shared/config/database.login.yml" do
