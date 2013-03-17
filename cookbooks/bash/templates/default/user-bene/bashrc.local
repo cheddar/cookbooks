@@ -12,6 +12,7 @@ FIGNORE=".o:~:CVS:.svn:.git:metadata.json"
 
 # git aliases
 alias ga="git add -A"
+alias gap="git add -p"
 alias gb="git blame"
 alias gcl="git checkout live"
 alias gcm="git checkout master"
