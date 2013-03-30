@@ -6,7 +6,7 @@
 #  (at your option) any later version.
 
 [Unit]
-Description=User Manager for %I
+Description=User Manager for %u
 After=systemd-user-sessions.service
 
 [Service]
@@ -16,8 +16,8 @@ ControlGroup=%R/user/%I/shared
 ControlGroupModify=yes
 Type=notify
 ExecStart=/usr/bin/systemd --user
-Environment=XDG_RUNTIME_DIR=/run/user/%I
-Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%I/dbus/user_bus_socket
+Environment=XDG_RUNTIME_DIR=/run/user/%U
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/dbus/user_bus_socket
 
 [Install]
-WantedBy=multi-user.target
+Alias=user-session@%i.service
