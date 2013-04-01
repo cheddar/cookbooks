@@ -96,13 +96,5 @@ when "gentoo"
     end
 
     nagios_plugin "check_systemd"
-  else
-    systemd_user_unit "dbus.socket" do
-      user node[:current_user]
-    end
-
-    systemd_user_unit "dbus.service" do
-      user node[:current_user]
-    end
   end
 end
