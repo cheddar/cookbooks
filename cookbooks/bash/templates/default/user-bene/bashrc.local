@@ -10,6 +10,10 @@ fi
 # blacklist for bash completion
 FIGNORE=".o:~:CVS:.svn:.git:metadata.json"
 
+# project aliases
+alias pc="cd ~/projects/chef"
+alias pzz="cd ~/projects/zentoo/zentoo"
+
 # git aliases
 alias ga="git add -A"
 alias gap="git add -p"
@@ -27,7 +31,8 @@ alias gpr="git pull --rebase"
 alias grh="git reset HEAD"
 alias s="git status"
 
-# rails shortcuts
+# ruby/rails shortcuts
+alias b="bundle"
 alias brs="bundle exec rails server"
 alias con="bundle exec rails console"
 
