@@ -1,7 +1,6 @@
 include_recipe "kanbanero::user"
 include_recipe "mysql"
 
-package "dev-libs/libxslt"
 package "net-libs/nodejs"
 
 systemd_user_session "kanbanero"

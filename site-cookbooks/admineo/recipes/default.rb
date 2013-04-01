@@ -1,7 +1,6 @@
 include_recipe "admineo::user"
 include_recipe "mongodb"
 
-package "dev-libs/libxslt"
 package "net-libs/nodejs"
 
 systemd_user_session "admineo"
