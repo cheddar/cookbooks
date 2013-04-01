@@ -3,7 +3,7 @@ def initialize(name, run_context=nil)
   @action = :create
 end
 
-actions :create, :delete, :start, :stop, :restart, :enable, :disable
+actions :create, :delete, :start, :stop, :restart, :reload, :enable, :disable
 
 attribute :user, kind_of: String, required: true
 attribute :cookbook, kind_of: String

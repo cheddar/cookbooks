@@ -61,6 +61,14 @@ action :restart do
   end
 end
 
+action :reload do
+  user = get_user(new_resource.user)
+
+  execute "systemd-user-unit-reload-#{new_resource.name}" do
+    command "su -l -c 'systemctl --user reload #{new_resource.name}' #{user[:name]}"
+  end
+end
+
 action :enable do
   user = get_user(new_resource.user)
 
