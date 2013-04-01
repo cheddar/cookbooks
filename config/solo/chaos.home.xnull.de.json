@@ -11,7 +11,7 @@
     "MAKEOPTS": "-j4",
     "OPTS": "--jobs=4 --load-average=12",
     "USE": [
-      "-bluetooth -cups -projectm -samba",
+      "-bluetooth -consolekit -cups -projectm -samba",
       "avahi fontconfig gs systemd upnp xorg",
       "aio cpudetection ssse3",
       "aacplus ass bluray css ffmpeg theora xvmc",
@@ -22,6 +22,8 @@
       "-video_cards_fbdev",
       "-video_cards_glint",
       "video_cards_intel",
+      "video_cards_i915",
+      "video_cards_i965",
       "-video_cards_mach64",
       "-video_cards_mga",
       "-video_cards_neomagic",
@@ -59,6 +61,7 @@
   },
 
   "run_list": [
-    "recipe[base]"
+    "recipe[base]",
+    "recipe[xbmc]"
   ]
 }

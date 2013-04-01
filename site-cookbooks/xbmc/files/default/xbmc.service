@@ -1,0 +1,8 @@
+[Unit]
+Description=Starts instance of XBMC using xinit
+
+[Service]
+ExecStart=/usr/bin/xinit /usr/bin/xbmc-standalone -- :0
+
+[Install]
+WantedBy=default.target
