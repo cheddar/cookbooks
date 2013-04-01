@@ -23,14 +23,11 @@ require 'chef/mixin/command'
 
 module ChefUtils
   module RVM
-    module ShellHelpers
-      # stub to satisfy StringCache (library load order not guarenteed)
-    end
-
     class StringCache
+
       class << self
+        include ChefUtils::RVM
         include Chef::Mixin::Command
-        include Chef::RVM::ShellHelpers
       end
 
       ##
