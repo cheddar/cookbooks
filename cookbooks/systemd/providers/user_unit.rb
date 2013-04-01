@@ -4,13 +4,24 @@ action :create do
   user = get_user(new_resource.user)
   path = "#{user[:dir]}/.config/systemd/user/#{new_resource.name}"
 
-  cookbook_file path do
-    source new_resource.name
-    cookbook new_resource.cookbook if new_resource.cookbook
-    owner "root"
-    group "root"
-    mode "0644"
-    notifies :run, "execute[systemd-reload-#{user[:name]}]", :immediately
+  if new_resource.template
+    template path do
+      source new_resource.name
+      cookbook new_resource.cookbook if new_resource.cookbook
+      owner "root"
+      group "root"
+      mode "0644"
+      notifies :run, "execute[systemd-reload-#{user[:name]}]", :immediately
+    end
+  else
+    cookbook_file path do
+      source new_resource.name
+      cookbook new_resource.cookbook if new_resource.cookbook
+      owner "root"
+      group "root"
+      mode "0644"
+      notifies :run, "execute[systemd-reload-#{user[:name]}]", :immediately
+    end
   end
 end
 

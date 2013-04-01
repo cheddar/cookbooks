@@ -7,3 +7,4 @@ actions :create, :delete, :start, :stop, :restart, :enable, :disable
 
 attribute :user, kind_of: String, required: true
 attribute :cookbook, kind_of: String
+attribute :template, kind_of: String
