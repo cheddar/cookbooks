@@ -14,18 +14,26 @@ end]
 
 case node[:fqdn]
 
+when "chef.zenops.net"
+  shorewall_rule "http" do
+    destport "http,https"
+  end
+
+when "nagios.zenops.net"
+  shorewall_rule "http" do
+    destport "http,https"
+  end
+
 when "dev.zentoo.org"
   shorewall_interface "nodes" do
     interface "vboxnet0 0.0.0.0 optional"
   end
 
   shorewall_rule "dev.zentoo.org" do
-    dest "$FW:#{nodes['dev.zentoo.org']}"
     destport "http,https,rsync,3000,8081"
   end
 
   shorewall6_rule "dev.zentoo.org" do
-    dest "$FW:#{nodes6['dev.zentoo.org']}"
     destport "http,https,rsync,3000,8081"
   end
 
@@ -71,20 +79,13 @@ when "app1.admineo.de"
     destport "http,https"
   end
 
-when "iberico.kanbanero.net"
-  # LXC
-  shorewall_lxc_bridge "lxc" do
-    interface "lxc0"
-    bridged "eth0"
-  end
-
-  shorewall_rule "app1" do
-    dest "$FW:#{nodes['app1.kanbanero.net']}"
+when "app1.kanbanero.net"
+  shorewall_rule "http" do
     destport "http,https"
   end
 
-  shorewall_rule "staging" do
-    dest "$FW:#{nodes['staging.kanbanero.net']}"
+when "staging.kanbanero.net"
+  shorewall_rule "http" do
     destport "http,https"
   end
 
