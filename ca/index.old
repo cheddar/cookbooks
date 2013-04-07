@@ -6,7 +6,7 @@ V	140309095352Z		05	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=d
 V	140309095353Z		06	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=iberico.kanbanero.net
 V	140309095354Z		07	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=kali.xnull.de
 V	140309095356Z		08	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=linux-vserver.org
-V	140309095357Z		09	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=nagios.zenops.net
+R	140309095357Z	130407112120Z	09	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=nagios.zenops.net
 V	140309095358Z		0A	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=staging.kanbanero.net
 V	140309095359Z		0B	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=web1.schilder-versand.com
 V	140309095400Z		0C	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=zeus.xnull.de
