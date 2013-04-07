@@ -29,3 +29,11 @@ end
     template "#{vhost}.conf"
   end
 end
+
+shorewall_rule "boca" do
+  destport "ftp,http,https"
+end
+
+shorewall6_rule "boca" do
+  destport "ftp,http,https"
+end

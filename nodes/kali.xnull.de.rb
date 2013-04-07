@@ -9,6 +9,5 @@ set[:postfix][:message_size_limit] = 25
 
 run_list(%w(
   role[base]
-  recipe[nepal]
-  recipe[postfix::relayhost]
+  role[nepal]
 ))

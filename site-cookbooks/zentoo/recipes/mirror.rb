@@ -87,3 +87,11 @@ end
 nginx_server "mirror" do
   template "mirror.nginx.conf"
 end
+
+shorewall_rule "zentoo-mirror" do
+  destport "http,https,rsync"
+end
+
+shorewall6_rule "zentoo-mirror" do
+  destport "http,https,rsync"
+end

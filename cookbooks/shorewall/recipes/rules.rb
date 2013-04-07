@@ -14,29 +14,6 @@ end]
 
 case node[:fqdn]
 
-when "chef.zenops.net"
-  shorewall_rule "http" do
-    destport "http,https"
-  end
-
-when "nagios.zenops.net"
-  shorewall_rule "http" do
-    destport "http,https"
-  end
-
-when "dev.zentoo.org"
-  shorewall_interface "nodes" do
-    interface "vboxnet0 0.0.0.0 optional"
-  end
-
-  shorewall_rule "dev.zentoo.org" do
-    destport "http,https,rsync,3000,8081"
-  end
-
-  shorewall6_rule "dev.zentoo.org" do
-    destport "http,https,rsync,3000,8081"
-  end
-
 when "zeus.xnull.de"
   shorewall_rule "helios" do
     dest "$FW:#{nodes['linux-vserver.org']}"
@@ -49,11 +26,6 @@ when "zeus.xnull.de"
   end
 
   # these nodes are not deployed or managed
-  shorewall_rule "keks" do
-    dest "$FW:188.40.132.124"
-    destport "http,https"
-  end
-
   shorewall_rule "noth" do
     dest "$FW:188.40.228.146"
     proto "-"
@@ -62,31 +34,6 @@ when "zeus.xnull.de"
   shorewall_rule "nemesis" do
     dest "$FW:188.40.228.151"
     proto "-"
-  end
-
-when "bocaloves.me"
-  shorewall_rule "bocaloves.me" do
-    destport "ftp,http,https"
-  end
-
-when "chariteam.de"
-  shorewall_rule "chariteam.de" do
-    destport "ftp,http,https"
-  end
-
-when "app1.admineo.de"
-  shorewall_rule "admineo" do
-    destport "http,https"
-  end
-
-when "app1.kanbanero.net"
-  shorewall_rule "http" do
-    destport "http,https"
-  end
-
-when "staging.kanbanero.net"
-  shorewall_rule "http" do
-    destport "http,https"
   end
 
 when "chaos.home.xnull.de"

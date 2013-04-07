@@ -1,8 +1,8 @@
-include_recipe "admineo::user"
 include_recipe "mongodb"
 
 package "net-libs/nodejs"
 
+capistrano_skeleton "admineo"
 systemd_user_session "admineo"
 
 nginx_unicorn "admineo" do
@@ -16,4 +16,12 @@ end
 
 nginx_server "admineo" do
   template "nginx.conf"
+end
+
+shorewall_rule "admineo" do
+  destport "http,https"
+end
+
+shorewall6_rule "admineo" do
+  destport "http,https"
 end

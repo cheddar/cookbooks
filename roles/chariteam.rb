@@ -7,7 +7,6 @@ run_list(%w(
 override_attributes({
   :contacts => {
     :hostmaster => "hostmaster@chariteam.de",
-    :cron => "hostmaster@chariteam.de"
   },
 
   :backup => {

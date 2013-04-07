@@ -4,3 +4,11 @@ include_recipe "nginx::php"
 #nginx_server "chariteam" do
 #  template "nginx.conf"
 #end
+
+shorewall_rule "chariteam" do
+  destport "ftp,http,https"
+end
+
+shorewall6_rule "chariteam" do
+  destport "ftp,http,https"
+end

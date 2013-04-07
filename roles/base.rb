@@ -5,16 +5,7 @@ run_list(%w(
   recipe[duply]
 ))
 
-default_attributes({
-  :contacts => {
-    :hostmaster => "unhollow@gmail.com",
-    :cron => "unhollow@gmail.com"
-  },
-
-  :postfix => {
-    :relayhost => "mx.zenops.net",
-  },
-
+override_attributes({
   :portage => {
     :SYNC => "rsync://rsync.zentoo.org/zentoo-portage-next",
   },
