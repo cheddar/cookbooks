@@ -11,9 +11,10 @@ set[:metro][:aws_secret_access_key] = "JgRUC9VfW0n6HwjxobT5Ow2yd5hslPRRvHgma/P7"
 
 run_list(%w(
   role[base]
-  recipe[metro]
-  recipe[zentoo::mirror]
   recipe[java]
+  recipe[metro]
+  recipe[zentoo::dev]
+  recipe[zentoo::mirror]
   recipe[mysql::server]
   recipe[mongodb::server]
   recipe[postgresql::server]
