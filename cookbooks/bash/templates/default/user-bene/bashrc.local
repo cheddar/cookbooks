@@ -15,7 +15,7 @@ alias pm="cd ~/projects/madvertise/platform"
 alias pmc="cd ~/projects/madvertise/chef"
 alias pms="cd ~/projects/madvertise/server"
 alias pzc="cd ~/projects/zenops/chef"
-alias pzz="cd ~/projects/zentoo/zentoo"
+alias pzz="cd ~/projects/zenops/zentoo"
 
 # git aliases
 alias ga="git add -A"
@@ -75,7 +75,7 @@ eportdir() {
 	elif [[ -d ${HOME}/projects/gentoo/cvs ]]; then
 		PORTDIR_CACHE="${HOME}/projects/gentoo/cvs"
 		eportdir
-	elif [[ -d ${HOME}/projects/zentoo/zentoo ]]; then
+	elif [[ -d ${HOME}/projects/zenops/zentoo ]]; then
 		PORTDIR_CACHE="${HOME}/projects/gentoo/cvs"
 		eportdir
 	elif [[ -d /usr/portage ]]; then
@@ -144,7 +144,7 @@ putdist() {
 
 # zentoo development
 geix() {
-	pushd ~/projects/zentoo/zentoo >/dev/null
+	pushd ~/projects/zenops/zentoo >/dev/null
 	./scripts/sync-gentoo-cache
 	eix --cache-file ./eix.cache.gentoo "$@"
 	popd >/dev/null
