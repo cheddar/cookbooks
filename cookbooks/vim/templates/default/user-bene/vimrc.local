@@ -34,8 +34,8 @@ let g:ConqueTerm_Color = 2
 let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CWInsert = 1
-let g:ruby_conque_rspec_command='bundle exec rspec -cfs'
-let g:ruby_conque_window_height=20
+let g:ruby_conque_rspec_command = 'bundle exec rspec -cfs'
+let g:ruby_conque_window_height = 10
 
 " ctrlp
 let g:ctrlp_max_height = 30
@@ -153,10 +153,9 @@ nnoremap <silent> <F2> :call RenameFile()<cr>
 nnoremap <silent> <F4> :set invpaste<cr>
 nnoremap <silent> <F5> :call system("ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f " . b:git_root_dir . "/tags " . b:git_root_dir)<cr>
 nnoremap <silent> <F6> :TlistToggle<cr>
-" nnoremap <F8> toggle terminal input mode
-" vnoremap <F9> send a visually selected range of text to an existing terminal buffer
-" nnoremap <F10> send the entire contents of the file to an existing terminal buffer
-" nnoremap <F11> execute the current file in a new terminal buffer
+nnoremap <silent> <F9> :call RunRspecCurrentFileConque()<CR>
+nnoremap <silent> <F10> :call RunRspecCurrentLineConque()<CR>
+nnoremap <silent> <F11> :call RunRspecAllFilesConque()<CR>
 nnoremap <silent> <F12> :GundoToggle<cr>
 
 " window movement
@@ -164,6 +163,10 @@ map <S-Down> <C-W><Down>
 map <S-Up> <C-W><Up>
 map <S-Left> <C-W><Left>
 map <S-Right> <C-W><Right>
+
+" window management
+map <silent> <C-c> <C-W><C-c>
+imap <silent> <C-c> <esc><C-W><C-c>
 
 " tab switching
 map  <silent> <C-Up> :tabprevious<cr>
