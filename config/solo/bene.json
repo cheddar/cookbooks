@@ -33,8 +33,6 @@
       "nerdtree": "https://github.com/scrooloose/nerdtree",
       "rails": "https://github.com/tpope/vim-rails.git",
       "ruby-conque": "https://github.com/skwp/vim-ruby-conque",
-      "snipmate": "https://github.com/garbas/vim-snipmate",
-      "snippets": "https://github.com/honza/snipmate-snippets",
       "supertab": "https://github.com/ervandew/supertab",
       "syntastic": "https://github.com/scrooloose/syntastic",
       "taglist": "https://github.com/vim-scripts/taglist.vim",
