@@ -21,10 +21,12 @@
 
   "vim": {
     "plugins": {
+      "Align": "https://github.com/vim-scripts/Align",
       "SelectBuf": "https://github.com/vim-scripts/SelectBuf.git",
       "closetag": "https://github.com/vim-scripts/closetag.vim",
-      "conque": "https://github.com/skwp/vim-conque",
+      "conque": "https://github.com/elkatwork/vim-conque.git",
       "ctrlp": "https://github.com/kien/ctrlp.vim",
+      "dwm": "https://github.com/spolu/dwm.vim",
       "fugitive": "https://github.com/tpope/vim-fugitive",
       "genutils": "https://github.com/vim-scripts/genutils.git",
       "gundo": "https://github.com/sjl/gundo.vim/",
@@ -32,11 +34,14 @@
       "nerdcommenter": "https://github.com/scrooloose/nerdcommenter",
       "nerdtree": "https://github.com/scrooloose/nerdtree",
       "rails": "https://github.com/tpope/vim-rails.git",
-      "ruby-conque": "https://github.com/skwp/vim-ruby-conque",
+      "ruby-conque": "https://github.com/elkatwork/vim-ruby-conque.git",
       "supertab": "https://github.com/ervandew/supertab",
+      "surround": "https://github.com/tpope/vim-surround.git",
+      "switch": "https://github.com/AndrewRadev/switch.vim",
       "syntastic": "https://github.com/scrooloose/syntastic",
       "taglist": "https://github.com/vim-scripts/taglist.vim",
-      "tlib": "https://github.com/tomtom/tlib_vim.git"
+      "tlib": "https://github.com/tomtom/tlib_vim.git",
+      "vimux": "https://github.com/benmills/vimux"
     }
   },
 
@@ -50,12 +55,12 @@
 
   "run_list": [
     "recipe[base]",
-    "recipe[mysql::server]",
+    "recipe[rvm]",
     "recipe[1password]",
     "recipe[adium]",
     "recipe[chrome]",
-    "recipe[istatmenus]",
     "recipe[skype]",
-    "recipe[spotify]"
+    "recipe[spotify]",
+    "recipe[mysql::server]"
   ]
 }

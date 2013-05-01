@@ -61,11 +61,6 @@ function C() {
 alias M="remote_tmux bene.madvertise.me"
 alias Z="remote_tmux dev.zentoo.org"
 
-# init script helpers
-sva () { sudo /etc/init.d/$1 start; }
-svo () { sudo /etc/init.d/$1 stop; }
-svr () { sudo /etc/init.d/$1 restart; }
-
 # gentoo development
 export ECHANGELOG_USER="Benedikt Böhm <hollow@gentoo.org>"
 
