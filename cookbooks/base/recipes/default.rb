@@ -88,15 +88,20 @@ when "gentoo"
       include_recipe "openrc"
     end
 
+    cookbook_file "/usr/local/bin/service" do
+      source "service.sh"
+      owner "root"
+      group "root"
+      mode "0755"
+    end
+
     include_recipe "lib_users"
     include_recipe "openssl"
     include_recipe "nss"
     include_recipe "sudo"
     include_recipe "ssh::server"
-
-    # XXX: these will go away after systemd integration is complete
     include_recipe "cron"
-    include_recipe "syslog::client"
+    include_recipe "syslog"
 
     # these are only usefull in non-solo mode and only if the specified role
     # has been deployed on another node (see above)
