@@ -8,6 +8,9 @@ set[:denyhosts][:whitelist] = [
 
 set[:php][:use_flags] = %w(xmlreader xmlwriter)
 
+set[:backup][:configs]['varwwww'][:source] = "/var/www"
+set[:backup][:configs]['home'][:source] = "/home"
+
 run_list(%w(
   role[chariteam]
   recipe[mysql::server]
