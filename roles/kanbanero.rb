@@ -15,6 +15,9 @@ override_attributes({
   },
 
   :mysql => {
+    :server => {
+      :bind_address => "0.0.0.0",
+    },
     :backup => {
       :mode => "copy",
     }
