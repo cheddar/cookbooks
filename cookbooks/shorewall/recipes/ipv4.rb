@@ -1,11 +1,11 @@
-# remove old cruft
-%w(common perl shell).each do |p|
-  package "net-firewall/shorewall-#{p}" do
-    action :remove
-  end
-end
+case node[:platform]
+when "gentoo"
+  package "net-firewall/shorewall"
 
-package "net-firewall/shorewall"
+when "debian"
+  package "shorewall"
+
+end
 
 execute "shorewall-restart" do
   command "/sbin/shorewall -q restart"
@@ -42,6 +42,15 @@ end
     group "root"
     mode "0600"
     notifies :run, "execute[shorewall-restart]"
+  end
+end
+
+if node[:platform] == "debian"
+  file "/etc/default/shorewall" do
+    content "startup=1\n"
+    owner "root"
+    group "root"
+    mode "0644"
   end
 end
 
