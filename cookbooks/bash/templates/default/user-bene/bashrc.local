@@ -15,7 +15,7 @@ alias pm="cd ~/projects/madvertise/platform"
 alias pmc="cd ~/projects/madvertise/chef"
 alias pms="cd ~/projects/madvertise/server"
 alias pzc="cd ~/projects/zenops/chef"
-alias pzz="cd ~/projects/zenops/zentoo"
+alias pzz="cd ~/projects/zentoo/zentoo"
 
 # git aliases
 alias ga="git add -A"
@@ -140,7 +140,6 @@ putdist() {
 # zentoo development
 geix() {
 	pushd ~/projects/zenops/zentoo >/dev/null
-	./scripts/sync-gentoo-cache
 	eix --cache-file ./eix.cache.gentoo "$@"
 	popd >/dev/null
 }
