@@ -10,4 +10,5 @@ run_list(%w(
   recipe[admineo]
   recipe[mongodb::server]
   recipe[mongodb::backup]
+  recipe[redis]
 ))
