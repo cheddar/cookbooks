@@ -4,7 +4,7 @@ V	140309095349Z		03	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=c
 V	140309095350Z		04	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=chef.zenops.net
 V	140309095352Z		05	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=dev.zentoo.org
 V	140309095353Z		06	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=iberico.kanbanero.net
-V	140309095354Z		07	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=kali.xnull.de
+R	140309095354Z	130619200841Z	07	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=kali.xnull.de
 V	140309095356Z		08	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=linux-vserver.org
 R	140309095357Z	130407112120Z	09	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=nagios.zenops.net
 V	140309095358Z		0A	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=staging.kanbanero.net
@@ -16,3 +16,4 @@ V	140318082150Z		0F	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=s
 V	140324063443Z		10	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=chaos.home.xnull.de
 V	140407164853Z		11	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=*.zenops.net
 R	130705074802Z	130618182056Z	06B4B1	unknown	/description=LnjTAmg224P1N8X2/C=DE/CN=www.kanbanero.com/emailAddress=hostmaster@kanbanero.com
+V	140618182058Z		12	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=www.kanbanero.com
