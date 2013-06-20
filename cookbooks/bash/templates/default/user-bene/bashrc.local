@@ -139,7 +139,7 @@ putdist() {
 
 # zentoo development
 geix() {
-	pushd ~/projects/zenops/zentoo >/dev/null
+	pushd ~/projects/zentoo/zentoo >/dev/null
 	eix --cache-file ./eix.cache.gentoo "$@"
 	popd >/dev/null
 }
