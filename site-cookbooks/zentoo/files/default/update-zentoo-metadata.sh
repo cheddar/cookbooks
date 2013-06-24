@@ -15,7 +15,7 @@ exec 2> >(logger -i -p "${LOG_FACILITY}.error" -t "${PROGRAM}")
 	pushd ${PORTDIR} > /dev/null
 	git fetch -q origin
 	git reset --hard origin/master
-	./scripts/sync-local-cache > /dev/null
+	./scripts/generate-cache > /dev/null
 	popd > /dev/null
 
 	export PORTDIR="/var/cache/portage/zentoo-next"
@@ -23,7 +23,7 @@ exec 2> >(logger -i -p "${LOG_FACILITY}.error" -t "${PROGRAM}")
 	pushd ${PORTDIR} > /dev/null
 	git fetch -q origin
 	git reset --hard origin/next
-	./scripts/sync-local-cache > /dev/null
+	./scripts/generate-cache > /dev/null
 	popd > /dev/null
 
 ) 9>/run/lock/${PROGRAM}.lock
