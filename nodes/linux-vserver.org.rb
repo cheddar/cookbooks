@@ -12,5 +12,6 @@ set[:portage][:USE] = [
 ]
 
 run_list(%w(
+  role[zenops]
   recipe[base]
 ))

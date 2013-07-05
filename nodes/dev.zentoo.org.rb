@@ -10,7 +10,7 @@ set[:metro][:aws_access_key_id] = "AKIAJ3QVLL4QG5UJFIMQ"
 set[:metro][:aws_secret_access_key] = "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"
 
 run_list(%w(
-  role[base]
+  role[zenops]
   recipe[java]
   recipe[metro]
   recipe[zentoo::dev]

@@ -12,3 +12,11 @@ end
 shorewall6_rule "chariteam" do
   destport "ftp,http,https"
 end
+
+duply_backup "varwww" do
+  source "/var/www"
+end
+
+duply_backup "home" do
+  source "/home"
+end

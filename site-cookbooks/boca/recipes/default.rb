@@ -37,3 +37,11 @@ end
 shorewall6_rule "boca" do
   destport "ftp,http,https"
 end
+
+duply_backup "htdocs" do
+  source "/var/www/localhost/htdocs"
+end
+
+duply_backup "lib" do
+  source "/var/www/localhost/lib"
+end
