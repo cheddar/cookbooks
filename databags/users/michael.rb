@@ -5,6 +5,9 @@ nodes({
   "app1.admineo.de" => {
     :tags => %w(hostmaster),
   },
+  "web1.schilder-versand.com" => {
+    :tags => %w(hostmaster),
+  },
 })
 
 authorized_keys [
