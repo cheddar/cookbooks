@@ -7,4 +7,5 @@ run_list(%w(
   recipe[mysql::server]
   recipe[mysql::backup]
   recipe[schilderversand]
+  recipe[pure-ftpd]
 ))
