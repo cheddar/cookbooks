@@ -18,4 +18,5 @@ run_list(%w(
   recipe[mysql::server]
   recipe[mongodb::server]
   recipe[postgresql::server]
+  recipe[xvfb]
 ))
