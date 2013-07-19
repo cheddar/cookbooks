@@ -34,6 +34,12 @@ template "/opt/confluence/confluence/WEB-INF/classes/confluence-init.properties"
   notifies :restart, "service[confluence]"
 end
 
+directory "/var/lib/confluence" do
+  owner "root"
+  group "root"
+  mode "0750"
+end
+
 systemd_unit "confluence.service"
 
 service "confluence" do
