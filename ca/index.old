@@ -8,7 +8,7 @@ R	140309095354Z	130619200841Z	07	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Op
 V	140309095356Z		08	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=linux-vserver.org
 R	140309095357Z	130407112120Z	09	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=nagios.zenops.net
 V	140309095358Z		0A	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=staging.kanbanero.net
-V	140309095359Z		0B	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=web1.schilder-versand.com
+R	140309095359Z	130719191322Z	0B	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=web1.schilder-versand.com
 R	140309095400Z	130619200851Z	0C	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=zeus.xnull.de
 V	140310190647Z		0D	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=app1.admineo.de
 V	140310202515Z		0E	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=www.admineo.de
@@ -18,3 +18,4 @@ V	140407164853Z		11	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=*
 R	130705074802Z	130618182056Z	06B4B1	unknown	/description=LnjTAmg224P1N8X2/C=DE/CN=www.kanbanero.com/emailAddress=hostmaster@kanbanero.com
 V	140618182058Z		12	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=www.kanbanero.com
 V	140709191836Z		13	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=www.zenops.net
+V	140717192337Z		14	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=www.schilder-versand.com

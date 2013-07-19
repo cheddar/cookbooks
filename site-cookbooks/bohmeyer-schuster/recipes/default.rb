@@ -24,11 +24,11 @@ template "/shopsystem2/shops/mysqladmin/config.inc.php" do
   variables :secret_key => secret_key
 end
 
-shorewall_rule "schilderversand" do
+shorewall_rule "default" do
   destport "ftp,http,https"
 end
 
-shorewall6_rule "schilderversand" do
+shorewall6_rule "default" do
   destport "ftp,http,https"
 end
 

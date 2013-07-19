@@ -5,7 +5,13 @@ nodes({
   "app1.admineo.de" => {
     :tags => %w(hostmaster),
   },
-  "web1.schilder-versand.com" => {
+  "web1.bohmeyer-schuster.com" => {
+    :tags => %w(hostmaster),
+  },
+  "web2.bohmeyer-schuster.com" => {
+    :tags => %w(hostmaster),
+  },
+  "nepal.bohmeyer-schuster.com" => {
     :tags => %w(hostmaster),
   },
 })

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-description "Cookbook for schilderversand"
+description "Cookbook for Bohmeyer & Schuster shopsystem"
 
 maintainer "Benedikt Böhm"
 maintainer_email "bb@xnull.de"
