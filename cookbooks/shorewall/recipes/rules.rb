@@ -14,6 +14,11 @@ end]
 
 case node[:fqdn]
 
+when "www.zenops.net"
+  shorewall_rule "default" do
+    destport "http,https"
+  end
+
 when "zeus.xnull.de"
   shorewall_rule "helios" do
     dest "$FW:#{nodes['linux-vserver.org']}"
