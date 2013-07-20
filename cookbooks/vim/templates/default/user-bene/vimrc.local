@@ -72,6 +72,9 @@ let g:VimuxHeight = "33"
 " map dwm keys ourself
 let g:dwm_map_keys = 0
 
+" https://github.com/vim-ruby/vim-ruby/issues/33
+let g:ruby_path = ""
+
 "-----------------------------------------------------------------------
 " auto commands
 "-----------------------------------------------------------------------
