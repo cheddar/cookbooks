@@ -1,6 +1,6 @@
 chef_environment "production"
 
-set[:primary_ipaddress] = "188.40.228.147"
+set[:primary_ipaddress] = "213.145.232.38"
 
 set[:skip][:postfix_satelite] = true
 
