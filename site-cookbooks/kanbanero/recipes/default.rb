@@ -32,14 +32,3 @@ end
 shorewall6_rule "kanbanero" do
   destport "http,https"
 end
-
-if tagged?("nagios-client")
-  nrpe_command "check_kanbanero_thin" do
-    command "/usr/lib/nagios/plugins/check_pidfile /var/app/kanbanero/shared/pids/thin.pid"
-  end
-
-  nagios_service "KANBAN-THIN" do
-    check_command "check_nrpe!check_kanbanero_thin"
-    servicegroups "kanbanero"
-  end
-end
