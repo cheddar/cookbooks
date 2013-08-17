@@ -22,7 +22,9 @@
   "vim": {
     "plugins": {
       "Align": "https://github.com/vim-scripts/Align",
+      "IndentLines": "https://github.com/Yggdroot/indentLine",
       "SelectBuf": "https://github.com/vim-scripts/SelectBuf.git",
+      "abolish": "https://github.com/tpope/vim-abolish",
       "closetag": "https://github.com/vim-scripts/closetag.vim",
       "conque": "https://github.com/elkatwork/vim-conque.git",
       "ctrlp": "https://github.com/kien/ctrlp.vim",
@@ -34,6 +36,7 @@
       "nerdcommenter": "https://github.com/scrooloose/nerdcommenter",
       "nerdtree": "https://github.com/scrooloose/nerdtree",
       "rails": "https://github.com/tpope/vim-rails.git",
+      "repeat": "https://github.com/tpope/vim-repeat",
       "ruby-conque": "https://github.com/elkatwork/vim-ruby-conque.git",
       "supertab": "https://github.com/ervandew/supertab",
       "surround": "https://github.com/tpope/vim-surround.git",
@@ -56,11 +59,11 @@
   "run_list": [
     "recipe[base]",
     "recipe[rvm]",
-    "recipe[mysql::server]",
     "recipe[mac::1password]",
     "recipe[mac::adium]",
     "recipe[mac::chrome]",
     "recipe[mac::skype]",
-    "recipe[mac::spotify]"
+    "recipe[mac::spotify]",
+    "recipe[mysql::server]"
   ]
 }

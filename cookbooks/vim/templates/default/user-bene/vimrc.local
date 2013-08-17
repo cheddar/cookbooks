@@ -154,8 +154,20 @@ command! -nargs=0 GitGrepWordBoundaries :call s:GitGrepWordBoundaries()
 command! -nargs=0 GitGrepWord :call s:GitGrepWord()
 command! -nargs=0 GitGrepAsk :call s:GitGrepAsk()
 
+function! TabIsEmpty()
+    let initial_win_num = winnr()
+    let win_count = 0
+    windo let win_count += len(expand('%'))
+    exe initial_win_num . "wincmd w"
+    if win_count == 0
+        return 1
+    else
+        return 0
+    endif
+endfunction
+
 function! DWMOpenFunc(action, line)
-    if a:action == 'e'
+    if TabIsEmpty() == 0 && a:action == 'e'
         let filename = fnameescape(fnamemodify(a:line, ':p'))
         call DWM_New()
         execute ":silent! lcd " . b:git_root_dir
@@ -219,7 +231,7 @@ vmap <C-k> xkP`[V`]
 vmap <C-j> xp`[V`]
 
 " switch.vim
-nmap <leader>ss :Switch<cr>
+nnoremap - :Switch<cr>
 
 " git grep for word under the cursor
 nmap <silent> <leader>gw :GitGrepWordBoundaries<cr>
