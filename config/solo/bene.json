@@ -27,6 +27,8 @@
       "rails": "https://github.com/tpope/vim-rails.git",
       "repeat": "https://github.com/tpope/vim-repeat",
       "ruby-conque": "https://github.com/elkatwork/vim-ruby-conque.git",
+      "sleuth": "https://github.com/tpope/vim-sleuth",
+      "splitjoin": "https://github.com/AndrewRadev/splitjoin.vim",
       "supertab": "https://github.com/ervandew/supertab",
       "surround": "https://github.com/tpope/vim-surround.git",
       "switch": "https://github.com/AndrewRadev/switch.vim",
