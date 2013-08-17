@@ -8,17 +8,6 @@
     }
   },
 
-  "mysql": {
-    "server": {
-      "max_allowed_packet": "64M",
-      "innodb_buffer_pool_size": "1G",
-      "innodb_flush_log_at_trx_commit": "0",
-      "tmp_table_size": "128M",
-      "max_heap_table_size": "128M",
-      "long_query_time": "0.1"
-    }
-  },
-
   "vim": {
     "plugins": {
       "Align": "https://github.com/vim-scripts/Align",
@@ -60,9 +49,7 @@
     "recipe[base]",
     "recipe[rvm]",
     "recipe[mac::1password]",
-    "recipe[mac::adium]",
     "recipe[mac::chrome]",
-    "recipe[mac::skype]",
     "recipe[mac::spotify]",
     "recipe[mysql::server]"
   ]

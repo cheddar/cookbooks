@@ -252,27 +252,23 @@ vmap <silent> <leader>su :sort u<cr>
 map <leader>gb :silent :Gblame<cr>
 
 " add ruby debugger
-nnoremap <silent> <leader>rad Orequire 'debugger'; debugger<esc>
+nnoremap <silent> <leader>rad Orequire 'ruby-debug'; debugger<esc>
 
-""" shortcuts below here haven't been used in quite a while, maybe i should
-""" remove them ...
+" splitjoin.vim
+function! s:try(cmd, default)
+    if exists(':' . a:cmd) && !v:count
+        let tick = b:changedtick
+        exe a:cmd
+        if tick == b:changedtick
+            execute 'normal! '.a:default
+        endif
+    else
+        execute 'normal! '.v:count.a:default
+    endif
+endfunction
 
-" rails shortcuts
-map <leader>rc :Rcontroller<cr>
-map <leader>rh :Rhelper<cr>
-map <leader>rm :Rmodel<cr>
-map <leader>rv :Rview<cr>
-
-" vimux
-map <leader>vp :silent :VimuxPromptCommand<cr>
-map <leader>vi :silent :VimuxInspectRunner<cr>
-map <leader>vq :silent :VimuxCloseRunner<cr>
-map <leader>vx :silent :VimuxClosePanes<cr>
-map <leader>vs :silent :VimuxInterruptRunner<cr>
-
-" run tests
-map <silent> <leader>t :silent :w<cr>:call VimuxRunCommand("PS1='${RESET}'; clear; rspec --drb " . expand("%:p"))<cr>
-map <silent> <leader>T :silent :w<cr>:call VimuxRunCommand("PS1='${RESET}'; clear; rspec --drb " . expand("%:p") . ":" . line("."))<cr>
+nnoremap <silent> J :<C-U>call <SID>try('SplitjoinJoin', 'J')<CR>
+nnoremap <silent> S :<C-U>call <SID>try('SplitjoinSplit', 'S')<CR>
 
 " Rename tabs to show tab# and # of viewports
 if exists("+showtabline")
