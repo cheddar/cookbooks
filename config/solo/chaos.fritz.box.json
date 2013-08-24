@@ -61,7 +61,7 @@
   },
 
   "systemd": {
-    "target": "graphical"
+    "target": "multi-user"
   },
 
   "run_list": [
