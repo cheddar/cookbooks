@@ -1,5 +1,3 @@
-systemd_user_session "bene"
-
 shorewall_rule "zentoo-dev" do
   destport "3000,8081"
 end
