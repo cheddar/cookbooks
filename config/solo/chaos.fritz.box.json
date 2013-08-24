@@ -5,17 +5,16 @@
   "current_name": "Benedikt Böhm",
 
   "portage": {
-    "profile": "/usr/portage/profiles/default/linux/amd64/13.0/desktop",
+    "profile": "/usr/portage/profiles/default/linux/amd64/13.0/desktop/gnome",
     "CFLAGS": "-march=native -mtune=native -O3 -pipe",
     "ACCEPT_KEYWORDS": "~amd64",
     "MAKEOPTS": "-j4",
     "OPTS": "--jobs=4 --load-average=12",
     "USE": [
-      "-bluetooth -consolekit -cups -projectm -samba -openrc",
-      "avahi fontconfig gs systemd upnp xorg",
+      "-bluetooth -cdr -consolekit -eds -projectm -samba -openrc -wext",
+      "avahi gtk3 systemd upnp xorg zeroconf",
       "aio cpudetection ssse3",
       "aacplus ass bluray css ffmpeg theora xvmc",
-      "lirc lirc_devices_commandir",
       "-input_devices_keyboard",
       "-input_devices_mouse",
       "-video_cards_dummy",
@@ -56,8 +55,16 @@
     "shorewall": true
   },
 
+  "resolv": {
+    "nameservers": ["10.35.0.1"],
+    "search": ["fritz.box"]
+  },
+
+  "systemd": {
+    "target": "graphical"
+  },
+
   "run_list": [
-    "recipe[base]",
-    "recipe[xbmc]"
+    "recipe[base]"
   ]
 }
