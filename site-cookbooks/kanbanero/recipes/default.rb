@@ -5,11 +5,6 @@ package "net-libs/nodejs"
 capistrano_skeleton "kanbanero"
 systemd_user_session "kanbanero"
 
-monit_instance "kanbanero" do
-  manage false
-  action :delete if systemd_running?
-end
-
 cookbook_file "/var/app/kanbanero/shared/config/database.login.yml" do
   source "database.login.yml"
   owner "kanbanero"
