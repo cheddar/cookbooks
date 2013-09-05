@@ -11,6 +11,7 @@ fi
 FIGNORE=".o:~:CVS:.svn:.git:metadata.json"
 
 # project aliases
+alias pkk="cd ~/projects/kanbanero/kanbanero"
 alias pm="cd ~/projects/madvertise/platform"
 alias pmc="cd ~/projects/madvertise/chef"
 alias pms="cd ~/projects/madvertise/server"
