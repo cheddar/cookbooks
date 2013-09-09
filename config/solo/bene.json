@@ -35,7 +35,8 @@
       "syntastic": "https://github.com/scrooloose/syntastic",
       "taglist": "https://github.com/vim-scripts/taglist.vim",
       "tlib": "https://github.com/tomtom/tlib_vim.git",
-      "vimux": "https://github.com/benmills/vimux"
+      "vimux": "https://github.com/benmills/vimux",
+      "emblem": "https://github.com/heartsentwined/vim-emblem"
     }
   },
 
