@@ -23,8 +23,7 @@ peers = node.run_state[:nodes].select do |n|
 end
 
 # misuse the pass4symmkey as admin password
-salt = SecureRandom.hex(8)
-admin_password = pass4symmkey.crypt("$1$#{salt}$")
+admin_password = pass4symmkey.crypt("$1$159c1407ab01798d$")
 
 splunk_users = Proc.new do |u|
   (u[:tags]) and
@@ -80,13 +79,6 @@ end
   end
 end
 
-forwarder = [
-  node.role?("splunk-master"),
-  node.role?("splunk-peer"),
-  node.role?("splunk-search"),
-  node.role?("splunk-server"),
-].none?
-
 # local/server.conf is overwritten by splunk on every restart and then
 # overwritten by every chef-client run, and again and again.
 # so we just overwrite the default/server.conf *sigh
@@ -96,7 +88,7 @@ template "/opt/splunk/etc/system/default/server.conf" do
   group "root"
   mode "0644"
   # only restart forwarders automatically
-  notifies :restart, "service[splunk]" if forwarder
+  notifies :restart, "service[splunk]" if splunk_forwarder?
   variables({
     pass4symmkey: pass4symmkey,
     master: master,
