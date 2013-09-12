@@ -43,7 +43,7 @@ alias con="bundle exec rails console"
 
 # host shortcuts
 remote_tmux() {
-	ssh -t $1 /bin/bash -li -c 'T'
+	ssh -D $2 -t $1 /bin/bash -li -c 'T'
 }
 
 wake() {
@@ -59,8 +59,8 @@ function C() {
 	remote_tmux home.xnull.de
 }
 
-alias M="remote_tmux bene.madvertise.me"
-alias Z="remote_tmux dev.zentoo.org"
+alias M="remote_tmux bene.madvertise.me 9990"
+alias Z="remote_tmux dev.zentoo.org 9991"
 
 # gentoo development
 export ECHANGELOG_USER="Benedikt Böhm <hollow@gentoo.org>"
