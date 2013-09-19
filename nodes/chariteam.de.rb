@@ -8,6 +8,9 @@ set[:denyhosts][:whitelist] = [
 
 set[:php][:use_flags] = %w(xmlreader xmlwriter)
 
+set[:mysql][:server][:innodb_flush_log_at_trx_commit] = "2"
+set[:mysql][:server][:innodb_thread_concurrency] = 32
+
 run_list(%w(
   role[chariteam]
   recipe[mysql::server]
