@@ -53,7 +53,6 @@
     "recipe[rvm]",
     "recipe[mac::1password]",
     "recipe[mac::chrome]",
-    "recipe[mac::spotify]",
-    "recipe[mysql::server]"
+    "recipe[mac::spotify]"
   ]
 }

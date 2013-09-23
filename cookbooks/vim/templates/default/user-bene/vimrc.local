@@ -60,9 +60,9 @@ let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': [],
                            \ 'passive_filetypes': ['c', 'cpp'] }
 
-" force usage of system MRI to workaround slow JRuby startup
+" force usage of MRI to workaround slow JRuby startup
 let g:syntastic_mri_checkers = ['mri']
-let g:syntastic_ruby_exec = '/usr/bin/ruby'
+let g:syntastic_ruby_exec = '~/.rvm/rubies/ruby-1.9.3-p448/bin/ruby'
 
 " taglist
 let Tlist_GainFocus_On_ToggleOpen = 1
