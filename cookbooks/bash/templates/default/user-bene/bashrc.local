@@ -60,7 +60,7 @@ function C() {
 }
 
 alias M="remote_tmux bene.madvertise.me 9990"
-alias Z="remote_tmux dev.zentoo.org 9991"
+alias Z="remote_tmux bene.dev.zenops.net 9991"
 
 # gentoo development
 export ECHANGELOG_USER="Benedikt Böhm <hollow@gentoo.org>"

@@ -15,8 +15,4 @@ run_list(%w(
   recipe[metro]
   recipe[zentoo::dev]
   recipe[zentoo::mirror]
-  recipe[mysql::server]
-  recipe[mongodb::server]
-  recipe[postgresql::server]
-  recipe[xvfb]
 ))
