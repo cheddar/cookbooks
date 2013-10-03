@@ -5,7 +5,7 @@
   "current_name": "Benedikt Böhm",
 
   "portage": {
-    "profile": "/usr/portage/profiles/default/linux/amd64/13.0/desktop",
+    "profile": "/usr/portage/profiles/default/linux/amd64/13.0/desktop/kde",
     "CFLAGS": "-march=native -mtune=native -O3 -pipe",
     "ACCEPT_KEYWORDS": "~amd64",
     "MAKEOPTS": "-j4",
@@ -61,7 +61,7 @@
   },
 
   "systemd": {
-    "target": "multi-user"
+    "target": "graphical"
   },
 
   "run_list": [
