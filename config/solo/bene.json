@@ -49,10 +49,7 @@
   },
 
   "run_list": [
-    "recipe[base]",
-    "recipe[rvm]",
-    "recipe[mac::1password]",
-    "recipe[mac::chrome]",
+    "role[workstation]",
     "recipe[mac::spotify]"
   ]
 }
