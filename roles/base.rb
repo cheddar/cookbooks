@@ -6,6 +6,6 @@ run_list(%w(
 
 override_attributes({
   :portage => {
-    :SYNC => "rsync://rsync.zentoo.org/zentoo-portage-next",
+    :SYNC => "rsync://mirror.zenops.net/zentoo-portage-next",
   },
 })
