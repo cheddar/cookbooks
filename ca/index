@@ -2,7 +2,7 @@ V	140309095347Z		01	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=a
 V	140309095348Z		02	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=bocaloves.me
 V	140309095349Z		03	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=chariteam.de
 V	140309095350Z		04	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=chef.zenops.net
-V	140309095352Z		05	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=dev.zentoo.org
+R	140309095352Z	131004094805Z	05	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=dev.zentoo.org
 V	140309095353Z		06	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=iberico.kanbanero.net
 R	140309095354Z	130619200841Z	07	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=kali.xnull.de
 R	140309095356Z	130730074736Z	08	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=linux-vserver.org
