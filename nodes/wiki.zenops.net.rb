@@ -6,6 +6,5 @@ run_list(%w(
   role[base]
   recipe[postgresql::server]
   recipe[confluence]
-  recipe[jira]
   recipe[nginx]
 ))

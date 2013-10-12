@@ -6,6 +6,5 @@ run_list(%w(
   recipe[java]
   recipe[xvfb]
   recipe[virtualbox]
-  recipe[mysql::server]
-  recipe[mongodb::server]
+  recipe[imagemagick]
 ))

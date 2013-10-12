@@ -17,7 +17,7 @@ V	140324063443Z		10	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=c
 V	140407164853Z		11	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=*.zenops.net
 R	130705074802Z	130618182056Z	06B4B1	unknown	/description=LnjTAmg224P1N8X2/C=DE/CN=www.kanbanero.com/emailAddress=hostmaster@kanbanero.com
 V	140618182058Z		12	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=www.kanbanero.com
-V	140709191836Z		13	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=www.zenops.net
+R	140709191836Z	131011124032Z	13	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=www.zenops.net
 V	140717192337Z		14	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=www.schilder-versand.com
 V	140719191501Z		15	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=web1.bohmeyer-schuster.com
 V	140720120817Z		16	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=nepal.bohmeyer-schuster.com
@@ -25,3 +25,4 @@ V	140818163312Z		17	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=c
 V	140905094720Z		18	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=mkrueger
 V	140905095038Z		19	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=mtroesken
 V	141001112340Z		1A	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=bene.dev.zenops.net
+V	141009072121Z		1B	unknown	/C=DE/ST=Berlin/L=Berlin/O=ZenOps/OU=Operations/CN=www.cover-lounge.de
