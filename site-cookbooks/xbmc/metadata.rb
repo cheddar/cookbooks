@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 description "XBMC"
 
 maintainer "Benedikt Böhm"
