@@ -1,11 +1,11 @@
-include_recipe "zenops::ci"
-
 directory "/var/cache/mirror" do
   owner "root"
   group "root"
   mode "0755"
 end
 
+include_recipe "zenops::ci"
+include_recipe "zenops::binhost"
 include_recipe "zenops::distfiles"
 include_recipe "zenops::mirror-zentoo"
 

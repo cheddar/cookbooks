@@ -1,6 +1,5 @@
 include_recipe "jenkins"
 
-# zentoo
 include_recipe "metro"
 
 sudo_rule "jenkins-ezbuild" do
@@ -9,7 +8,6 @@ sudo_rule "jenkins-ezbuild" do
   command "NOPASSWD: /usr/local/metro/ezbuild *"
 end
 
-# packer
 package "dev-util/packer"
 
 sudo_rule "jenkins-packer" do
