@@ -10,20 +10,20 @@ namespace :upstream do
     end
 
     # remove old cruft
-    sh("git remote rm upstream || :")
-    sh("git branch -D upstream || :")
+    sh("git remote rm next || :")
+    sh("git branch -D next || :")
 
     # add public cookbooks remote
     sh("git remote rm zenops || :")
     sh("git remote add -f zenops https://github.com/zenops/cookbooks.git")
-    sh("git branch -t -f next zenops/next")
+    sh("git branch -t -f upstream #{UPSTREAM_BRANCH}")
     sh("git config push.default tracking")
   end
 
   task :pull do
     require_clean_working_tree
     sh("git fetch zenops")
-    sh("git branch -t -f next zenops/next")
+    sh("git branch -t -f upstream #{UPSTREAM_BRANCH}")
   end
 
   desc "Merge upstream branch"
@@ -38,7 +38,7 @@ namespace :upstream do
     sh("git diff #{args.branch} config cookbooks documentation environments roles scripts tasks vagrant Gemfile* Rakefile Vagrantfile README.rst")
   end
 
-  desc "Interactively pick changes from HEAD into next"
+  desc "Interactively pick changes from HEAD into upstream"
   task :pick, :upstream  do |t, args|
     args.with_defaults(upstream: UPSTREAM_BRANCH)
 
@@ -46,7 +46,7 @@ namespace :upstream do
     files = %x(git ls-tree -r --name-only #{args.upstream} | grep -v ^environments).split($/)
     commits = %x(git whatchanged -r --format=oneline #{base}..HEAD -- #{files.join(' ')} | grep -v ^: | awk '{print $1}').split($/).reverse
 
-    sh("git checkout next")
+    sh("git checkout upstream")
 
     commits.each do |commit|
       sh("git --no-pager log -1 #{commit}")
