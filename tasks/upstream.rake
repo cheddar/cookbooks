@@ -33,7 +33,6 @@ namespace :upstream do
   end
 
   desc "Show changes to upstream"
-  task :changes => [ :pull ]
   task :changes, :branch do |t, args|
     sh("git diff upstream -- config cookbooks documentation environments roles scripts tasks vagrant Gemfile* Rakefile Vagrantfile README.rst")
   end
