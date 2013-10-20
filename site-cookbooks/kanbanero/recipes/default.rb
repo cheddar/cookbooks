@@ -1,4 +1,5 @@
 include_recipe "mysql"
+include_recipe "imagemagick"
 
 package "net-libs/nodejs"
 

@@ -32,6 +32,7 @@ alias gdc="git diff --cached"
 alias gl="git lg"
 alias gp="git pull"
 alias gpr="git pull --rebase"
+alias gpv="git push -f origin HEAD:vagrant/bene"
 alias grh="git reset HEAD"
 alias s="git status"
 

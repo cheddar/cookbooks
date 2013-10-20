@@ -17,6 +17,7 @@ override_attributes({
   :php => {
     :max_input_vars => "50000",
     :register_globals => "On",
+    :memory_limit => "512M",
   },
 
   :mysql => {
