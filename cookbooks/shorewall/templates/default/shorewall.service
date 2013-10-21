@@ -2,6 +2,9 @@
 Description=The Shoreline IPv4 Firewall
 After=network.target
 
+# web1.bohmeyer-schuster.com has no firewall currently
+ConditionHost=!b582172e41e1f878377b100c513cbcea
+
 [Service]
 Type=oneshot
 ExecStart=/sbin/shorewall start
