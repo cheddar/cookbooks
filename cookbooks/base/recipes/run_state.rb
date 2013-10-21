@@ -1,25 +1,25 @@
 # to make things faster, load data from search index into run_state
 if solo?
-  node.run_state[:nodes] = [node]
   node.run_state[:roles] = []
   node.run_state[:users] = []
+  node.run_state[:nodes] = [node]
 else
-  node.run_state[:nodes] = search(:node, "primary_ipaddress:[* TO *]")
   node.run_state[:roles] = search(:role)
   node.run_state[:users] = search(:users)
+  node.run_state[:nodes] = search(:node, "primary_ipaddress:[* TO *]").sort_by do |n|
+    n[:fqdn]
+  end
+end
+
+# filter nodes that belong to the same cluster as the current node
+node.run_state[:cluster_nodes] = node.run_state[:nodes].select do |n|
+  n[:cluster][:name] == node[:cluster][:name]
 end
 
 # select basic infrastructure nodes from the index for easy access in recipes
 %w(
   chef
-  splunk
-  splunk-master
-  splunk-peer
-  splunk-search
-  splunk-server
-  nagios
   mx
-  zenops-mirror
 ).each do |role|
   node.run_state[role.to_sym] = node.run_state[:nodes].select do |n|
     n[:roles] and n[:roles].include?(role)
@@ -44,8 +44,4 @@ if solo?
   node.apply_expansion_attributes(node.expand!('disk'))
 else
   node.apply_expansion_attributes(node.expand!('server'))
-end
-
-if node.run_state[:nagios].any?
-  tag("nagios-client")
 end

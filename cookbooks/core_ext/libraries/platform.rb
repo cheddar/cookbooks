@@ -1,4 +1,20 @@
 module PlatformHelpers
+  def production?
+    node.chef_environment == "production"
+  end
+
+  def staging?
+    node.chef_environment == "staging"
+  end
+
+  def development?
+    node.chef_environment == "development"
+  end
+
+  def vagrant?
+    node[:cluster][:name] == "vagrant"
+  end
+
   def linux?
     node[:os] == "linux"
   end

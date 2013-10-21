@@ -16,18 +16,27 @@ node.set[:shorewall6][:zones] = {}
 
 include_recipe "shorewall::rules"
 
-# LXC support
-if node[:primary_interface] == "lxc0"
-  shorewall_lxc_bridge "lxc" do
-    interface node[:primary_interface]
-    bridged node[:primary_interface_bridged]
+# detect bridge
+if node[:primary_interface_bridged]
+  shorewall_interface "br" do
+    interface "#{node[:primary_interface]}:#{node[:primary_interface_bridged]}"
+  end
+
+  shorewall_zone "br:net" do
+    type "bport"
+  end
+
+  shorewall_policy "br" do
+    source "br"
+    dest "all"
+    policy "ACCEPT"
   end
 end
 
 include_recipe "shorewall::ipv4"
 include_recipe "shorewall::ipv6"
 
-if tagged?("nagios-client")
+if nagios_client?
   nagios_plugin "check_conntrack"
 
   nrpe_command "check_conntrack" do

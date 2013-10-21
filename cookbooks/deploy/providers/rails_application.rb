@@ -5,16 +5,17 @@ use_inline_resources rescue nil
 action :create do
   nr = new_resource # rebind
   user = get_user(nr.user)
-  homedir = user[:dir]
+  path = user[:dir]
+  rails_env = nr.rails_env || node.chef_environment
 
-  template "#{homedir}/shared/config/unicorn.rb" do
+  template "#{path}/shared/config/unicorn.rb" do
     source "rails/unicorn.rb"
     cookbook "deploy"
     owner user[:name]
     group user[:group][:name]
     mode "640"
     variables({
-      homedir: homedir,
+      path: path,
       worker_processes: nr.worker_processes,
       timeout: nr.timeout,
     })
@@ -44,15 +45,16 @@ action :create do
       end
 
       rvm_shell "#{nr.user}-assets:precompile" do
-        code "bundle exec rake assets:precompile RAILS_ENV=production"
+        code "bundle exec rake assets:precompile RAILS_ENV=#{rails_env}"
         cwd release_path
         user nr.user
       end
 
       rvm_shell "#{nr.user}-db:migrate" do
-        code "bundle exec rake db:migrate RAILS_ENV=production"
+        code "bundle exec rake db:migrate RAILS_ENV=#{rails_env}"
         cwd release_path
         user nr.user
+        only_if { nr.migrate }
       end
     end
 

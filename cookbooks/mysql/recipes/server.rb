@@ -1,5 +1,3 @@
-tag("mysql-server")
-
 include_recipe "mysql"
 
 if gentoo?
@@ -54,11 +52,7 @@ if gentoo?
       end
     end
 
-    if solo?
-      mysql_root_pass = "root"
-    else
-      mysql_root_pass = get_password("mysql/root")
-    end
+    mysql_root_pass = vagrant? ? "root" : get_password("mysql/root")
 
     template "/usr/sbin/mysql_pkg_config" do
       source "mysql_pkg_config"
@@ -104,27 +98,14 @@ if gentoo?
     mysql_user "root" do
       password mysql_root_pass
       force_password true
+      host "%" if vagrant?
     end
 
     mysql_grant "root" do
       database "*"
       user "root"
+      user_host "%" if vagrant?
       grant_option true
-    end
-
-    if solo? # for vagrant
-      mysql_user "root" do
-        password mysql_root_pass
-        force_password true
-        host "%"
-      end
-
-      mysql_grant "root" do
-        database "*"
-        user "root"
-        user_host "%"
-        grant_option true
-      end
     end
 
     mysql_database "test" do
@@ -152,7 +133,7 @@ elsif mac_os_x?
 end
 
 # nagios service checks
-if tagged?("nagios-client")
+if nagios_client?
 
   # simple helper class for custom nagios checks
   cookbook_file "/usr/lib/ruby/site_ruby/nagios/plugin/mysql.rb" do

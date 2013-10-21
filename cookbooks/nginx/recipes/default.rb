@@ -68,11 +68,13 @@ service "nginx" do
   action [:enable, :start]
 end
 
-ssl_certificate "/etc/ssl/nginx/nginx" do
-  cn node[:fqdn]
-  owner "nginx"
-  group "nginx"
-  notifies :restart, "service[nginx]"
+if !solo?
+  ssl_certificate "/etc/ssl/nginx/nginx" do
+    cn node[:fqdn]
+    owner "nginx"
+    group "nginx"
+    notifies :restart, "service[nginx]"
+  end
 end
 
 %w(csr pem).each do |f|
@@ -116,7 +118,7 @@ nginx_server "status" do
   template "status.conf"
 end
 
-if tagged?("ganymed-client")
+if ganymed?
   ganymed_collector "nginx" do
     source "nginx.rb"
   end
