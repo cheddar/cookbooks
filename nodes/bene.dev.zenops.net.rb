@@ -9,7 +9,4 @@ run_list(%w(
   role[base]
   role[workstation]
   role[zenops-mirror]
-  recipe[mysql::server]
-  recipe[mongodb::server]
-  recipe[zookeeper]
 ))

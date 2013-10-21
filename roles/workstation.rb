@@ -8,4 +8,6 @@ run_list(%w(
   recipe[firefox]
   recipe[virtualbox]
   recipe[imagemagick]
+  recipe[mysql::server]
+  recipe[mongodb::server]
 ))
