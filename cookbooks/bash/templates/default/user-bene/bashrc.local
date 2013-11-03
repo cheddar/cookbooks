@@ -1,12 +1,3 @@
-# load virtualenv wrapper
-if [[ -r /usr/bin/virtualenvwrapper.sh ]]; then
-	export VIRTUALENV_USE_DISTRIBUTE=1
-	export VIRTUAL_ENV_DISABLE_PROMPT=1
-	export PIP_VIRTUALENV_BASE=$WORKON_HOME
-	export PIP_RESPECT_VIRTUALENV=true
-	source /usr/bin/virtualenvwrapper.sh
-fi
-
 # blacklist for bash completion
 FIGNORE=".o:~:CVS:.svn:.git:metadata.json"
 
