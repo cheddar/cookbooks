@@ -20,4 +20,5 @@ if splunk_forwarder?
   end
 
   include_recipe "splunk::common"
+  include_recipe "splunk::unix"
 end

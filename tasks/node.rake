@@ -13,10 +13,12 @@ namespace :node do
   task :create => [ :pull ]
   task :create, :fqdn, :ipaddress do |t, args|
     fqdn, ipaddress = args.fqdn, args.ipaddress
+    Rake::Task['node:checkdns'].reenable
     Rake::Task['node:checkdns'].invoke(fqdn, ipaddress)
 
     # create SSL cert
     ENV['BATCH'] = "1"
+    Rake::Task['ssl:do_cert'].reenable
     Rake::Task['ssl:do_cert'].invoke(fqdn)
     knife :cookbook_upload, ['certificates', '--force']
 
@@ -33,12 +35,14 @@ namespace :node do
     end
 
     # upload to chef server
+    Rake::Task['load:node'].reenable
     Rake::Task['load:node'].invoke(fqdn)
   end
 
   desc "Bootstrap the specified node"
   task :bootstrap, :fqdn, :ipaddress do |t, args|
     ENV['DISTRO'] ||= "gentoo"
+    Rake::Task['node:create'].reenable
     Rake::Task['node:create'].invoke(args.fqdn, args.ipaddress)
     sh("knife bootstrap #{args.fqdn} --distro #{ENV['DISTRO']} -P tux")
     env = "/usr/bin/env UPDATEWORLD_DONT_ASK=1"
@@ -47,13 +51,15 @@ namespace :node do
   end
 
   desc "Quickstart & Bootstrap the specified node"
-  task :quickstart, :fqdn, :ipaddress, :profile do |t, args|
+  task :quickstart, :fqdn, :ipaddress, :password, :profile do |t, args|
     args.with_defaults(:profile => 'generic-two-disk-md')
+    raise "missing parameters!" unless args.fqdn && args.ipaddress && args.password
 
     # create DNS/rDNS records
     name = args.fqdn.sub(/\.#{chef_domain}$/, '')
     hetzner_server_name_rdns(args.ipaddress, name, args.fqdn)
     zendns_add_record(args.fqdn, args.ipaddress)
+    Rake::Task['node:checkdns'].reenable
     Rake::Task['node:checkdns'].invoke(args.fqdn, args.ipaddress)
 
     # quick start
@@ -64,7 +70,7 @@ namespace :node do
     tmpfile.write(erb.result(b))
     tmpfile.rewind
 
-    sh(%{cat #{tmpfile.path} | ssh -l root -o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -o "GlobalKnownHostsFile /dev/null" #{args.ipaddress} "bash -s"})
+    sh(%{cat #{tmpfile.path} | sshpass -p #{args.password} ssh -l root -o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -o "GlobalKnownHostsFile /dev/null" #{args.ipaddress} "bash -s"})
 
     tmpfile.unlink
 
@@ -73,6 +79,7 @@ namespace :node do
     wait_with_ping(args.ipaddress, true)
 
     # run normal bootstrap
+    Rake::Task['node:bootstrap'].reenable
     Rake::Task['node:bootstrap'].invoke(args.fqdn, args.ipaddress)
   end
 
@@ -84,6 +91,7 @@ namespace :node do
     ENV['BATCH'] = "1"
 
     begin
+      Rake::Task['ssl:revoke'].reenable
       Rake::Task['ssl:revoke'].invoke(fqdn)
     rescue
       # do nothing
