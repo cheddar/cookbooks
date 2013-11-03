@@ -117,19 +117,6 @@ eci() {
 	repoman commit -m "${msg}" || return 1
 }
 
-putdgo() {
-	scp $1 hollow@dev.gentoo.org:$2
-}
-
-putmirror() {
-	putdgo $1 /space/distfiles-local/
-}
-
-putdist() {
-	putdgo $1 /home/hollow/public_html/distfiles/
-	putdgo $1 /space/distfiles-local/
-}
-
 # zentoo development
 geix() {
 	pushd ~/projects/zentoo/zentoo >/dev/null
