@@ -38,8 +38,15 @@ end
 
 if systemd_running?
   systemd_unit "ganymed.service"
-
-  service "ganymed" do
-    action [:enable, :start]
+else
+  cookbook_file "/etc/init.d/ganymed" do
+    source "ganymed.initd"
+    owner "root"
+    group "root"
+    mode "0755"
   end
+end
+
+service "ganymed" do
+  action [:enable, :start]
 end
