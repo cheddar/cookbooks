@@ -4,10 +4,9 @@ ssl_certificate "/etc/ssl/nginx/www.schilder-versand.com" do
   cn "www.schilder-versand.com"
 end
 
-# XXX: temporarily disabled until config stabilizes on the server
-#nginx_server "chariteam" do
-#  template "nginx.conf"
-#end
+nginx_server "shops" do
+  template "nginx.conf"
+end
 
 git "/shopsystem2/shops/mysqladmin" do
   repository "https://github.com/phpmyadmin/phpmyadmin"
