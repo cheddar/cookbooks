@@ -1,6 +1,9 @@
 # blacklist for bash completion
 FIGNORE=".o:~:CVS:.svn:.git:metadata.json"
 
+# give it some mem
+export JRUBY_OPTS="-J-Xmx24g"
+
 # project aliases
 alias pkk="cd ~/projects/kanbanero/kanbanero"
 alias pm="cd ~/projects/madvertise/platform"
