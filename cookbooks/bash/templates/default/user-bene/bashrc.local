@@ -6,9 +6,9 @@ export JRUBY_OPTS="-J-Xmx24g"
 
 # project aliases
 alias pkk="cd ~/projects/kanbanero/kanbanero"
-alias pm="cd ~/projects/madvertise/platform"
-alias pmc="cd ~/projects/madvertise/chef"
-alias pms="cd ~/projects/madvertise/server"
+alias pm="cd ~/projects/liquidm/platform"
+alias pmc="cd ~/projects/liquidm/chef"
+alias pms="cd ~/projects/liquidm/server"
 alias pzc="cd ~/projects/zenops/chef"
 alias pzz="cd ~/projects/zentoo/zentoo"
 
