@@ -11,4 +11,6 @@ run_list(%w(
   recipe[zenops::workstation]
   recipe[mysql::server]
   recipe[mongodb::server]
+  recipe[redis]
+  recipe[zookeeper]
 ))

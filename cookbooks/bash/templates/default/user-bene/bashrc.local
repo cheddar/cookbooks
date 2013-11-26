@@ -122,7 +122,11 @@ eci() {
 
 # zentoo development
 geix() {
-	pushd ~/projects/zentoo/zentoo >/dev/null
-	eix --cache-file ./eix.cache.gentoo "$@"
+	local base=~/projects/zentoo/zentoo
+	pushd ${base} >/dev/null
+	env \
+		PORTDIR=${base}/cache/gentoo-portage/ \
+		PORTAGE_PROFILE=${base}/cache/gentoo-portage/profiles/default/linux/amd64/13.0 \
+		eix --cache-file ./eix.cache.gentoo "$@"
 	popd >/dev/null
 }
