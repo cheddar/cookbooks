@@ -120,11 +120,6 @@ mklnx() {
 		emerge --getbinpkg=n --usepkg=n --nodeps \
 		app-emulation/virtualbox-modules
 
-	# install oprofile modules
-	ROOT=${tmpdir} KERNEL_DIR=$(realpath $PWD) \
-		emerge --getbinpkg=n --usepkg=n --nodeps \
-		dev-util/oprofile
-
 	# generate initramfs
 	emerge dracut -u
 	dracut --force ${tmpdir}/boot/initramfs-${kernel_version}.img
