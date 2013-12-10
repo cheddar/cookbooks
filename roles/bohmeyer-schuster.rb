@@ -21,6 +21,12 @@ override_attributes({
     :memory_limit => "512M",
   },
 
+  :nginx => {
+    :php => {
+      :max_children => 16,
+    },
+  },
+
   :mysql => {
     :backup => {
       :mode => "copy",

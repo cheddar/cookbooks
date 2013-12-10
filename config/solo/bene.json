@@ -33,8 +33,7 @@
       "syntastic": "https://github.com/scrooloose/syntastic",
       "taglist": "https://github.com/vim-scripts/taglist.vim",
       "tlib": "https://github.com/tomtom/tlib_vim.git",
-      "emblem": "https://github.com/heartsentwined/vim-emblem",
-      "gitgutter": "https://github.com/airblade/vim-gitgutter"
+      "emblem": "https://github.com/heartsentwined/vim-emblem"
     }
   },
 
