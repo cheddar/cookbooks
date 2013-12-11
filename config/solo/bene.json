@@ -8,35 +8,6 @@
     }
   },
 
-  "vim": {
-    "plugins": {
-      "Align": "https://github.com/vim-scripts/Align",
-      "IndentLines": "https://github.com/Yggdroot/indentLine",
-      "SelectBuf": "https://github.com/vim-scripts/SelectBuf.git",
-      "abolish": "https://github.com/tpope/vim-abolish",
-      "closetag": "https://github.com/vim-scripts/closetag.vim",
-      "ctrlp": "https://github.com/kien/ctrlp.vim",
-      "dwm": "https://github.com/spolu/dwm.vim",
-      "fugitive": "https://github.com/tpope/vim-fugitive",
-      "genutils": "https://github.com/vim-scripts/genutils.git",
-      "gundo": "https://github.com/sjl/gundo.vim/",
-      "mw-utils": "https://github.com/MarcWeber/vim-addon-mw-utils",
-      "nerdcommenter": "https://github.com/scrooloose/nerdcommenter",
-      "nerdtree": "https://github.com/scrooloose/nerdtree",
-      "rails": "https://github.com/tpope/vim-rails.git",
-      "repeat": "https://github.com/tpope/vim-repeat",
-      "sleuth": "https://github.com/tpope/vim-sleuth",
-      "splitjoin": "https://github.com/AndrewRadev/splitjoin.vim",
-      "supertab": "https://github.com/ervandew/supertab",
-      "surround": "https://github.com/tpope/vim-surround.git",
-      "switch": "https://github.com/AndrewRadev/switch.vim",
-      "syntastic": "https://github.com/scrooloose/syntastic",
-      "taglist": "https://github.com/vim-scripts/taglist.vim",
-      "tlib": "https://github.com/tomtom/tlib_vim.git",
-      "emblem": "https://github.com/heartsentwined/vim-emblem"
-    }
-  },
-
   "lftp": {
     "bookmarks": {
       "cafe": "sftp://bene@cafe.noova.de/home/dump",
