@@ -10,6 +10,5 @@ version "0.1.0"
 
 supports "gentoo"
 
-depends "capistrano"
 depends "mongodb"
 depends "nginx"

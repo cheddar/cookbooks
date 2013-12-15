@@ -1,1 +1,0 @@
-capistrano_skeleton "kanbanero"

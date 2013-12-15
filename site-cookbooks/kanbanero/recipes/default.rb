@@ -3,7 +3,7 @@ include_recipe "imagemagick"
 
 package "net-libs/nodejs"
 
-capistrano_skeleton "kanbanero"
+#capistrano_skeleton "kanbanero"
 systemd_user_session "kanbanero"
 
 cookbook_file "/var/app/kanbanero/shared/config/database.login.yml" do

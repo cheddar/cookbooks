@@ -2,7 +2,7 @@ include_recipe "mongodb"
 
 package "net-libs/nodejs"
 
-capistrano_skeleton "admineo"
+#capistrano_skeleton "admineo"
 systemd_user_session "admineo"
 
 nginx_unicorn "admineo" do

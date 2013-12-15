@@ -10,7 +10,6 @@ version "0.1.1"
 
 supports "gentoo"
 
-depends "capistrano"
 depends "mysql"
 depends "nagios"
 depends "nginx"
