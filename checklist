@@ -1,0 +1,9 @@
+- raise if platform not supported
+- include *all* dependencies in metadata.rb
+- recipes should decide themselves if they are needed (instead of base)
+- delete for all LWRPs
+- use ruby 1.9 hash syntax
+
+[2013-12-15T17:34:42+01:00] WARN: File /sbin/service managed by file[/sbin/service] is really a symlink. Managing the source file instead.
+[2013-12-15T17:34:42+01:00] WARN: Disable this warning by setting `manage_symlink_source true` on the resource
+[2013-12-15T17:34:42+01:00] WARN: In a future Chef release, 'manage_symlink_source' will not be enabled by default

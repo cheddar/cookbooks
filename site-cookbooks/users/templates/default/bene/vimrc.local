@@ -14,13 +14,18 @@ endif
 " use the wildmenu
 set wildmenu
 set wildmode=full
-"
+
 " reload files changed outside of vim
 set autoread
+
+" write on quit
 set autowriteall
 
 " no backup files (we have git after all)
 set nobackup
+
+" highlight current line
+set cursorline
 
 " easy pasting
 set pastetoggle=<F4>
@@ -30,15 +35,15 @@ au BufEnter * execute ":silent! lcd " . expand("%:p:h")
 
 " restore cursor without mkview overhead (and bugs)
 function! ResCur()
-	if line("'\"") <= line("$")
-		normal! g`"
-		return 1
-	endif
+    if line("'\"") <= line("$")
+        normal! g`"
+        return 1
+    endif
 endfunction
 
 augroup resCur
-	au!
-	au BufWinEnter * call ResCur()
+    au!
+    au BufWinEnter * call ResCur()
 augroup END
 
 
@@ -57,6 +62,10 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'vim-ruby/vim-ruby'
 
 NeoBundle 'hollow/vim-colors-solarized'
+set t_Co=256
+set background=dark
+colorscheme solarized
+
 NeoBundle 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
 
@@ -107,8 +116,8 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': ['c', 'cpp'] }
+            \ 'active_filetypes': [],
+            \ 'passive_filetypes': ['c', 'cpp'] }
 let g:syntastic_mri_checkers = ['mri']
 let g:syntastic_ruby_exec = '~/.rvm/rubies/default/bin/ruby'
 
