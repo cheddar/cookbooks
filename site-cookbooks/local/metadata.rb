@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 description "Local recipes"
 
 maintainer "Benedikt Böhm"
