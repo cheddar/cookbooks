@@ -30,3 +30,7 @@ run_list(%w(
   recipe[shorewall]
   recipe[local::shorewall-rules]
 ))
+
+default_attributes({
+  chef_domain: 'zenops.net',
+})
