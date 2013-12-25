@@ -19,6 +19,7 @@ run_list(%w(
   recipe[openssl]
   recipe[postfix::satelite]
   recipe[python]
+  recipe[shorewall]
   recipe[smart]
   recipe[splunk::forwarder]
   recipe[ssh::server]
@@ -27,7 +28,6 @@ run_list(%w(
   recipe[tmux]
   recipe[vim]
   recipe[watchdog]
-  recipe[shorewall]
   recipe[local::shorewall-rules]
 ))
 
