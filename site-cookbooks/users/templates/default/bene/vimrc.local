@@ -30,8 +30,178 @@ set cursorline
 " easy pasting
 set pastetoggle=<F4>
 
+" split windows at the bottom by default
+set splitbelow
+
+
+"-----------------------------------------------------------------------
+" libraries
+"-----------------------------------------------------------------------
+
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'vim-scripts/genutils.git'
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+
+
+"-----------------------------------------------------------------------
+" syntax- & filetypes
+"-----------------------------------------------------------------------
+
+NeoBundle 'vim-ruby/vim-ruby'
+" https://github.com/vim-ruby/vim-ruby/issues/33
+let g:ruby_path = ""
+
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'heartsentwined/vim-emblem'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'tpope/vim-git'
+NeoBundle 'tpope/vim-haml'
+NeoBundle 'tpope/vim-markdown'
+
+
+"-----------------------------------------------------------------------
+" colors & ui
+"-----------------------------------------------------------------------
+
+NeoBundle 'kien/vim-colors-solarized'
+set t_Co=256
+set background=dark
+colorscheme solarized
+
+NeoBundle 'bling/vim-airline'
+let g:airline_powerline_fonts = 1
+
+"NeoBundle 'roman/golden-ratio'
+NeoBundle 'hollow/ctrlp.vim'
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = 'ra'
+
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
+endif
+
+NeoBundle 'Yggdroot/indentLine'
+
+
+"-----------------------------------------------------------------------
+" tools
+"-----------------------------------------------------------------------
+
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'vim-scripts/Align'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'vim-scripts/closetag.vim'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-sleuth'
+NeoBundle 'tpope/vim-surround.git'
+
+NeoBundle 'tpope/vim-fugitive'
+map <leader>ga :silent :Git add %<cr>:redraw!<cr>
+map <leader>gb :silent :Gblame<cr>
+map <leader>gc :silent :Gcommit<cr>ggi
+map <leader>gd :silent :Git diff<cr>:redraw!<cr>
+map <leader>gl :silent :Git lg<cr>:redraw!<cr>
+map <leader>gp :silent :Git add -p %<cr>:redraw!<cr>
+map <leader>gs :silent :Gstatus<cr>
+
+NeoBundle 'AndrewRadev/switch.vim'
+nnoremap - :Switch<cr>
+
+NeoBundle 'AndrewRadev/splitjoin.vim'
+function! s:try(cmd, default)
+  if exists(':' . a:cmd) && !v:count
+    let tick = b:changedtick
+    exe a:cmd
+    if tick == b:changedtick
+      execute 'normal! '.a:default
+    endif
+  else
+    execute 'normal! '.v:count.a:default
+  endif
+endfunction
+nnoremap <silent> J :<C-U>call <SID>try('SplitjoinJoin', 'J')<CR>
+nnoremap <silent> S :<C-U>call <SID>try('SplitjoinSplit', 'S')<CR>
+
+NeoBundle 'scrooloose/syntastic'
+let g:syntastic_auto_jump=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_mode_map = { 'mode': 'active',
+            \ 'active_filetypes': [],
+            \ 'passive_filetypes': ['c', 'cpp'] }
+let g:syntastic_mri_checkers = ['mri']
+let g:syntastic_ruby_exec = '~/.rvm/rubies/default/bin/ruby'
+
+"-----------------------------------------------------------------------
+" completion
+"-----------------------------------------------------------------------
+
+NeoBundle 'Shougo/neocomplete.vim'
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+"let g:neocomplete#enable_auto_select = 1
+
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> neocomplete#close_popup()
+inoremap <expr><C-e> neocomplete#cancel_popup()
+
+" omnicompletion
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+
+" all remaining filetypes use syntaxcomplete
+autocmd Filetype *
+            \ if &omnifunc == "" |
+            \   setlocal omnifunc=syntaxcomplete#Complete |
+            \ endif
+
+
+"-----------------------------------------------------------------------
+" auto commands
+"-----------------------------------------------------------------------
+
 " cd to buffer directory
 au BufEnter * execute ":silent! lcd " . expand("%:p:h")
+
+" expand tabs in C
+autocmd FileType c,cpp set ts=4 sw=4 tw=79 expandtab et
+
+" remember the git root of the current project
+autocmd VimEnter,BufEnter * let b:git_root_dir = system("git rev-parse --show-toplevel 2>/dev/null")[:-2]
+
+" use project-level tagfiles
+autocmd VimEnter,BufEnter * execute("set tags=./tags," . b:git_root_dir . "/tags")
+
+" close nerdtree if its the last window
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" delete fugitive buffers
+autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " restore cursor without mkview overhead (and bugs)
 function! ResCur()
@@ -45,134 +215,6 @@ augroup resCur
     au!
     au BufWinEnter * call ResCur()
 augroup END
-
-
-"-----------------------------------------------------------------------
-" plugins
-"-----------------------------------------------------------------------
-
-" syntax & filetypes
-NeoBundle 'heartsentwined/vim-emblem'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'tpope/vim-git'
-NeoBundle 'tpope/vim-haml'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'vim-ruby/vim-ruby'
-
-NeoBundle 'hollow/vim-colors-solarized'
-set t_Co=256
-set background=dark
-colorscheme solarized
-
-NeoBundle 'bling/vim-airline'
-let g:airline_powerline_fonts = 1
-
-NeoBundle 'Shougo/vimproc'
-"NeoBundle 'Shougo/unite.vim'
-"let g:unite_enable_start_insert = 1
-"let g:unite_split_rule = "botright"
-"let g:unite_force_overwrite_statusline = 0
-"let g:unite_winheight = 10
-
-"nnoremap <C-P> :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<cr>
-
-"autocmd FileType unite call s:unite_settings()
-"function! s:unite_settings()
-"  "let b:SuperTabDisabled=1
-"  imap <buffer> <C-c> <Plug>(unite_exit)
-"  nmap <buffer> <C-c> <Plug>(unite_exit)
-"  nmap <buffer> <ESC> <Plug>(unite_exit)
-"  imap <silent><buffer><expr> <C-x> unite#do_action('split')
-"  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-"  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
-"endfunction
-
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'vim-scripts/Align'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'vim-scripts/SelectBuf.git'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'vim-scripts/closetag.vim'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'spolu/dwm.vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'vim-scripts/genutils.git'
-"NeoBundle 'sjl/gundo.vim'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-sleuth'
-NeoBundle 'AndrewRadev/splitjoin.vim'
-"NeoBundle 'ervandew/supertab'
-NeoBundle 'tpope/vim-surround.git'
-NeoBundle 'AndrewRadev/switch.vim'
-
-NeoBundle 'scrooloose/syntastic'
-let g:syntastic_auto_jump=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_mode_map = { 'mode': 'active',
-            \ 'active_filetypes': [],
-            \ 'passive_filetypes': ['c', 'cpp'] }
-let g:syntastic_mri_checkers = ['mri']
-let g:syntastic_ruby_exec = '~/.rvm/rubies/default/bin/ruby'
-
-NeoBundle 'vim-scripts/taglist.vim'
-"NeoBundle 'tomtom/tlib_vim.git'
-
-" selectbuf
-let g:selBufAlwaysHideBufNums = 1
-
-" supertab
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-highlight Pmenu ctermbg=238 gui=bold
-
-" taglist
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Close_On_Select = 1
-let Tlist_Highlight_Tag_On_BufEnter = 0
-let Tlist_Sort_Type = "name"
-
-" map dwm keys ourself
-let g:dwm_map_keys = 0
-
-" https://github.com/vim-ruby/vim-ruby/issues/33
-let g:ruby_path = ""
-
-"-----------------------------------------------------------------------
-" auto commands
-"-----------------------------------------------------------------------
-
-" expand tabs in C
-autocmd FileType c,cpp set ts=4 sw=4 tw=79 expandtab et
-
-" ruby completion
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-
-" all remaining filetypes use syntaxcomplete
-autocmd Filetype *
-            \ if &omnifunc == "" |
-            \   setlocal omnifunc=syntaxcomplete#Complete |
-            \ endif
-
-" remember the git root of the current project
-autocmd VimEnter,BufEnter * let b:git_root_dir = system("git rev-parse --show-toplevel 2>/dev/null")[:-2]
-
-" use project-level tagfiles
-autocmd VimEnter,BufEnter * execute("set tags=./tags," . b:git_root_dir . "/tags")
-
-" close nerdcommenter if its the last window
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" delete fugitive buffers
-autocmd BufReadPost fugitive://* set bufhidden=delete
 
 "-----------------------------------------------------------------------
 " custom functions
@@ -189,64 +231,6 @@ function! RenameFile()
     endif
 endfunction
 
-" git-grep function
-if !exists('g:git_grep_command')
-    let g:git_grep_command = 'git grep -n '
-endif
-
-function! s:GitGrep(terms)
-    let expr = g:git_grep_command."'".a:terms."'"
-
-    execute ":silent! lcd " . b:git_root_dir
-    cgetexpr system(expr)
-    execute ":silent! lcd " . expand("%:p:h")
-
-    cwin
-    echo 'Number of matches: ' . len(getqflist())
-endfunction
-
-function! s:GitGrepAsk()
-    let term = escape(input("what do you want to seach?: "),  '\\/')
-    call s:GitGrep(term)
-endfunction
-
-function! s:GitGrepWord()
-    call s:GitGrep(expand("<cword>"))
-endfunction
-
-function! s:GitGrepWordBoundaries()
-    call s:GitGrep("\\b".expand("<cword>")."\\b")
-endfunction
-
-command! -nargs=0 GitGrepWordBoundaries :call s:GitGrepWordBoundaries()
-command! -nargs=0 GitGrepWord :call s:GitGrepWord()
-command! -nargs=0 GitGrepAsk :call s:GitGrepAsk()
-
-function! TabIsEmpty()
-    let initial_win_num = winnr()
-    let win_count = 0
-    windo let win_count += len(expand('%'))
-    exe initial_win_num . "wincmd w"
-    if win_count == 0
-        return 1
-    else
-        return 0
-    endif
-endfunction
-
-function! DWMOpenFunc(action, line)
-    if TabIsEmpty() == 0 && a:action == 'e'
-        let filename = fnameescape(fnamemodify(a:line, ':p'))
-        call DWM_New()
-        execute ":silent! lcd " . b:git_root_dir
-        execute 'edit' filename
-    else
-        call call('ctrlp#acceptfile', [a:action, a:line])
-    endif
-endfunction
-
-let g:ctrlp_open_func = { 'files': 'DWMOpenFunc' }
-
 "-----------------------------------------------------------------------
 " key mappings
 "-----------------------------------------------------------------------
@@ -254,31 +238,19 @@ let g:ctrlp_open_func = { 'files': 'DWMOpenFunc' }
 " function keys
 nnoremap <silent> <F1> :help<cr>
 nnoremap <silent> <F2> :call RenameFile()<cr>
-" nnoremap <F3> :SelectBuf<cr>
 nnoremap <silent> <F4> :set invpaste<cr>
 nnoremap <silent> <F5> :call system("ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f " . b:git_root_dir . "/tags " . b:git_root_dir)<cr>
-nnoremap <silent> <F6> :TlistToggle<cr>
 call togglebg#map("<F8>")
-nnoremap <silent> <F9> :call RunRspecCurrentFileConque()<CR>
-nnoremap <silent> <F10> :call RunRspecCurrentLineConque()<CR>
-nnoremap <silent> <F11> :call RunRspecAllFilesConque()<CR>
-nnoremap <silent> <F12> :GundoToggle<cr>
 
-" window/tab management
-map <S-Down>  <C-W><Down>
-map <S-Up>    <C-W><Up>
-map <S-Left>  <C-W><Left>
-map <S-Right> <C-W><Right>
+" window/tab movement
+nmap <S-Down>  <C-W><Down>
+nmap <S-Up>    <C-W><Up>
+nmap <S-Left>  <C-W><Left>
+nmap <S-Right> <C-W><Right>
 
-map  <silent> <C-Up> :tabprevious<cr>
-imap <silent> <C-Up> <esc>:tabprevious<cr>a
-map  <silent> <C-Down> :tabnext<cr>
-imap <silent> <C-Down> <esc>:tabnext<cr>a
-
-map  <silent> <C-c> <Plug>DWMClose
-imap <silent> <C-c> <esc><Plug>DWMClose
-
-map <silent> <bs> <Plug>DWMFocus
+" close with Ctrl-C
+nmap <C-c>     <C-W><C-C>
+imap <C-c>     <esc><C-W><C-C>
 
 " map Ctrl-N to write+next
 imap <C-n> <esc>:w<cr>:n<cr>
@@ -290,21 +262,10 @@ map <leader>fc /^<<<<<cr>
 " (visual) paste without losing the register
 xnoremap P Pgvy
 
-" Bubble single lines
-nmap <C-k> ddkP
-nmap <C-j> ddp
-
-" Bubble multiple lines
-vmap <C-k> xkP`[V`]
-vmap <C-j> xp`[V`]
-
-" switch.vim
-nnoremap - :Switch<cr>
-
-" git grep for word under the cursor
-nmap <silent> <leader>gw :GitGrepWordBoundaries<cr>
-nmap <silent> <leader>gW :GitGrepWord<cr>
-nmap <silent> <leader>gg :GitGrepAsk<cr>
+" grep
+nmap <silent> <leader>gw :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+command -nargs=+ -complete=file -bar Grep silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Grep<SPACE>
 
 " disable search hilight
 nmap <silent> <leader>n :silent :nohlsearch<cr>
@@ -316,94 +277,5 @@ nmap <silent> <leader>ws :set et<cr>:retab<cr>:%s/\s\+$//g<cr>
 vmap <silent> <leader>so :sort<cr>
 vmap <silent> <leader>su :sort u<cr>
 
-" git shortcuts
-map <leader>gb :silent :Gblame<cr>
-
 " add ruby debugger
 nnoremap <silent> <leader>rad Orequire 'ruby-debug'; debugger<esc>
-
-" splitjoin.vim
-function! s:try(cmd, default)
-    if exists(':' . a:cmd) && !v:count
-        let tick = b:changedtick
-        exe a:cmd
-        if tick == b:changedtick
-            execute 'normal! '.a:default
-        endif
-    else
-        execute 'normal! '.v:count.a:default
-    endif
-endfunction
-
-nnoremap <silent> J :<C-U>call <SID>try('SplitjoinJoin', 'J')<CR>
-nnoremap <silent> S :<C-U>call <SID>try('SplitjoinSplit', 'S')<CR>
-
-" Rename tabs to show tab# and # of viewports
-if exists("+showtabline")
-    function MyTabLine()
-        let s = '' " complete tabline goes here
-        " loop through each tab page
-        for t in range(tabpagenr('$'))
-            " select the highlighting for the buffer names
-            if t + 1 == tabpagenr()
-                let s .= '%#TabLineSel#'
-            else
-                let s .= '%#TabLine#'
-            endif
-            " empty space
-            let s .= ' '
-            " set the tab page number (for mouse clicks)
-            let s .= '%' . (t + 1) . 'T'
-            " set page number string
-            let s .= t + 1 . ' '
-            " get buffer names and statuses
-            let n = ''  "temp string for buffer names while we loop and check buftype
-            let m = 0 " &modified counter
-            let bc = len(tabpagebuflist(t + 1))  "counter to avoid last ' '
-            " loop through each buffer in a tab
-            for b in tabpagebuflist(t + 1)
-                " buffer types: quickfix gets a [Q], help gets [H]{base fname}
-                " others get 1dir/2dir/3dir/fname shortened to 1/2/3/fname
-                if getbufvar( b, "&buftype" ) == 'help'
-                    let n .= '[H]' . fnamemodify( bufname(b), ':t:s/.txt$//' )
-                elseif getbufvar( b, "&buftype" ) == 'quickfix'
-                    let n .= '[Q]'
-                else
-                    let n .= pathshorten(fnamemodify(bufname(b), ':~'))
-                endif
-                " check and ++ tab's &modified count
-                if getbufvar( b, "&modified" )
-                    let m += 1
-                endif
-                " no final ' ' added...formatting looks better done later
-                if bc > 1
-                    let n .= ' '
-                endif
-                let bc -= 1
-            endfor
-            " add modified label [n+] where n pages in tab are modified
-            if m > 0
-                "let s .= '[' . m . '+]'
-                let s.= '+ '
-            endif
-            " add buffer names
-            if n == ''
-                let s .= '[No Name]'
-            else
-                let s .= n
-            endif
-            " switch to no underlining and add final space to buffer list
-            "let s .= '%#TabLineSel#' . ' '
-            let s .= ' '
-        endfor
-        " after the last tab fill with TabLineFill and reset tab page nr
-        let s .= '%#TabLineFill#%T'
-        " right-align the label to close the current tab page
-        if tabpagenr('$') > 1
-            let s .= '%=%#TabLine#%999XX'
-        endif
-        return s
-    endfunction
-    set stal=2
-    set tabline=%!MyTabLine()
-endif
