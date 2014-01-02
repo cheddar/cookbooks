@@ -1,6 +1,4 @@
-"-----------------------------------------------------------------------
-" global settings
-"-----------------------------------------------------------------------
+" {{{ global settings
 
 " personal leader key
 let mapleader = ","
@@ -18,7 +16,8 @@ set wildmode=full
 " reload files changed outside of vim
 set autoread
 
-" write on quit
+" use hidden buffers and write on quit
+set hidden
 set autowriteall
 
 " no backup files (we have git after all)
@@ -32,38 +31,29 @@ set pastetoggle=<F4>
 
 " split windows at the bottom by default
 set splitbelow
+" }}}
 
-
-"-----------------------------------------------------------------------
-" libraries
-"-----------------------------------------------------------------------
-
-NeoBundle 'Shougo/vimproc'
+" {{{ libraries
 NeoBundle 'vim-scripts/genutils.git'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
+" }}}
 
-
-"-----------------------------------------------------------------------
-" syntax- & filetypes
-"-----------------------------------------------------------------------
-
+" {{{ syntax- & filetypes
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'tpope/vim-rails'
 " https://github.com/vim-ruby/vim-ruby/issues/33
 let g:ruby_path = ""
 
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'heartsentwined/vim-emblem'
-NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'tpope/vim-git'
-NeoBundle 'tpope/vim-haml'
-NeoBundle 'tpope/vim-markdown'
+NeoBundle 'elzr/vim-json'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'heartsentwined/vim-emblem'
 
+NeoBundle 'vim-scripts/applescript.vim'
+au BufRead,BufNewFile *.applescript set ft=applescript
+" }}}
 
-"-----------------------------------------------------------------------
-" colors & ui
-"-----------------------------------------------------------------------
-
+" {{{ colors & ui
 NeoBundle 'kien/vim-colors-solarized'
 set t_Co=256
 set background=dark
@@ -83,22 +73,46 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" This plugin is used for displaying thin vertical lines at each indentation
+" level for code indented with spaces.
 NeoBundle 'Yggdroot/indentLine'
+" }}}
 
-
-"-----------------------------------------------------------------------
-" tools
-"-----------------------------------------------------------------------
-
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'vim-scripts/Align'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'vim-scripts/closetag.vim'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'scrooloose/nerdtree'
+" {{{ tools
+" Repeat.vim remaps . in a way that plugins can tap into it.
 NeoBundle 'tpope/vim-repeat'
+
+" use abolish.vim for coercion:
+" MixedCase (crm)
+" camelCase (crc)
+" snake_case (crs)
+" and UPPER_CASE (cru)
+NeoBundle 'tpope/vim-abolish'
+
+" This is a simple plugin that helps to end certain structures automatically.
+" In Ruby, this means adding end after if, do, def and several other keywords.
+NeoBundle 'tpope/vim-endwise'
+
+" This plugin automatically adjusts 'shiftwidth' and 'expandtab' heuristically
+" based on the current file, or, in the case the current file is new, blank,
+" or otherwise insufficient, by looking at other files of the same type in the
+" current and parent directories.
 NeoBundle 'tpope/vim-sleuth'
+
+" Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML
+" tags, and more. The plugin provides mappings to easily delete, change and
+" add such surroundings in pairs.
 NeoBundle 'tpope/vim-surround.git'
+
+NeoBundle 'vim-scripts/Align'
+NeoBundle 'vim-scripts/closetag.vim'
+
+
+let NERDCreateDefaultMappings = 0
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdcommenter'
+nmap <leader>cl <Plug>NERDCommenterAlignBoth
+xmap <leader>cl <Plug>NERDCommenterAlignBoth
 
 NeoBundle 'tpope/vim-fugitive'
 map <leader>ga :silent :Git add %<cr>:redraw!<cr>
@@ -137,11 +151,9 @@ let g:syntastic_mode_map = { 'mode': 'active',
             \ 'passive_filetypes': ['c', 'cpp'] }
 let g:syntastic_mri_checkers = ['mri']
 let g:syntastic_ruby_exec = '~/.rvm/rubies/default/bin/ruby'
+" }}}
 
-"-----------------------------------------------------------------------
-" completion
-"-----------------------------------------------------------------------
-
+" {{{ completion
 NeoBundle 'Shougo/neocomplete.vim'
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
@@ -150,7 +162,8 @@ let g:neocomplete#enable_smart_case = 1
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  return neocomplete#close_popup() . "\<CR>"
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 
 " <TAB>: completion.
@@ -163,27 +176,18 @@ inoremap <expr><C-y> neocomplete#close_popup()
 inoremap <expr><C-e> neocomplete#cancel_popup()
 
 " omnicompletion
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
-" all remaining filetypes use syntaxcomplete
-autocmd Filetype *
-            \ if &omnifunc == "" |
-            \   setlocal omnifunc=syntaxcomplete#Complete |
-            \ endif
+"" all remaining filetypes use syntaxcomplete
+"autocmd Filetype *
+"            \ if &omnifunc == "" |
+"            \   setlocal omnifunc=syntaxcomplete#Complete |
+"            \ endif
+" }}}
 
-
-"-----------------------------------------------------------------------
-" auto commands
-"-----------------------------------------------------------------------
+" {{{ auto commands
 
 " cd to buffer directory
 au BufEnter * execute ":silent! lcd " . expand("%:p:h")
@@ -202,25 +206,9 @@ autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " delete fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
+" }}}
 
-" restore cursor without mkview overhead (and bugs)
-function! ResCur()
-    if line("'\"") <= line("$")
-        normal! g`"
-        return 1
-    endif
-endfunction
-
-augroup resCur
-    au!
-    au BufWinEnter * call ResCur()
-augroup END
-
-"-----------------------------------------------------------------------
-" custom functions
-"-----------------------------------------------------------------------
-
-" shortcut for file rename
+" {{{ custom functions
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -230,10 +218,9 @@ function! RenameFile()
         redraw!
     endif
 endfunction
+" }}}
 
-"-----------------------------------------------------------------------
-" key mappings
-"-----------------------------------------------------------------------
+" {{{ key mappings
 
 " function keys
 nnoremap <silent> <F1> :help<cr>
@@ -279,3 +266,6 @@ vmap <silent> <leader>su :sort u<cr>
 
 " add ruby debugger
 nnoremap <silent> <leader>rad Orequire 'ruby-debug'; debugger<esc>
+" }}}
+
+" vim: ft=vim

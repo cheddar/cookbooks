@@ -36,9 +36,17 @@ alias be="bundle exec"
 alias brs="bundle exec rails server"
 alias con="bundle exec rails console"
 
+# chef helper
+alias kcu="knife cookbook upload"
+
+# always use system ruby to start vim
+vim() {
+	rvm system exec vim "$@"
+}
+
 # host shortcuts
 remote_tmux() {
-	ssh -D $2 -t $1 /bin/bash -li -c 'T'
+	ssh -XY -D $2 -t $1 /bin/bash -li -c 'T'
 }
 
 wake() {
@@ -54,29 +62,12 @@ function C() {
 	remote_tmux home.xnull.de
 }
 
-alias M="remote_tmux bene.madvertise.me 9990"
-alias Z="remote_tmux bene.dev.zenops.net 9991"
+function Z() {
+	remote_tmux bene.dev.zenops.net 9991
+}
 
 # gentoo development
 export ECHANGELOG_USER="Benedikt Böhm <hollow@gentoo.org>"
-
-eportdir() {
-	if [[ -n "${PORTDIR_CACHE}" ]]; then
-		echo "${PORTDIR_CACHE}"
-	elif [[ -d ${HOME}/projects/gentoo/cvs ]]; then
-		PORTDIR_CACHE="${HOME}/projects/gentoo/cvs"
-		eportdir
-	elif [[ -d ${HOME}/projects/zenops/zentoo ]]; then
-		PORTDIR_CACHE="${HOME}/projects/gentoo/cvs"
-		eportdir
-	elif [[ -d /usr/portage ]]; then
-		PORTDIR_CACHE="/usr/portage"
-		eportdir
-	else
-		PORTDIR_CACHE="$(portageq portdir)"
-		eportdir
-	fi
-}
 
 repm() {
 	repoman manifest
@@ -84,40 +75,12 @@ repm() {
 
 reps() {
 	repm
-		repoman scan
+	repoman scan
 }
 
 repf() {
 	repm
-		repoman full
-}
-
-emerge() {
-	if [[ ${_DISTNAME} == "gentoo" ]]; then
-		sudo $(which emerge) "$@"
-	else
-		$(which emerge) "$@"
-	fi
-}
-
-eci() {
-	local answer msg
-
-	repoman manifest || return 1
-	cvs diff | colordiff | less -R
 	repoman full
-
-	echo -n 'continue? (y/N) '
-	read -e answer
-	[[ "${answer}" != "y" && "${answer}" != "Y" ]] && return 1
-
-	while [[ "${msg}" == "" ]]; do
-		echo -n 'enter commit message> '
-		read -e msg
-	done
-
-	echangelog "${msg}" || return 1
-	repoman commit -m "${msg}" || return 1
 }
 
 # zentoo development
@@ -130,3 +93,5 @@ geix() {
 		eix --cache-file ./eix.cache.gentoo "$@"
 	popd >/dev/null
 }
+
+# vim: ft=sh
