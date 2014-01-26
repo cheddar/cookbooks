@@ -1,10 +1,11 @@
 #!/bin/bash
 
-MIRROR=${MIRROR:-http://mirror.zenops.net/zentoo}
-
-ARCH=$(portageq envvar ARCH)
+set -e
 
 # defaults
+MIRROR=${MIRROR:-http://mirror.zenops.net/zentoo}
+ARCH=$(portageq envvar ARCH)
+
 image=$MIRROR/$ARCH/zentoo-amd64-base.tar.bz2
 ipaddress=169.254.169.254
 gateway=$(ip addr show dev lxc0 scope global | grep inet | awk '{print $2}' | awk -F/ '{print $1}')
@@ -22,7 +23,7 @@ configure_gentoo()
     ln -s /usr/lib/systemd/system/multi-user.target \
         /etc/systemd/system/default.target
 
-    echo "LANG=${default_lang}" > "${rootfs}/etc/locale.conf"
+    echo "LANG=en_US.UTF-8" > "${rootfs}/etc/locale.conf"
     echo "KEYMAP=us" > "${rootfs}/etc/vconsole.conf"
     cat > "${rootfs}/etc/adjtime" << EOF
 0.0 0.0 0.0
@@ -67,7 +68,7 @@ cleanup()
     rm -rf $cache/$(basename $image)
 }
 
-download_image()
+download_gentoo()
 {
     cache=$1
     image=$2
@@ -91,7 +92,7 @@ download_image()
     return 0
 }
 
-copy_image()
+copy_gentoo()
 {
     cache=$1
     image=$2
@@ -108,8 +109,8 @@ copy_image()
 
 install_gentoo()
 {
-    cache="/var/cache/lxc/gentoo"
     rootfs=$1
+    cache="/var/cache/lxc/gentoo"
 
     file=$(basename $image)
     dir=${file/.tar*}
@@ -123,14 +124,14 @@ install_gentoo()
 
         echo "Checking cache download in $cache/$(basename $image) ... "
         if [ ! -e "$cache/$dir" ]; then
-            download_image $cache $image
+            download_gentoo $cache $image
             if [ $? -ne 0 ]; then
                 echo "Failed to download image"
                 return 1
             fi
         fi
 
-        copy_image $cache $image $rootfs
+        copy_gentoo $cache $image $rootfs
         if [ $? -ne 0 ]; then
             echo "Failed to copy rootfs"
             return 1
@@ -138,7 +139,7 @@ install_gentoo()
 
         return 0
 
-        ) 200>/run/lock/lxc-gentoo
+    ) 200>/run/lock/lxc-gentoo
 
     return $?
 }
@@ -214,17 +215,20 @@ clean()
 usage()
 {
     cat <<EOF
-$1 -h|--help -p|--path=<path> --clean --image=URL --ipaddress=1.2.3.4 --gateway=1.2.3.4
+$1 -h|--help [-d|--debug] [-c|--clean] [-i|--ipaddress 1.2.3.4] [-g|--gateway 1.2.3.4] [--image <URL>]
 EOF
     return 0
 }
 
-options=$(getopt -o hp:n:c -l help,path:,name:,clean,image:,ipaddress:,gateway: -- "$@")
+options=$(getopt -o hp:n:cdi:g: -l help,path:,name:,clean,ipaddress:,gateway:,image: -- "$@")
 if [ $? -ne 0 ]; then
         usage $(basename $0)
         exit 1
 fi
 eval set -- "$options"
+
+clean=0
+debug=0
 
 while true
 do
@@ -233,13 +237,18 @@ do
         -p|--path)      path=$2; shift 2;;
         -n|--name)      name=$2; shift 2;;
         -c|--clean)     clean=$2; shift 2;;
+        -d|--debug)     debug=1; shift 1;;
+        -i|--ipaddress) ipaddress=$2; shift 2;;
+        -g|--gateway)   gateway=$2; shift 2;;
         --image)        image=$2; shift 2;;
-        --ipaddress)    ipaddress=$2; shift 2;;
-        --gateway)      gateway=$2; shift 2;;
         --)             shift 1; break ;;
         *)              break ;;
     esac
 done
+
+if [ $debug -eq 1 ]; then
+    set -x
+fi
 
 if [ ! -z "$clean" -a -z "$path" ]; then
     clean || exit 1
@@ -263,7 +272,6 @@ if grep -q '^lxc.rootfs' $config 2>/dev/null ; then
 else
     rootfs=$path/rootfs
 fi
-
 
 install_gentoo $rootfs
 if [ $? -ne 0 ]; then
