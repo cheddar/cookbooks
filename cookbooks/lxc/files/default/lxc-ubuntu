@@ -45,7 +45,7 @@ iface eth0 inet static
     address ${ipaddress}
     netmask 255.255.255.255
     gateway ${gateway}
-    up ip route add ${gateway} dev eth0
+    pointopoint ${gateway}
 EOF
 
     echo "root:tux" | chroot $rootfs chpasswd
@@ -78,7 +78,7 @@ download_ubuntu()
     debootstrap --verbose \
         --components=main,universe \
         --arch=$arch \
-        --include=vim,ssh \
+        --include=vim,ssh,git \
         $release \
         $cache/partial-$arch \
         $MIRROR
@@ -176,40 +176,64 @@ copy_configuration()
     release=$5
 
     grep -q "^lxc.rootfs" $path/config 2>/dev/null || echo "lxc.rootfs = $rootfs" >> $path/config
-    rootfs=$(grep ^lxc.rootfs $path/config | awk '{print $3}')
 
-    if [[ -b $rootfs ]]; then
-        fs_type=block
-        source_attr=dev
-    else
-        fs_type=mount
-        source_attr=dir
-    fi
+    cat <<EOF >> $path/config
+lxc.utsname = ${name}
 
-    mkdir -p /etc/libvirt/lxc
-    cat <<EOF > /etc/libvirt/lxc/${name}.xml
-<domain type='lxc'>
-    <name>${name}</name>
-    <memory>67108864</memory>
-    <os>
-        <type>exe</type>
-        <init>/sbin/init</init>
-    </os>
-    <devices>
-        <console type='pty'/>
-        <filesystem type='${fs_type}'>
-            <source ${source_attr}='${rootfs}'/>
-            <target dir='/'/>
-        </filesystem>
-        <interface type='bridge'>
-            <source bridge='lxc0'/>
-            <target dev='veth-${name}'/>
-        </interface>
-    </devices>
-</domain>
+lxc.network.type = veth
+lxc.network.veth.pair = veth-${name}
+lxc.network.flags = up
+lxc.network.link = lxc0
+lxc.network.name = eth0
+
+# mounts that allow us to drop CAP_SYS_ADMIN
+lxc.autodev = 1
+lxc.mount.entry=sys ${rootfs}/sys sysfs ro,defaults 0 0
+lxc.mount.entry=proc ${rootfs}/proc proc nodev,noexec,nosuid 0 0
+
+# console access
+lxc.tty = 1
+lxc.pts = 128
+
+# drop unnecessary capabilities
+lxc.cap.drop = audit_control
+lxc.cap.drop = audit_write
+lxc.cap.drop = dac_read_search
+lxc.cap.drop = ipc_owner
+lxc.cap.drop = linux_immutable
+lxc.cap.drop = mac_admin
+lxc.cap.drop = mac_override
+lxc.cap.drop = mknod
+lxc.cap.drop = sys_boot
+lxc.cap.drop = sys_module
+lxc.cap.drop = sys_rawio
+lxc.cap.drop = sys_time
+lxc.cap.drop = sys_tty_config
+lxc.cap.drop = syslog
+
+# deny access to all devices by default, explicitly grant some permissions
+lxc.cgroup.devices.deny = a
+# /dev/null and zero
+lxc.cgroup.devices.allow = c 1:3 rw
+lxc.cgroup.devices.allow = c 1:5 rw
+# /dev/{,u}random
+lxc.cgroup.devices.allow = c 1:8 r
+lxc.cgroup.devices.allow = c 1:9 rw
+# /dev/tty{0,1}
+lxc.cgroup.devices.allow = c 4:0 rwm
+lxc.cgroup.devices.allow = c 4:1 rwm
+# /dev/tty
+lxc.cgroup.devices.allow = c 5:0 rwm
+# /dev/console
+lxc.cgroup.devices.allow = c 5:1 rwm
+# /dev/pts/*
+lxc.cgroup.devices.allow = c 5:2 rw
+lxc.cgroup.devices.allow = c 136:* rw
+# rtc
+lxc.cgroup.devices.allow = c 254:0 rwm
 EOF
 
-    virsh define /etc/libvirt/lxc/${name}.xml
+    echo "INIT_COMMAND=/sbin/init" > $path/env
 
     return 0
 }

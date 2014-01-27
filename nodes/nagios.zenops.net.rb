@@ -7,5 +7,5 @@ run_list(%w(
   role[mx]
   role[nagios]
   role[splunk-server]
-  role[gitlab]
 ))
+  #role[gitlab]
