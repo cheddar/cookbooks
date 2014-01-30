@@ -26,9 +26,9 @@ if root?
     tags.flatten!.compact!
 
     account_skeleton user[:id] do
-      user.keys.each do |key, value|
+      user.each do |key, value|
         next if [:id, :name].include?(key.to_sym)
-        send(key.to_sym, value) if value
+        send(key.to_sym, value) if respond_to?(key.to_sym) && value
       end
       groups hostmaster_groups if tags.include?("hostmaster")
     end
